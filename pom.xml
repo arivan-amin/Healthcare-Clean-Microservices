@@ -38,6 +38,8 @@
     </properties>
 
     <modules>
+        <module>Backend-Discovery-Server</module>
+        <module>Backend-Api-Gateway</module>
         <module>Backend-Core</module>
     </modules>
 

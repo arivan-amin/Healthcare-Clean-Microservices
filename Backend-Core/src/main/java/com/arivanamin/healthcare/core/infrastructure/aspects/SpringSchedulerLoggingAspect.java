@@ -1,6 +1,6 @@
 package com.arivanamin.healthcare.core.infrastructure.aspects;
 
-import com.arivanamin.reporting.core.domain.aspects.ExecuteAndLogPerformance;
+import com.arivanamin.healthcare.core.domain.aspects.ExecuteAndLogPerformance;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

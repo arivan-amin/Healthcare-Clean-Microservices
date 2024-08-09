@@ -4,7 +4,7 @@ volumes:
 
 services:
   discovery-server:
-    container_name: discovery-server
+    container_name: healthcare-discovery-server
     image: arivanamin/healthcare-backend-discovery-server
     ports:
       - "8761:8761"
@@ -14,7 +14,7 @@ services:
       - app-logs:/root/Apps/Healthcare/Logs/
   
   backend-api-gateway:
-    container_name: backend-api-gateway
+    container_name: healthcare-api-gateway
     image: arivanamin/healthcare-backend-api-gateway
     ports:
       - "8080:8080"
