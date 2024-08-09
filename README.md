@@ -56,8 +56,8 @@ The system is divided into several microservices, each responsible for a specifi
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/yourusername/healthcare-management-system.git
-    cd healthcare-management-system
+    git clone https://github.com/arivan-amin/healthcare-management-system.git
+    cd Healthcare-Management-System
     ```
 
 2. **Build the project:**
