@@ -38,6 +38,7 @@
     </properties>
 
     <modules>
+        <module>Backend-Core</module>
     </modules>
 
     <dependencies>
