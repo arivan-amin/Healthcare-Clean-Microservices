@@ -1,13 +1,10 @@
 package com.arivanamin.healthcare.core.domain.dates;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static java.time.format.DateTimeFormatter.ofPattern;
 
-@Slf4j
 public class DefaultDateTimeFormatter implements DateTimeFormatter {
     
     public static final String DATE_FORMAT = "yyyy-MM-dd";
