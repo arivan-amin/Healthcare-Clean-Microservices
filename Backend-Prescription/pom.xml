@@ -9,9 +9,9 @@
         <version>0.1</version>
     </parent>
 
-    <artifactId>backend-core</artifactId>
+    <artifactId>backend-prescription</artifactId>
     <version>0.1</version>
-    <name>backend-core</name>
-    <description>Backend Core Module</description>
+    <name>Backend-Prescription</name>
+    <description>Backend Prescription Module</description>
 
 </project>

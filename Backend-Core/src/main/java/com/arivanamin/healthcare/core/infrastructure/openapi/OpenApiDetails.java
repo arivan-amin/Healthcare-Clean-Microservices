@@ -21,6 +21,6 @@ public final class OpenApiDetails {
     }
     
     public static String getOpenApiTermsOfService () {
-        return "https://www.arivan-amin.com/reporting/terms";
+        return "https://www.arivan-amin.com/healthcare-management-microservices/terms";
     }
 }

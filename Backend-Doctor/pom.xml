@@ -9,9 +9,9 @@
         <version>0.1</version>
     </parent>
 
-    <artifactId>backend-Doctor</artifactId>
+    <artifactId>backend-doctor</artifactId>
     <version>0.1</version>
-    <name>backend-Doctor</name>
-    <description>Backend Core Module</description>
+    <name>Backend-Doctor</name>
+    <description>Backend Doctor Module</description>
 
 </project>
