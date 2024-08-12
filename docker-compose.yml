@@ -8,8 +8,8 @@ services:
     image: arivanamin/healthcare-backend-discovery-server
     ports:
       - "8761:8761"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
+    env_file:
+      - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
   
@@ -18,8 +18,8 @@ services:
     image: arivanamin/healthcare-backend-api-gateway
     ports:
       - "8080:8080"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
+    env_file:
+      - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:

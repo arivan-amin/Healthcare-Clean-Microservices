@@ -24,7 +24,7 @@
         <spring-cloud.version>2023.0.3</spring-cloud.version>
         <!-- Other dependency versions -->
         <logstash-logback-encoder-version>7.4</logstash-logback-encoder-version>
-        <springdoc-starter-version>2.5.0</springdoc-starter-version>
+        <springdoc-starter-version>2.6.0</springdoc-starter-version>
         <java-faker-version>1.0.2</java-faker-version>
         <easy-random-version>5.0.0</easy-random-version>
         <vavr-version>0.10.4</vavr-version>
@@ -45,13 +45,17 @@
         <module>Backend-Billing</module>
         <module>Backend-Doctor</module>
         <module>Backend-Inventory</module>
+        <module>Backend-Lab</module>
         <module>Backend-Medical-Records</module>
         <module>Backend-Notification</module>
         <module>Backend-Patient</module>
+        <module>Backend-Pharmacy</module>
         <module>Backend-Prescription</module>
+        <module>Backend-Radiology</module>
         <module>Backend-Reporting</module>
         <module>Backend-Security</module>
         <module>Backend-Staff</module>
+        <module>Backend-Surgery</module>
     </modules>
 
     <dependencies>

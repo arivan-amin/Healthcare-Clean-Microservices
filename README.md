@@ -66,16 +66,27 @@ The system is divided into several microservices, each responsible for a specifi
     mvn clean install
     ```
 
-3. **Run the services using Docker Compose:**
+3. **Set Eureka username and password environment variables :** 
+   - on Linux: add the below variables to your .bashrc file and reload or reboot
+    ```bash
+    export EUREKA_USER=admin
+    export EUREKA_PASSWORD=admin
+    ```
+    - on Windows: add the below variables to your 
+    ```bash
+    set EUREKA_USER=admin
+    set EUREKA_PASSWORD=admin
+    ```
+4. **Run the services using Docker Compose:**
 
     ```bash
-    docker-compose up -d
+    docker compose up -d
     ```
 
-4. **Access the services:**
+5. **Access the services:**
 
     - API Gateway: `http://localhost:8080`
-    - Eureka Dashboard: `http://localhost:8761`
+    - Eureka Dashboard: `http://localhost:8080/eureka/web`
     - Swagger UI: `http://localhost:8080/swagger-ui.html`
 
 ## Testing
