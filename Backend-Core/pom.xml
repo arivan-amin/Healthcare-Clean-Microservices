@@ -11,7 +11,7 @@
 
     <artifactId>backend-core</artifactId>
     <version>0.1</version>
-    <name>backend-core</name>
+    <name>Backend-Core</name>
     <description>Backend Core Module</description>
 
     <properties>
