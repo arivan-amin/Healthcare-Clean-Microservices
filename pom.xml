@@ -48,7 +48,7 @@
         <module>Backend-Doctor</module>
         <module>Backend-Inventory</module>
         <module>Backend-Lab</module>
-        <module>Backend-Medical-Records</module>
+        <module>Backend-Medical-Record</module>
         <module>Backend-Notification</module>
         <module>Backend-Patient</module>
         <module>Backend-Pharmacy</module>
