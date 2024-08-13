@@ -27,8 +27,7 @@
         <dependency>
             <groupId>com.arivanamin.healthcare</groupId>
             <artifactId>backend-core</artifactId>
-            <version>0.1</version>
+            <version>${core-module-version}</version>
         </dependency>
     </dependencies>
-
 </project>
