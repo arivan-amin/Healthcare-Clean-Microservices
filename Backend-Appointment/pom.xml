@@ -6,7 +6,7 @@
 	<parent>
         <groupId>com.arivanamin.healthcare</groupId>
         <artifactId>backend</artifactId>
-        <version>0.1</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>backend-appointment</artifactId>
@@ -27,7 +27,7 @@
         <dependency>
             <groupId>com.arivanamin.healthcare</groupId>
             <artifactId>backend-core</artifactId>
-            <version>0.1</version>
+            <version>${core-module-version}</version>
         </dependency>
     </dependencies>
     

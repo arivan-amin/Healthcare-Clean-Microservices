@@ -13,7 +13,7 @@
 
     <groupId>com.arivanamin.healthcare</groupId>
     <artifactId>backend</artifactId>
-    <version>0.1</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
     <name>Backend</name>
     <description>Backend Parent Module</description>
@@ -35,6 +35,8 @@
         <commons-io-version>2.11.0</commons-io-version>
         <!-- Plugin versions -->
         <jib-plugin-version>3.4.3</jib-plugin-version>
+        <!-- Inherited dependency versions -->
+        <core-module-version>0.1</core-module-version>
     </properties>
 
     <modules>
