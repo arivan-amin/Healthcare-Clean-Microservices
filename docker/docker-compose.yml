@@ -1,0 +1,98 @@
+volumes:
+  app-logs:
+    driver: local
+
+services:
+  backend-discovery-server:
+    container_name: healthcare-discovery-server
+    image: arivanamin/healthcare-backend-discovery-server
+    ports:
+      - "8761:8761"
+    env_file:
+      - .env
+    volumes:
+      - app-logs:/root/Apps/Healthcare/Logs/
+
+  backend-api-gateway:
+    container_name: healthcare-api-gateway
+    image: arivanamin/healthcare-backend-api-gateway
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - app-logs:/root/Apps/Healthcare/Logs/
+    depends_on:
+      - backend-discovery-server
+
+  tempo:
+    container_name: healthcare-tempo
+    image: grafana/tempo:2.2.2
+    command: [ "-config.file=/etc/tempo.yaml" ]
+    volumes:
+      - ./docker/tempo/tempo.yml:/etc/tempo.yaml:ro
+      - ./docker/tempo/tempo-data:/tmp/tempo
+    ports:
+      - "3110:3100"  # Tempo
+      - "9411:9411" # zipkin
+
+  loki:
+    container_name: healthcare-loki
+    image: grafana/loki:main
+    command: [ "-config.file=/etc/loki/local-config.yaml" ]
+    ports:
+      - "3100:3100"
+
+  promtail:
+    container_name: healthcare-promtail
+    image: grafana/promtail:2.7.1
+    volumes:
+      - ./promtail-config.yaml:/etc/promtail/config.yml
+      - app-logs:/logs
+      - ${HOME}/Apps/Healthcare/Logs:/local-logs
+    command: -config.file=/etc/promtail/config.yml
+
+  prometheus:
+    container_name: healthcare-prometheus
+    image: prom/prometheus:v2.46.0
+    command:
+      - --enable-feature=exemplar-storage
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+
+  grafana:
+    container_name: healthcare-grafana
+    image: grafana/grafana:10.1.0
+    volumes:
+      - ./docker/grafana:/etc/grafana/provisioning/datasources:ro
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
+    ports:
+      - "3000:3000"
+
+  # Services
+  backend-appointment-service:
+    container_name: healthcare-backend-appointment
+    image: arivanamin/healthcare-backend-appointment
+    env_file:
+      - .env
+    volumes:
+      - app-logs:/root/Apps/Healthcare/Logs/
+    depends_on:
+      - backend-discovery-server
+      - backend-api-gateway
+
+  backend-billing-service:
+    container_name: healthcare-backend-billing
+    image: arivanamin/healthcare-backend-billing
+    env_file:
+      - .env
+    volumes:
+      - app-logs:/root/Apps/Healthcare/Logs/
+    depends_on:
+      - backend-discovery-server
