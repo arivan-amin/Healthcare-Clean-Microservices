@@ -85,7 +85,7 @@ services:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
       - backend-discovery-server
-      - backend-api-gateway
+      - backend-api-gateway # find out if needed or not
 
   backend-billing-service:
     container_name: healthcare-backend-billing
