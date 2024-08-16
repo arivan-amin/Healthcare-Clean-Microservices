@@ -6,7 +6,7 @@ scrape_configs:
   - job_name: 'prometheus'
     static_configs:
       - targets: [ 'prometheus:9090' ]
-  - job_name: 'services'
-    metrics_path: '/actuator/prometheus'
+  - job_name: 'appointment-services'
+    metrics_path: '/appointment/actuator/prometheus'
     static_configs:
-      - targets: [ '172.17.0.1:17001','172.17.0.1:17002' ]
+      - targets: [ '172.17.0.1:8080' ] # todo 16-aug-2024 - must be changed later 
