@@ -62,10 +62,10 @@ The system is divided into several microservices, each responsible for a specifi
     cd Healthcare-Management-Microservices
     ```
 
-2. **Build the project:**
+2. **Build the project and it will load the images to your local docker repository using JIB:**
 
     ```bash
-    mvn clean install
+    mvn clean package
     ```
 
 3. **Set Eureka username and password environment variables :** 
