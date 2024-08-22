@@ -54,7 +54,7 @@
         <module>Backend-Pharmacy</module>
         <module>Backend-Prescription</module>
         <module>Backend-Radiology</module>
-        <module>Backend-Reporting</module>
+        <module>Backend-Report</module>
         <module>Backend-Security</module>
         <module>Backend-Staff</module>
         <module>Backend-Surgery</module>

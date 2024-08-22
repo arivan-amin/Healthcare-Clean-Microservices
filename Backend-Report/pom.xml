@@ -9,10 +9,10 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>backend-reporting</artifactId>
+    <artifactId>backend-report</artifactId>
     <version>0.1</version>
-    <name>Backend-Reporting</name>
-    <description>Backend Reporting Module</description>
+    <name>Backend-Report</name>
+    <description>Backend Report Module</description>
 
     <dependencies>
         <dependency>
