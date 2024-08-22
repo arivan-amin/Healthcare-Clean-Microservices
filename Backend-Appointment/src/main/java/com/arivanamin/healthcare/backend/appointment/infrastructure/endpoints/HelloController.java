@@ -14,7 +14,7 @@ import java.util.List;
 @Tag (name = "Hello controller", description = "all the greetings")
 public class HelloController {
     
-    @GetMapping ("protected/appointment/greeting")
+    @GetMapping ("protected/appointments/greeting")
     @Operation (summary = "Get list of all greetings")
     @ResponseStatus (HttpStatus.OK)
     @LogExecutionTime
