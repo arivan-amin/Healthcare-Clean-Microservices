@@ -9,4 +9,19 @@ scrape_configs:
   - job_name: 'appointment-services'
     metrics_path: '/backend-appointment-service/actuator/prometheus'
     static_configs:
-      - targets: [ '172.17.0.1:8080' ] # todo 16-aug-2024 - must be changed later 
+      - targets: [ '172.17.0.1:8080' ] # todo 16-aug-2024 - must be changed later
+        
+  - job_name: 'billing-services'
+    metrics_path: '/backend-billing-service/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ] 
+
+  - job_name: 'doctor-services'
+    metrics_path: '/backend-doctor-service/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ] 
+        
+  - job_name: 'inventory-services'
+    metrics_path: '/backend-inventory-service/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ] 
