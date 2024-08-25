@@ -40,24 +40,24 @@
     </properties>
 
     <modules>
-        <module>Backend-Discovery-Server</module>
-        <module>Backend-Api-Gateway</module>
+        <module>Discovery-Server</module>
+        <module>Api-Gateway</module>
         <module>Backend-Core</module>
-        <module>Backend-Appointment</module>
-        <module>Backend-Billing</module>
-        <module>Backend-Doctor</module>
-        <module>Backend-Inventory</module>
-        <module>Backend-Lab</module>
-        <module>Backend-Medical-Record</module>
-        <module>Backend-Notification</module>
-        <module>Backend-Patient</module>
-        <module>Backend-Pharmacy</module>
-        <module>Backend-Prescription</module>
-        <module>Backend-Radiology</module>
-        <module>Backend-Report</module>
-        <module>Backend-Security</module>
-        <module>Backend-Staff</module>
-        <module>Backend-Surgery</module>
+        <module>Appointment-Service</module>
+        <module>Billing-Service</module>
+        <module>Doctor-Service</module>
+        <module>Inventory-Service</module>
+        <module>Lab-Service</module>
+        <module>Medical-Record-Service</module>
+        <module>Notification-Service</module>
+        <module>Patient-Service</module>
+        <module>Pharmacy-Service</module>
+        <module>Prescription-Service</module>
+        <module>Radiology-Service</module>
+        <module>Report-Service</module>
+        <module>Security-Service</module>
+        <module>Staff-Service</module>
+        <module>Surgery-Service</module>
     </modules>
 
     <dependencies>

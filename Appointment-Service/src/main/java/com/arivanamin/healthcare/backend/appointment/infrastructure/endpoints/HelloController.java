@@ -20,7 +20,7 @@ public class HelloController {
     @LogExecutionTime
     public List<Greeting> getAllTransactions () {
         
-        return List.of(Greeting.builder().name("greeting 1").build());
+        return List.of(Greeting.builder().name("appointment api works").build());
     }
 }
 

@@ -7,21 +7,15 @@ scrape_configs:
     static_configs:
       - targets: [ 'prometheus:9090' ]
   - job_name: 'appointment-services'
-    metrics_path: '/backend-appointment-service/actuator/prometheus'
+    metrics_path: '/appointments/actuator/prometheus'
     static_configs:
-      - targets: [ '172.17.0.1:8080' ] # todo 16-aug-2024 - must be changed later
-        
-  - job_name: 'billing-services'
-    metrics_path: '/backend-billing-service/actuator/prometheus'
-    static_configs:
-      - targets: [ '172.17.0.1:8080' ] 
+      - targets: [ '${DOCKER_HOST_IP:-host.docker.internal}:8080' ]
+        labels:
+          instance: 'Appointment-Service'
 
-  - job_name: 'doctor-services'
-    metrics_path: '/backend-doctor-service/actuator/prometheus'
+  - job_name: 'billing-services'
+    metrics_path: '/billings/actuator/prometheus'
     static_configs:
-      - targets: [ '172.17.0.1:8080' ] 
-        
-  - job_name: 'inventory-services'
-    metrics_path: '/backend-inventory-service/actuator/prometheus'
-    static_configs:
-      - targets: [ '172.17.0.1:8080' ] 
+      - targets: [ '${DOCKER_HOST_IP:-host.docker.internal}:8080' ]
+        labels:
+          instance: 'Billing-Service'
