@@ -10,7 +10,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>inventory-Service</artifactId>
+    <artifactId>inventory-service</artifactId>
     <version>0.1</version>
     <name>Inventory-Service</name>
     <description>Inventory Service Module</description>

@@ -8,8 +8,7 @@
     <appender class="ch.qos.logback.core.ConsoleAppender" name="Console">
         <encoder>
             <pattern>
-                %d{yyyy-MM-dd HH:mm:ss:SSS} %5p {App: ${appName:-}, trace: %X{traceId:-}, span:
-                %X{spanId:-}} %c{0} %M %line = %msg%n%n
+                %d{yyyy-MM-dd HH:mm:ss:SSS} %5p {App: ${appName:-}, trace: %X{traceId:-}, span: %X{spanId:-}} %c{0} %M %line = %msg%n%n
             </pattern>
         </encoder>
     </appender>
@@ -24,8 +23,7 @@
         </rollingPolicy>
         <encoder>
             <pattern>
-                %d{yyyy-MM-dd HH:mm:ss:SSS} %5p {App: ${appName:-}, trace: %X{traceId:-}, span:
-                %X{spanId:-}} %c{0} %M %line = %msg%n%n
+                %d{yyyy-MM-dd HH:mm:ss:SSS} %5p {App: ${appName:-}, trace: %X{traceId:-}, span: %X{spanId:-}} %c{0} %M %line = %msg%n%n
             </pattern>
         </encoder>
     </appender>

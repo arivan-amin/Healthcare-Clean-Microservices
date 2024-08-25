@@ -222,7 +222,7 @@
                 <version>${jib-plugin-version}</version>
                 <configuration>
                     <from>
-                        <image>openjdk:21</image>
+                        <image>eclipse-temurin:21-jre-alpine</image>
                     </from>
                     <to>
                         <image>arivanamin/healthcare-${project.artifactId}</image>
