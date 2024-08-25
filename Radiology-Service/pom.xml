@@ -9,10 +9,10 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>backend-radiology</artifactId>
+    <artifactId>radiology-service</artifactId>
     <version>0.1</version>
-    <name>Backend-Radiology</name>
-    <description>Backend Radiology Module</description>
+    <name>Radiology-Service</name>
+    <description>Radiology Service Module</description>
 
     <dependencies>
         <dependency>

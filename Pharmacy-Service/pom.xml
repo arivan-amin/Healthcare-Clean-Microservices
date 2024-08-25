@@ -9,10 +9,10 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>backend-pharmacy</artifactId>
+    <artifactId>pharmacy-service</artifactId>
     <version>0.1</version>
-    <name>Backend-Pharmacy</name>
-    <description>Backend Pharmacy Module</description>
+    <name>Pharmacy-Service</name>
+    <description>Pharmacy Service Module</description>
 
     <dependencies>
         <dependency>

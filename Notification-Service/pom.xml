@@ -9,10 +9,10 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>backend-notification</artifactId>
+    <artifactId>notification-service</artifactId>
     <version>0.1</version>
-    <name>Backend-Notification</name>
-    <description>Backend Notification Module</description>
+    <name>Notification-Service</name>
+    <description>Notification Service Module</description>
 
     <dependencies>
         <dependency>

@@ -9,10 +9,10 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>backend-billing</artifactId>
+    <artifactId>billing-service</artifactId>
     <version>0.1</version>
-    <name>Backend-Billing</name>
-    <description>Backend Billing Module</description>
+    <name>Billing-Service</name>
+    <description>Billing Service Module</description>
 
     <dependencies>
         <dependency>

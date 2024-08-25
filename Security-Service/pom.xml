@@ -9,10 +9,10 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>backend-security</artifactId>
+    <artifactId>security-service</artifactId>
     <version>0.1</version>
-    <name>Backend-Security</name>
-    <description>Backend Security Module</description>
+    <name>Security-Service</name>
+    <description>Security Service Module</description>
 
     <dependencies>
         <dependency>
