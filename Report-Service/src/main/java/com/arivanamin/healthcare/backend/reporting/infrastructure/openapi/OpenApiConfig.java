@@ -16,7 +16,7 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI myOpenAPI () {
         Server server = new Server();
-        server.setUrl("localhost:8080/protected/reporting");
+        server.setUrl("localhost:8080/protected/reports");
         server.setDescription("Server URL");
         
         Info info = new Info().title("Reporting Service API")

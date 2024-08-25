@@ -16,7 +16,7 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI myOpenAPI () {
         Server server = new Server();
-        server.setUrl("localhost:8080/protected/security");
+        server.setUrl("localhost:8080/protected/securities");
         server.setDescription("Server URL");
         
         Info info = new Info().title("Security Service API")

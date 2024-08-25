@@ -16,7 +16,7 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI myOpenAPI () {
         Server server = new Server();
-        server.setUrl("localhost:8080/protected/medical-record");
+        server.setUrl("localhost:8080/protected/medical-records");
         server.setDescription("Server URL");
         
         Info info = new Info().title("Medical Record Service API")

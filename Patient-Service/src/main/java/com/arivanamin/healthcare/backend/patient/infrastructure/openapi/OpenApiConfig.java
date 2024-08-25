@@ -16,7 +16,7 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI myOpenAPI () {
         Server server = new Server();
-        server.setUrl("localhost:8080/protected/patient");
+        server.setUrl("localhost:8080/protected/patients");
         server.setDescription("Server URL");
         
         Info info = new Info().title("Patient Service API")
