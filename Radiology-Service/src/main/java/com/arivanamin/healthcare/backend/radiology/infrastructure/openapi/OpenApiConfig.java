@@ -19,7 +19,7 @@ public class OpenApiConfig {
         server.setUrl("localhost:8080/protected/radiology");
         server.setDescription("Server URL");
         
-        Info info = new Info().title("Backend Radiology API")
+        Info info = new Info().title("Radiology Service API")
             .description("Provides all the API related to Radiology service").version("1.0")
             .contact(getOpenApiContactDetails()).termsOfService(getOpenApiTermsOfService())
             .license(getOpenApiLicence());

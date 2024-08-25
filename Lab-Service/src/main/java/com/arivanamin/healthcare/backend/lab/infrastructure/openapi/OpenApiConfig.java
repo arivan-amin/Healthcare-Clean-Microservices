@@ -19,7 +19,7 @@ public class OpenApiConfig {
         server.setUrl("localhost:8080/protected/lab");
         server.setDescription("Server URL");
         
-        Info info = new Info().title("Backend Lab API")
+        Info info = new Info().title("Lab Service API")
             .description("Provides all the API related to Lab service").version("1.0")
             .contact(getOpenApiContactDetails()).termsOfService(getOpenApiTermsOfService())
             .license(getOpenApiLicence());

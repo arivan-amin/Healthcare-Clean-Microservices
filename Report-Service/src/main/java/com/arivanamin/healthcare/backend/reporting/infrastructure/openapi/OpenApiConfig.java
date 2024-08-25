@@ -19,7 +19,7 @@ public class OpenApiConfig {
         server.setUrl("localhost:8080/protected/reporting");
         server.setDescription("Server URL");
         
-        Info info = new Info().title("Backend Reporting API")
+        Info info = new Info().title("Reporting Service API")
             .description("Provides all the API related to Reporting service").version("1.0")
             .contact(getOpenApiContactDetails()).termsOfService(getOpenApiTermsOfService())
             .license(getOpenApiLicence());

@@ -19,7 +19,7 @@ public class OpenApiConfig {
         server.setUrl("localhost:8080/protected/security");
         server.setDescription("Server URL");
         
-        Info info = new Info().title("Backend Security API")
+        Info info = new Info().title("Security Service API")
             .description("Provides all the API related to Security service").version("1.0")
             .contact(getOpenApiContactDetails()).termsOfService(getOpenApiTermsOfService())
             .license(getOpenApiLicence());

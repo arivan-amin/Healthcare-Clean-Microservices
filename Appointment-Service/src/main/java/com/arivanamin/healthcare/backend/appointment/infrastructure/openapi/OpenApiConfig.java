@@ -16,10 +16,10 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI myOpenAPI () {
         Server server = new Server();
-        server.setUrl("localhost:8080/protected/appointment");
+        server.setUrl("localhost:8080/protected/appointments");
         server.setDescription("Server URL");
         
-        Info info = new Info().title("Backend Appointment API")
+        Info info = new Info().title("Appointment Service API")
             .description("Provides all the API related to Appointment service").version("1.0")
             .contact(getOpenApiContactDetails()).termsOfService(getOpenApiTermsOfService())
             .license(getOpenApiLicence());

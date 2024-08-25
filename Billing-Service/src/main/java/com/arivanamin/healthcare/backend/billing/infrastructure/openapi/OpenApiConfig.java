@@ -19,7 +19,7 @@ public class OpenApiConfig {
         server.setUrl("localhost:8080/protected/billing");
         server.setDescription("Server URL");
         
-        Info info = new Info().title("Backend Billing API")
+        Info info = new Info().title("Billing Service API")
             .description("Provides all the API related to Billing service").version("1.0")
             .contact(getOpenApiContactDetails()).termsOfService(getOpenApiTermsOfService())
             .license(getOpenApiLicence());

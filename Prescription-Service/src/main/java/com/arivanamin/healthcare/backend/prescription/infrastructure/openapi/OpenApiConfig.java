@@ -19,7 +19,7 @@ public class OpenApiConfig {
         server.setUrl("localhost:8080/protected/prescription");
         server.setDescription("Server URL");
         
-        Info info = new Info().title("Backend Prescription API")
+        Info info = new Info().title("Prescription Service API")
             .description("Provides all the API related to Prescription service").version("1.0")
             .contact(getOpenApiContactDetails()).termsOfService(getOpenApiTermsOfService())
             .license(getOpenApiLicence());

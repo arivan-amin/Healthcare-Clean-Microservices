@@ -19,7 +19,7 @@ public class OpenApiConfig {
         server.setUrl("localhost:8080/protected/notification");
         server.setDescription("Server URL");
         
-        Info info = new Info().title("Backend Notification API")
+        Info info = new Info().title("Notification Service API")
             .description("Provides all the API related to Notification service").version("1.0")
             .contact(getOpenApiContactDetails()).termsOfService(getOpenApiTermsOfService())
             .license(getOpenApiLicence());

@@ -19,7 +19,7 @@ public class OpenApiConfig {
         server.setUrl("localhost:8080/protected/doctor");
         server.setDescription("Server URL");
         
-        Info info = new Info().title("Backend Doctor API")
+        Info info = new Info().title("Doctor Service API")
             .description("Provides all the API related to Doctor service").version("1.0")
             .contact(getOpenApiContactDetails()).termsOfService(getOpenApiTermsOfService())
             .license(getOpenApiLicence());
