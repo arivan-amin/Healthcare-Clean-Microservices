@@ -3,9 +3,9 @@ volumes:
     driver: local
 
 services:
-  backend-discovery-server:
+  discovery-server:
     container_name: healthcare-discovery-server
-    image: arivanamin/healthcare-backend-discovery-server
+    image: arivanamin/healthcare-discovery-server
     ports:
       - "8761:8761"
     env_file:
@@ -13,9 +13,9 @@ services:
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
 
-  backend-api-gateway:
+  api-gateway:
     container_name: healthcare-api-gateway
-    image: arivanamin/healthcare-backend-api-gateway
+    image: arivanamin/healthcare-api-gateway
     ports:
       - "8080:8080"
     env_file:
@@ -23,7 +23,7 @@ services:
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
+      - discovery-server
 
   tempo:
     container_name: healthcare-tempo
@@ -76,23 +76,23 @@ services:
       - "3000:3000"
 
   # Services
-  backend-appointment-service:
-    container_name: healthcare-backend-appointment
-    image: arivanamin/healthcare-backend-appointment
+  appointment-service:
+    container_name: healthcare-appointment-service
+    image: arivanamin/healthcare-appointment-service
     env_file:
       - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
-      - backend-api-gateway # find out if needed or not
+      - discovery-server
+      - api-gateway
 
-  backend-billing-service:
-    container_name: healthcare-backend-billing
-    image: arivanamin/healthcare-backend-billing
+  billing-service:
+    container_name: healthcare-billing-service
+    image: arivanamin/healthcare-billing-service
     env_file:
       - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
+      - discovery-server

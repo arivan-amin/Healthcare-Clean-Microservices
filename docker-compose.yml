@@ -3,9 +3,9 @@ volumes:
     driver: local
 
 services:
-  backend-discovery-server:
+  discovery-server:
     container_name: healthcare-discovery-server
-    image: arivanamin/healthcare-backend-discovery-server
+    image: arivanamin/healthcare-discovery-server
     ports:
       - "8761:8761"
     env_file:
@@ -13,9 +13,9 @@ services:
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
 
-  backend-api-gateway:
+  api-gateway:
     container_name: healthcare-api-gateway
-    image: arivanamin/healthcare-backend-api-gateway
+    image: arivanamin/healthcare-api-gateway
     ports:
       - "8080:8080"
     env_file:
@@ -23,7 +23,7 @@ services:
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
+      - discovery-server
 
   tempo:
     container_name: healthcare-tempo
@@ -76,153 +76,153 @@ services:
       - "3000:3000"
 
   # Services
-  backend-appointment-service:
-    container_name: healthcare-backend-appointment
-    image: arivanamin/healthcare-backend-appointment
+  appointment-service:
+    container_name: healthcare-appointment-service
+    image: arivanamin/healthcare-appointment-service
     env_file:
       - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
-      - backend-api-gateway
+      - discovery-server
+      - api-gateway
 
-  backend-billing-service:
-    container_name: healthcare-backend-billing
-    image: arivanamin/healthcare-backend-billing
+  billing-service:
+    container_name: healthcare-billing-service
+    image: arivanamin/healthcare-billing-service
     env_file:
       - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
+      - discovery-server
 
-  backend-doctor-service:
-    container_name: healthcare-backend-doctor
-    image: arivanamin/healthcare-backend-doctor
+  doctor-service:
+    container_name: healthcare-doctor-service
+    image: arivanamin/healthcare-doctor-service
     env_file:
       - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
+      - discovery-server
 
-  backend-inventory-service:
-    container_name: healthcare-backend-inventory
-    image: arivanamin/healthcare-backend-inventory
+  inventory-service:
+    container_name: healthcare-inventory-service
+    image: arivanamin/healthcare-inventory-service
     env_file:
       - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
+      - discovery-server
 
-  backend-lab-service:
-    container_name: healthcare-backend-lab
-    image: arivanamin/healthcare-backend-lab
+  lab-service:
+    container_name: healthcare-lab-service
+    image: arivanamin/healthcare-lab-service
     env_file:
       - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
+      - discovery-server
 
-  backend-medical-record-service:
-    container_name: healthcare-backend-medical-record
-    image: arivanamin/healthcare-backend-medical-record
+  medical-record-service:
+    container_name: healthcare-medical-record-service
+    image: arivanamin/healthcare-medical-record-service
     env_file:
       - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
+      - discovery-server
 
-  backend-notification-service:
-    container_name: healthcare-backend-notification
-    image: arivanamin/healthcare-backend-notification
+  notification-service:
+    container_name: healthcare-notification-service
+    image: arivanamin/healthcare-notification-service
     env_file:
       - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
+      - discovery-server
 
-  backend-patient-service:
-    container_name: healthcare-backend-patient
-    image: arivanamin/healthcare-backend-patient
+  patient-service:
+    container_name: healthcare-patient-service
+    image: arivanamin/healthcare-patient-service
     env_file:
       - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
+      - discovery-server
 
-  backend-pharmacy-service:
-    container_name: healthcare-backend-pharmacy
-    image: arivanamin/healthcare-backend-pharmacy
+  pharmacy-service:
+    container_name: healthcare-pharmacy-service
+    image: arivanamin/healthcare-pharmacy-service
     env_file:
       - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
+      - discovery-server
 
-  backend-prescription-service:
-    container_name: healthcare-backend-prescription
-    image: arivanamin/healthcare-backend-prescription
+  prescription-service:
+    container_name: healthcare-prescription-service
+    image: arivanamin/healthcare-prescription-service
     env_file:
       - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
+      - discovery-server
 
-  backend-radiology-service:
-    container_name: healthcare-backend-radiology
-    image: arivanamin/healthcare-backend-radiology
+  radiology-service:
+    container_name: healthcare-radiology-service
+    image: arivanamin/healthcare-radiology-service
     env_file:
       - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
+      - discovery-server
 
-  backend-reporting-service:
-    container_name: healthcare-backend-reporting
-    image: arivanamin/healthcare-backend-reporting
+  reporting-service:
+    container_name: healthcare-report-service
+    image: arivanamin/healthcare-report-service
     env_file:
       - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
+      - discovery-server
 
-  backend-security-service:
-    container_name: healthcare-backend-security
-    image: arivanamin/healthcare-backend-security
+  security-service:
+    container_name: healthcare-security-service
+    image: arivanamin/healthcare-security-service
     env_file:
       - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
+      - discovery-server
 
-  backend-staff-service:
-    container_name: healthcare-backend-staff
-    image: arivanamin/healthcare-backend-staff
+  staff-service:
+    container_name: healthcare-staff-service
+    image: arivanamin/healthcare-staff-service
     env_file:
       - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
+      - discovery-server
 
-  backend-surgery-service:
-    container_name: healthcare-backend-surgery
-    image: arivanamin/healthcare-backend-surgery
+  surgery-service:
+    container_name: healthcare-surgery-service
+    image: arivanamin/healthcare-surgery-service
     env_file:
       - .env
     volumes:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
-      - backend-discovery-server
+      - discovery-server
