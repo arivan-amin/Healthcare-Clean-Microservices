@@ -9,9 +9,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 @EnableCaching
 public class LabApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(LabApplication.class, args);
-	}
-
+    
+    public static void main (String[] args) {
+        SpringApplication.run(LabApplication.class, args);
+    }
 }

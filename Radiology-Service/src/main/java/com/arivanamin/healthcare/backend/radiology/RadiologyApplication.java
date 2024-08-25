@@ -9,9 +9,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 @EnableCaching
 public class RadiologyApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(RadiologyApplication.class, args);
-	}
-
+    
+    public static void main (String[] args) {
+        SpringApplication.run(RadiologyApplication.class, args);
+    }
 }
