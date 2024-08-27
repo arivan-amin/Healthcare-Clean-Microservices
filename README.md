@@ -99,22 +99,24 @@ The system is divided into several microservices, each responsible for a specifi
     cd Healthcare-Management-Microservices
     ```
 
-2. **Build the project and it will load the images to your local docker repository using JIB:**
+2. **Build the project, and it will load the images to your local docker repository using JIB:**
 
     ```bash
     mvn clean package
     ```
 
-3. **Set Eureka username and password environment variables :**
+3. **Set Eureka username and password environment variables and docker host ip:**
     - on Linux: add the below variables to your .bashrc file and reload or reboot
     ```bash
     export EUREKA_USER=admin
     export EUREKA_PASSWORD=admin
+    export DOCKER_HOST_IP=172.17.0.1
     ```
-    - on Windows: add the below variables to your
+    - on Windows: run the below commands
     ```bash
     set EUREKA_USER=admin
     set EUREKA_PASSWORD=admin
+    set DOCKER_HOST_IP=host.docker.internal
     ```
 4. **Run the services using Docker Compose:**
 
