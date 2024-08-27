@@ -27,7 +27,7 @@ services:
 
   tempo:
     container_name: healthcare-tempo
-    image: grafana/tempo:2.2.2
+    image: grafana/tempo:2.3.0
     command: [ "-config.file=/etc/tempo.yaml" ]
     volumes:
       - ./docker/tempo/tempo.yml:/etc/tempo.yaml:ro
@@ -45,7 +45,7 @@ services:
 
   promtail:
     container_name: healthcare-promtail
-    image: grafana/promtail:2.7.1
+    image: grafana/promtail:2.8.5
     volumes:
       - ./promtail-config.yaml:/etc/promtail/config.yml
       - app-logs:/logs
@@ -54,24 +54,29 @@ services:
 
   prometheus:
     container_name: healthcare-prometheus
-    image: prom/prometheus:v2.46.0
+    image: prom/prometheus:v2.53.2
     command:
       - --enable-feature=exemplar-storage
       - --config.file=/etc/prometheus/prometheus.yml
     volumes:
       - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    environment:
+      - DOCKER_HOST_IP=${DOCKER_HOST_IP}
     ports:
       - "9090:9090"
-
+      
   grafana:
     container_name: healthcare-grafana
-    image: grafana/grafana:10.1.0
+    image: grafana/grafana:11.1.4
     volumes:
       - ./docker/grafana:/etc/grafana/provisioning/datasources:ro
+      - ./docker/grafana/provisioning:/etc/grafana/provisioning
+      - ./docker/grafana/provisioning/dashboards:/var/lib/grafana/dashboards
     environment:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
       - GF_AUTH_DISABLE_LOGIN_FORM=true
+      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
     ports:
       - "3000:3000"
 
