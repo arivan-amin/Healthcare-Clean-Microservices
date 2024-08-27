@@ -64,7 +64,7 @@ services:
       - DOCKER_HOST_IP=${DOCKER_HOST_IP}
     ports:
       - "9090:9090"
-      
+
   grafana:
     container_name: healthcare-grafana
     image: grafana/grafana:11.1.4
@@ -81,23 +81,12 @@ services:
       - "3000:3000"
 
   # Services
-#  appointment-service:
-#    container_name: healthcare-appointment-service
-#    image: arivanamin/healthcare-appointment-service
-#    env_file:
-#      - .env
-#    volumes:
-#      - app-logs:/root/Apps/Healthcare/Logs/
-#    depends_on:
-#      - discovery-server
-#      - api-gateway
-#
-#  billing-service:
-#    container_name: healthcare-billing-service
-#    image: arivanamin/healthcare-billing-service
-#    env_file:
-#      - .env
-#    volumes:
-#      - app-logs:/root/Apps/Healthcare/Logs/
-#    depends_on:
-#      - discovery-server
+  appointment-service:
+    container_name: healthcare-appointment-service
+    image: arivanamin/healthcare-appointment-service
+    env_file:
+      - .env
+    volumes:
+      - app-logs:/root/Apps/Healthcare/Logs/
+    depends_on:
+      - discovery-server

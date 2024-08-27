@@ -90,7 +90,6 @@ services:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
       - discovery-server
-      - api-gateway
 
   billing-service:
     container_name: healthcare-billing-service
