@@ -60,23 +60,18 @@ services:
       - --config.file=/etc/prometheus/prometheus.yml
     volumes:
       - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-    environment:
-      - DOCKER_HOST_IP=${DOCKER_HOST_IP}
     ports:
       - "9090:9090"
-      
+  
   grafana:
     container_name: healthcare-grafana
     image: grafana/grafana:11.1.4
     volumes:
       - ./docker/grafana:/etc/grafana/provisioning/datasources:ro
-      - ./docker/grafana/provisioning:/etc/grafana/provisioning
-      - ./docker/grafana/provisioning/dashboards:/var/lib/grafana/dashboards
     environment:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
       - GF_AUTH_DISABLE_LOGIN_FORM=true
-      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
     ports:
       - "3000:3000"
 

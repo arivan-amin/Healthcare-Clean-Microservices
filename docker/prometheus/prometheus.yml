@@ -6,10 +6,10 @@ scrape_configs:
   - job_name: 'prometheus'
     static_configs:
       - targets: [ 'prometheus:9090' ]
-        
+
   - job_name: 'appointment-service'
     metrics_path: '/appointments/actuator/prometheus'
     static_configs:
-      - targets: [ '${DOCKER_HOST_IP}:8080' ]
+      - targets: [ '172.17.0.1:8080' ]
         labels:
           instance: 'Appointment-Service'
