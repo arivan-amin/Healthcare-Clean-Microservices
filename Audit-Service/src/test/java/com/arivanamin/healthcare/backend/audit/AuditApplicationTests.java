@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.audit;
+package com.arivanamin.healthcare.backend.audit;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
