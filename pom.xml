@@ -44,6 +44,7 @@
         <module>Api-Gateway</module>
         <module>Backend-Core</module>
         <module>Appointment-Service</module>
+        <module>Audit-Service</module>
         <module>Billing-Service</module>
         <module>Doctor-Service</module>
         <module>Inventory-Service</module>

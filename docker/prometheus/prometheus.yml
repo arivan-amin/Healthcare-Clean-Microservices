@@ -13,3 +13,108 @@ scrape_configs:
       - targets: [ '172.17.0.1:8080' ]
         labels:
           instance: 'Appointment-Service'
+
+  - job_name: 'audit-service'
+    metrics_path: '/audits/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Audit-Service'
+
+  - job_name: 'billing-service'
+    metrics_path: '/billings/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Billing-Service'
+
+  - job_name: 'doctor-service'
+    metrics_path: '/doctors/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Doctor-Service'
+
+  - job_name: 'inventory-service'
+    metrics_path: '/inventories/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Inventory-Service'
+
+  - job_name: 'lab-service'
+    metrics_path: '/labs/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Lab-Service'
+
+  - job_name: 'medical-record-service'
+    metrics_path: '/medical-records/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Medical-Record-Service'
+
+  - job_name: 'notification-service'
+    metrics_path: '/notifications/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Notification-Service'
+
+  - job_name: 'patient-service'
+    metrics_path: '/patients/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Patient-Service'
+
+  - job_name: 'pharmacy-service'
+    metrics_path: '/pharmacies/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Pharmacy-Service'
+
+  - job_name: 'prescription-service'
+    metrics_path: '/prescriptions/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Prescription-Service'
+
+  - job_name: 'radiology-service'
+    metrics_path: '/radiology/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Radiology-Service'
+
+  - job_name: 'report-service'
+    metrics_path: '/reports/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Report-Service'
+
+  - job_name: 'security-service'
+    metrics_path: '/securities/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Security-Service'
+
+  - job_name: 'staff-service'
+    metrics_path: '/staffs/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Staff-Service'
+
+  - job_name: 'surgery-service'
+    metrics_path: '/surgeries/actuator/prometheus'
+    static_configs:
+      - targets: [ '172.17.0.1:8080' ]
+        labels:
+          instance: 'Surgery-Service'
