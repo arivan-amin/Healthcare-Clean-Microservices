@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.api.gateway;
+package com.arivanamin.healthcare.backend.api.gateway.infrastructure;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
