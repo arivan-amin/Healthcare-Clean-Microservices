@@ -6,13 +6,6 @@ scrape_configs:
   - job_name: 'prometheus'
     static_configs:
       - targets: [ 'prometheus:9090' ]
-
-  - job_name: 'discovery-server'
-    metrics_path: '/discovery-server/actuator/prometheus'
-    static_configs:
-      - targets: [ '172.17.0.1:8080' ]
-        labels:
-          instance: 'Discovery-Server'
           
   - job_name: 'api-gateway-service'
     metrics_path: '/api-gateway/actuator/prometheus'
