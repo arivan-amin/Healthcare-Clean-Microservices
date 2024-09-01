@@ -10,6 +10,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableCaching
 public class AppointmentApplication {
     
+    // todo 9/1/24 - inject micrometer into controllers
     public static void main (String[] args) {
         SpringApplication.run(AppointmentApplication.class, args);
     }

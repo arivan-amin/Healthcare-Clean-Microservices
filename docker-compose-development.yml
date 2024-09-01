@@ -127,12 +127,12 @@ services:
       DYNAMIC_CONFIG_ENABLED: 'true'
   
   # Services
-  appointment-service:
-    container_name: healthcare-appointment-service
-    image: arivanamin/healthcare-appointment-service
-    env_file:
-      - .env
-    volumes:
-      - app-logs:/root/Apps/Healthcare/Logs/
-    depends_on:
-      - discovery-server
+#  appointment-service:
+#    container_name: healthcare-appointment-service
+#    image: arivanamin/healthcare-appointment-service
+#    env_file:
+#      - .env
+#    volumes:
+#      - app-logs:/root/Apps/Healthcare/Logs/
+#    depends_on:
+#      - discovery-server
