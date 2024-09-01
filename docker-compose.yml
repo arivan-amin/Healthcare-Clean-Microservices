@@ -62,7 +62,7 @@ services:
       - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
     ports:
       - "9090:9090"
-  
+
   grafana:
     container_name: healthcare-grafana
     image: grafana/grafana:11.1.4
@@ -74,7 +74,7 @@ services:
       - GF_AUTH_DISABLE_LOGIN_FORM=true
     ports:
       - "3000:3000"
-  
+
   # Kafka
   zookeeper:
     container_name: healthcare-zookeeper
@@ -113,7 +113,7 @@ services:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker:29092'
       SCHEMA_REGISTRY_LISTENERS: http://schema-registry:8081
-  
+
   kafka-ui:
     container_name: healthcare-kafka-ui
     image: provectuslabs/kafka-ui:latest
@@ -124,9 +124,8 @@ services:
     environment:
       KAFKA_CLUSTERS_NAME: local
       KAFKA_CLUSTERS_BOOTSTRAPSERVERS: broker:29092
-      #      KAFKA_CLUSTERS_SCHEMAREGISTRY: http://schema-registry:8081
       DYNAMIC_CONFIG_ENABLED: 'true'
-  
+
   # Services
   appointment-service:
     container_name: healthcare-appointment-service
