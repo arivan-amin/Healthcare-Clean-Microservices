@@ -47,7 +47,7 @@ services:
     container_name: healthcare-promtail
     image: grafana/promtail:2.8.5
     volumes:
-      - ./promtail-config.yaml:/etc/promtail/config.yml
+      - ./docker/promtail/promtail-config.yaml:/etc/promtail/config.yml
       - app-logs:/logs
       - ${HOME}/Apps/Healthcare/Logs:/local-logs
     command: -config.file=/etc/promtail/config.yml
