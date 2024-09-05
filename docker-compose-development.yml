@@ -123,7 +123,7 @@ services:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker:29092'
       SCHEMA_REGISTRY_LISTENERS: http://schema-registry:8081
-  
+
   kafka-ui:
     container_name: healthcare-kafka-ui
     image: provectuslabs/kafka-ui:latest
