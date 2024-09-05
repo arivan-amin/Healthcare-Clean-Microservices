@@ -6,7 +6,7 @@ scrape_configs:
   - job_name: 'prometheus'
     static_configs:
       - targets: [ 'prometheus:9090' ]
-          
+
   - job_name: 'api-gateway-service'
     metrics_path: '/api-gateway/actuator/prometheus'
     static_configs:
