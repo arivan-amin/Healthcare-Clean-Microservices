@@ -22,10 +22,6 @@ public class EurekaSecurityConfig {
     @Value ("${EUREKA_PASSWORD}")
     private String password;
     
-    // todo 8/12/24 - maybe change the docker compose file to run all the services to ease setup 
-    //  and create another docker compose that only runs the essential services like api gateway,
-    //  eureka and grafana for development
-    
     @Bean
     public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
