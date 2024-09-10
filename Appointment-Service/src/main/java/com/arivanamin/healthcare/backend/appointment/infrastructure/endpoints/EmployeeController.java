@@ -1,6 +1,6 @@
 package com.arivanamin.healthcare.backend.appointment.infrastructure.endpoints;
 
-import com.arivanamin.healthcare.core.domain.aspects.LogExecutionTime;
+import com.arivanamin.healthcare.backend.core.domain.aspects.LogExecutionTime;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.Builder;
 import lombok.Value;
