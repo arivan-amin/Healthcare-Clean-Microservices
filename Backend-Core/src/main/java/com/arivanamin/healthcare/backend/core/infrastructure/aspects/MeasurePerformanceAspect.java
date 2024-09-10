@@ -13,7 +13,7 @@ import static com.arivanamin.healthcare.backend.core.domain.aspects.ExecuteAndLo
 @Slf4j
 public class MeasurePerformanceAspect {
     
-    @Around ("@annotation(aspects.domain.com.arivanamin.healthcare.backend.core.LogExecutionTime)")
+    @Around ("@annotation(com.arivanamin.healthcare.backend.core.domain.aspects.LogExecutionTime)")
     public Object logExecutionTimeOfMethod (ProceedingJoinPoint joinPoint) throws Throwable {
         String methodName = joinPoint.getSignature().toShortString();
         return executeThrowable(methodName, joinPoint::proceed);
