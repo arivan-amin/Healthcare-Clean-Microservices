@@ -1,6 +1,6 @@
 package com.arivanamin.healthcare.backend.patient.domain.entities;
 
-import com.arivanamin.healthcare.core.domain.gender.Gender;
+import com.arivanamin.healthcare.backend.core.domain.gender.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 

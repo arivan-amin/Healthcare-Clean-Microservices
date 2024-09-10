@@ -5,7 +5,7 @@ import com.arivanamin.healthcare.backend.patient.domain.entities.Patient;
 import java.util.List;
 import java.util.UUID;
 
-public interface PatientService {
+public interface PatientCrudService {
     
     public List<Patient> getAllPatients ();
     
