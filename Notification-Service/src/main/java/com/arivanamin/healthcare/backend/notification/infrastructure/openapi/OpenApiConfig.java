@@ -16,7 +16,7 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI myOpenAPI () {
         Server server = new Server();
-        server.setUrl("localhost:8080/protected/notifications");
+        server.setUrl("localhost:8080/");
         server.setDescription("Server URL");
         
         Info info = new Info().title("Notification Service API")

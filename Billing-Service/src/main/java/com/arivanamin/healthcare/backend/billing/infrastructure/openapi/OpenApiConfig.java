@@ -16,7 +16,7 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI myOpenAPI () {
         Server server = new Server();
-        server.setUrl("localhost:8080/protected/billings");
+        server.setUrl("localhost:8080/");
         server.setDescription("Server URL");
         
         Info info = new Info().title("Billing Service API")
