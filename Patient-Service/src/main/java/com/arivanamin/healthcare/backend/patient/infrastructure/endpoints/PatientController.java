@@ -1,7 +1,7 @@
 package com.arivanamin.healthcare.backend.patient.infrastructure.endpoints;
 
-import com.arivanamin.healthcare.backend.patient.domain.entities.Patient;
-import com.arivanamin.healthcare.backend.patient.domain.services.PatientCrudService;
+import com.arivanamin.healthcare.backend.patient.domain.entity.Patient;
+import com.arivanamin.healthcare.backend.patient.domain.usecase.*;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,28 +17,47 @@ import java.util.UUID;
 @Slf4j
 public class PatientController {
     
-    private PatientCrudService service;
+    private ReadPatientUseCase readUseCase;
+    private CreatePatientUseCase createUseCase;
+    private UpdatePatientUseCase updateUseCase;
+    private DeletePatientUseCase deleteUseCase;
     
     @GetMapping ("/v1/profiles")
-    @Operation (summary = "Get list of all patient profiles")
+    @Operation (summary = "Get a list of all patient profiles")
     @ResponseStatus (HttpStatus.OK)
     public List<Patient> getAllPatients () {
-        return service.getAllPatients();
+        return readUseCase.executeFindAll();
     }
     
-    @GetMapping ("/v1/profiles/{patientId}")
-    @Operation (summary = "Get single patient profile by id")
+    @GetMapping ("/v1/profiles/{id}")
+    @Operation (summary = "Get a single patient profile by id")
     @ResponseStatus (HttpStatus.OK)
-    public Patient getPatientById (@PathVariable UUID patientId) {
-        log.info("received patientId = {}", patientId);
-        return service.getPatientById();
+    public Patient getPatientById (@PathVariable UUID id) {
+        log.info("received patientId = {}", id);
+        return readUseCase.executeFindById();
     }
     
     @PostMapping ("/v1/profiles")
-    @Operation (summary = "Creates Patient profile")
+    @Operation (summary = "Creates a patient profile")
     @ResponseStatus (HttpStatus.CREATED)
     public Patient createPatient (@PathVariable Patient patient) {
         log.info("received patient to create = {}", patient);
-        return service.createPatient(patient);
+        return createUseCase.execute(patient);
+    }
+    
+    @PostMapping ("/v1/profiles")
+    @Operation (summary = "Updates a patient profile")
+    @ResponseStatus (HttpStatus.CREATED)
+    public Patient updatePatient (@PathVariable Patient patient) {
+        log.info("received patient to update = {}", patient);
+        return updateUseCase.execute(patient);
+    }
+    
+    @DeleteMapping ("/v1/profiles/{id}")
+    @Operation (summary = "Deletes a patient profile")
+    @ResponseStatus (HttpStatus.NO_CONTENT)
+    public void deletePatient (@PathVariable UUID id) {
+        log.info("received patient to delete = {}", id);
+        deleteUseCase.execute(id);
     }
 }

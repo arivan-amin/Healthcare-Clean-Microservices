@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.patient.domain.entities;
+package com.arivanamin.healthcare.backend.patient.domain.entity;
 
 import com.arivanamin.healthcare.backend.core.domain.gender.Gender;
 import jakarta.persistence.*;
