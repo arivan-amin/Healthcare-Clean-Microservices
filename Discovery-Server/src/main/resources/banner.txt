@@ -15,10 +15,5 @@ EE::::::EEEEEEEE:::::E   u:::::::::::::::   uur:::::r               e::::::::e  
 E::::::::::::::::::::E    u::::::::::::::   :ur:::::r                e::::::::eeeeeeee k   ::::::k  k:::::k   a:::::aaaa::::::a 
 E::::::::::::::::::::E     uu::::::::uu::   :ur:::::r                 ee:::::::::::::e k   ::::::k   k:::::   ka::::::::::aa:::a
 EEEEEEEEEEEEEEEEEEEEEE       uuuuuuuu  uu   uurrrrrrr                   eeeeeeeeeeeeee k   kkkkkkk    kkkkk   kkaaaaaaaaaa  aaaa
-                                                                                                                 
-                                                                                                                 
-                                                                                                                 
-                                                                                                                 
-                                                                                                                 
-                                                                                                                 
-                                                                                                                 
+
+Spring Boot Version:${spring-boot.formatted-version}

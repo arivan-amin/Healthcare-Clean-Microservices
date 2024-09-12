@@ -6,3 +6,4 @@
 ███████║   ██║   ██║  ██║██║     ██║     
 ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝     ╚═╝     
                                          
+Spring Boot Version:${spring-boot.formatted-version}
