@@ -2,7 +2,7 @@ package com.arivanamin.healthcare.backend.patient.infrastructure.persistence;
 
 import com.arivanamin.healthcare.backend.patient.domain.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.domain.persistence.PatientPersistence;
-import com.arivanamin.healthcare.backend.patient.infrastructure.repository.JpaPatientRepository;
+import com.arivanamin.healthcare.backend.patient.infrastructure.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class SpringPatientPersistence implements PatientPersistence {
     
-    private final JpaPatientRepository repository;
+    private final PatientRepository repository;
     
     @Override
     public List<Patient> getAllPatients () {
