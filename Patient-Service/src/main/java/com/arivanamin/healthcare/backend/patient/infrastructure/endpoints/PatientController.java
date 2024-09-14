@@ -18,9 +18,9 @@ import java.util.UUID;
 public class PatientController {
     
     private final ReadPatientUseCase readUseCase;
-    // private final CreatePatientUseCase createUseCase;
-    // private final UpdatePatientUseCase updateUseCase;
-    // private final DeletePatientUseCase deleteUseCase;
+    private final CreatePatientUseCase createUseCase;
+    private final UpdatePatientUseCase updateUseCase;
+    private final DeletePatientUseCase deleteUseCase;
     
     @GetMapping ("/v1/profiles")
     @Operation (summary = "Get a list of all patient profiles")
@@ -34,16 +34,15 @@ public class PatientController {
     @ResponseStatus (HttpStatus.OK)
     public Patient getPatientById (@PathVariable UUID id) {
         log.info("received patientId = {}", id);
-        return readUseCase.executeFindById();
+        return readUseCase.executeFindById(id).orElseThrow();
     }
     
     @PostMapping ("/v1/profiles")
     @Operation (summary = "Creates a patient profile")
     @ResponseStatus (HttpStatus.CREATED)
-    public Patient createPatient (@PathVariable Patient patient) {
+    public Patient createPatient (@RequestBody Patient patient) {
         log.info("received patient to create = {}", patient);
-        // return createUseCase.execute(patient);
-        return null;
+        return createUseCase.execute(patient);
     }
     
     @PostMapping ("/v1/profiles/{id}")
@@ -51,8 +50,7 @@ public class PatientController {
     @ResponseStatus (HttpStatus.CREATED)
     public Patient updatePatient (@PathVariable UUID id, @RequestBody Patient patient) {
         log.info("received patient to update = {}", patient);
-        // return updateUseCase.execute(patient);
-        return null;
+        return updateUseCase.execute(patient);
     }
     
     @DeleteMapping ("/v1/profiles/{id}")
@@ -60,6 +58,6 @@ public class PatientController {
     @ResponseStatus (HttpStatus.NO_CONTENT)
     public void deletePatient (@PathVariable UUID id) {
         log.info("received patient to delete = {}", id);
-        // deleteUseCase.execute(id);
+        deleteUseCase.execute(id);
     }
 }
