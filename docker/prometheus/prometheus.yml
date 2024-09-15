@@ -7,6 +7,10 @@ scrape_configs:
     static_configs:
       - targets: [ 'prometheus:9090' ]
 
+  - job_name: 'mysql'
+    static_configs:
+      - targets: [ '172.17.0.1:9104' ]
+
   - job_name: 'api-gateway-service'
     metrics_path: '/api-gateway/actuator/prometheus'
     static_configs:

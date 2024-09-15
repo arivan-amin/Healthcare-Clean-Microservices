@@ -5,6 +5,7 @@ volumes:
 services:
   discovery-server:
     container_name: healthcare-discovery-server
+    restart: unless-stopped
     image: arivanamin/healthcare-discovery-server
     ports:
       - "8761:8761"
@@ -15,6 +16,7 @@ services:
 
   api-gateway:
     container_name: healthcare-api-gateway
+    restart: unless-stopped
     image: arivanamin/healthcare-api-gateway
     ports:
       - "8080:8080"
@@ -27,6 +29,7 @@ services:
 
   tempo:
     container_name: healthcare-tempo
+    restart: unless-stopped
     image: grafana/tempo:2.3.0
     command: [ "-config.file=/etc/tempo.yaml" ]
     volumes:
@@ -37,6 +40,7 @@ services:
 
   loki:
     container_name: healthcare-loki
+    restart: unless-stopped
     image: grafana/loki:main
     command: [ "-config.file=/etc/loki/local-config.yaml" ]
     ports:
@@ -44,6 +48,7 @@ services:
 
   promtail:
     container_name: healthcare-promtail
+    restart: unless-stopped
     image: grafana/promtail:2.8.5
     volumes:
       - ./docker/promtail/promtail-config.yaml:/etc/promtail/config.yml
@@ -53,6 +58,7 @@ services:
 
   prometheus:
     container_name: healthcare-prometheus
+    restart: unless-stopped
     image: prom/prometheus:v2.53.2
     command:
       - --enable-feature=exemplar-storage
@@ -64,6 +70,7 @@ services:
 
   grafana:
     container_name: healthcare-grafana
+    restart: unless-stopped
     image: grafana/grafana:11.1.4
     volumes:
       - ./docker/grafana:/etc/grafana/provisioning/datasources:ro
@@ -77,16 +84,32 @@ services:
   mysql:
     image: mysql:lts
     container_name: healthcare-mysql
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: mysql
     ports:
       - "3306:3306"
     volumes:
       - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    
+  mysqld-exporter:
+    image: prom/mysqld-exporter
+    container_name: healthcare-mysql-exporter
+    restart: unless-stopped
+    command:
+      - --config.my-cnf=/cfg/.my.cnf
+      - --mysqld.address=healthcare-mysql:3306
+    volumes:
+      - ./docker/mysql/mysql-exporter.cnf:/cfg/.my.cnf
+    ports:
+      - "9104:9104"
+    depends_on:
+      - mysql
 
   # Kafka
   zookeeper:
     container_name: healthcare-zookeeper
+    restart: unless-stopped
     image: confluentinc/cp-zookeeper:7.5.0
     hostname: zookeeper
     ports:
@@ -97,6 +120,7 @@ services:
 
   broker:
     container_name: healthcare-broker
+    restart: unless-stopped
     image: confluentinc/cp-kafka:7.5.0
     ports:
       - "9092:9092"
@@ -112,6 +136,7 @@ services:
 
   schema-registry:
     container_name: healthcare-schema-registry
+    restart: unless-stopped
     image: confluentinc/cp-schema-registry:7.5.0
     hostname: schema-registry
     depends_on:
@@ -125,6 +150,7 @@ services:
 
   kafka-ui:
     container_name: healthcare-kafka-ui
+    restart: unless-stopped
     image: provectuslabs/kafka-ui:latest
     ports:
       - "8086:8080"
@@ -138,6 +164,7 @@ services:
   # Services
   appointment-service:
     container_name: healthcare-appointment-service
+    restart: unless-stopped
     image: arivanamin/healthcare-appointment-service
     env_file:
       - .env
@@ -148,6 +175,7 @@ services:
 
   billing-service:
     container_name: healthcare-billing-service
+    restart: unless-stopped
     image: arivanamin/healthcare-billing-service
     env_file:
       - .env
@@ -158,6 +186,7 @@ services:
 
   doctor-service:
     container_name: healthcare-doctor-service
+    restart: unless-stopped
     image: arivanamin/healthcare-doctor-service
     env_file:
       - .env
@@ -168,6 +197,7 @@ services:
 
   inventory-service:
     container_name: healthcare-inventory-service
+    restart: unless-stopped
     image: arivanamin/healthcare-inventory-service
     env_file:
       - .env
@@ -178,6 +208,7 @@ services:
 
   lab-service:
     container_name: healthcare-lab-service
+    restart: unless-stopped
     image: arivanamin/healthcare-lab-service
     env_file:
       - .env
@@ -188,6 +219,7 @@ services:
 
   medical-record-service:
     container_name: healthcare-medical-record-service
+    restart: unless-stopped
     image: arivanamin/healthcare-medical-record-service
     env_file:
       - .env
@@ -198,6 +230,7 @@ services:
 
   notification-service:
     container_name: healthcare-notification-service
+    restart: unless-stopped
     image: arivanamin/healthcare-notification-service
     env_file:
       - .env
@@ -208,6 +241,7 @@ services:
 
   patient-service:
     container_name: healthcare-patient-service
+    restart: unless-stopped
     image: arivanamin/healthcare-patient-service
     env_file:
       - .env
@@ -218,6 +252,7 @@ services:
 
   pharmacy-service:
     container_name: healthcare-pharmacy-service
+    restart: unless-stopped
     image: arivanamin/healthcare-pharmacy-service
     env_file:
       - .env
@@ -228,6 +263,7 @@ services:
 
   prescription-service:
     container_name: healthcare-prescription-service
+    restart: unless-stopped
     image: arivanamin/healthcare-prescription-service
     env_file:
       - .env
@@ -238,6 +274,7 @@ services:
 
   radiology-service:
     container_name: healthcare-radiology-service
+    restart: unless-stopped
     image: arivanamin/healthcare-radiology-service
     env_file:
       - .env
@@ -248,6 +285,7 @@ services:
 
   reporting-service:
     container_name: healthcare-report-service
+    restart: unless-stopped
     image: arivanamin/healthcare-report-service
     env_file:
       - .env
@@ -258,6 +296,7 @@ services:
 
   security-service:
     container_name: healthcare-security-service
+    restart: unless-stopped
     image: arivanamin/healthcare-security-service
     env_file:
       - .env
@@ -268,6 +307,7 @@ services:
 
   staff-service:
     container_name: healthcare-staff-service
+    restart: unless-stopped
     image: arivanamin/healthcare-staff-service
     env_file:
       - .env
@@ -278,6 +318,7 @@ services:
 
   surgery-service:
     container_name: healthcare-surgery-service
+    restart: unless-stopped
     image: arivanamin/healthcare-surgery-service
     env_file:
       - .env

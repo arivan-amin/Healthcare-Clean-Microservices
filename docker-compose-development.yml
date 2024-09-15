@@ -5,6 +5,7 @@ volumes:
 services:
   discovery-server:
     container_name: healthcare-discovery-server
+    restart: unless-stopped
     image: arivanamin/healthcare-discovery-server
     ports:
       - "8761:8761"
@@ -15,6 +16,7 @@ services:
 
   api-gateway:
     container_name: healthcare-api-gateway
+    restart: unless-stopped
     image: arivanamin/healthcare-api-gateway
     ports:
       - "8080:8080"
@@ -27,6 +29,7 @@ services:
 
   tempo:
     container_name: healthcare-tempo
+    restart: unless-stopped
     image: grafana/tempo:2.3.0
     command: [ "-config.file=/etc/tempo.yaml" ]
     volumes:
@@ -37,6 +40,7 @@ services:
 
   loki:
     container_name: healthcare-loki
+    restart: unless-stopped
     image: grafana/loki:main
     command: [ "-config.file=/etc/loki/local-config.yaml" ]
     ports:
@@ -44,6 +48,7 @@ services:
 
   promtail:
     container_name: healthcare-promtail
+    restart: unless-stopped
     image: grafana/promtail:2.8.5
     volumes:
       - ./docker/promtail/promtail-config.yaml:/etc/promtail/config.yml
@@ -53,6 +58,7 @@ services:
 
   prometheus:
     container_name: healthcare-prometheus
+    restart: unless-stopped
     image: prom/prometheus:v2.53.2
     command:
       - --enable-feature=exemplar-storage
@@ -64,6 +70,7 @@ services:
 
   grafana:
     container_name: healthcare-grafana
+    restart: unless-stopped
     image: grafana/grafana:11.1.4
     volumes:
       - ./docker/grafana:/etc/grafana/provisioning/datasources:ro
@@ -77,12 +84,27 @@ services:
   mysql:
     image: mysql:lts
     container_name: healthcare-mysql
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: mysql
     ports:
       - "3306:3306"
     volumes:
       - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  mysqld-exporter:
+    image: prom/mysqld-exporter
+    container_name: healthcare-mysql-exporter
+    restart: unless-stopped
+    command:
+      - --config.my-cnf=/cfg/.my.cnf
+      - --mysqld.address=healthcare-mysql:3306
+    volumes:
+      - ./docker/mysql/mysql-exporter.cnf:/cfg/.my.cnf
+    ports:
+      - "9104:9104"
+    depends_on:
+      - mysql
 
   # Kafka
   zookeeper:
