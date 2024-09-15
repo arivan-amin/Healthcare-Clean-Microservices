@@ -26,10 +26,113 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 6756,
   "graphTooltip": 0,
-  "id": 12,
+  "id": 15,
   "links": [],
   "liveNow": false,
   "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "locale"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 6,
+        "y": 0
+      },
+      "id": 66,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "datasource": "PBFA97CFB590B2093",
+          "editorMode": "code",
+          "expr": "process_files_open_files{instance=\"$instance\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Open Files",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": "PBFA97CFB590B2093",
+          "expr": "process_files_max{application=\"$application\", instance=\"$instance\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Max Files",
+          "refId": "B"
+        }
+      ],
+      "title": "Process Open Files",
+      "type": "timeseries"
+    },
     {
       "collapsed": false,
       "datasource": {
@@ -40,7 +143,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 6
       },
       "id": 54,
       "panels": [],
@@ -55,7 +158,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
           },
           "decimals": 1,
           "mappings": [
@@ -90,7 +193,7 @@
         "h": 3,
         "w": 6,
         "x": 0,
-        "y": 1
+        "y": 7
       },
       "id": 52,
       "maxDataPoints": 100,
@@ -176,7 +279,7 @@
         "h": 6,
         "w": 5,
         "x": 6,
-        "y": 1
+        "y": 7
       },
       "id": 58,
       "maxDataPoints": 100,
@@ -269,7 +372,7 @@
         "h": 6,
         "w": 5,
         "x": 11,
-        "y": 1
+        "y": 7
       },
       "id": 60,
       "maxDataPoints": 100,
@@ -310,40 +413,91 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "palette-classic"
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
           },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 16,
+        "y": 7
+      },
+      "id": 103,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(http_server_requests_seconds_count{application=\"$instance\", uri!~\".*actuator.*\"})",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "timeFrom": "24h",
+      "title": "Total Requests",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "Time"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
           },
           "mappings": [],
           "thresholds": {
@@ -358,53 +512,53 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "locale"
+          }
         },
         "overrides": []
       },
       "gridPos": {
         "h": 6,
-        "w": 8,
-        "x": 16,
-        "y": 1
+        "w": 4,
+        "x": 20,
+        "y": 7
       },
-      "id": 66,
+      "id": 106,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "11.1.4",
       "targets": [
         {
-          "datasource": "PBFA97CFB590B2093",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "editorMode": "code",
-          "expr": "process_files_open_files{application=\"$application\", instance=\"$instance\"}",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Open Files",
+          "exemplar": true,
+          "expr": "sum(http_server_requests_seconds_count{application=\"$instance\", outcome=\"SERVER_ERROR\"})",
+          "interval": "",
+          "legendFormat": "",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": "PBFA97CFB590B2093",
-          "expr": "process_files_max{application=\"$application\", instance=\"$instance\"}",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Max Files",
-          "refId": "B"
         }
       ],
-      "title": "Process Open Files",
-      "type": "timeseries"
+      "timeFrom": "24h",
+      "title": "Total Exceptions",
+      "type": "stat"
     },
     {
       "datasource": {
@@ -414,7 +568,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
           },
           "mappings": [
             {
@@ -448,7 +602,7 @@
         "h": 3,
         "w": 6,
         "x": 0,
-        "y": 4
+        "y": 10
       },
       "id": 56,
       "maxDataPoints": 100,
@@ -549,7 +703,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 7
+        "y": 13
       },
       "id": 95,
       "options": {
@@ -655,7 +809,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 7
+        "y": 13
       },
       "id": 96,
       "options": {
@@ -704,33 +858,40 @@
       },
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
           },
-          "unit": "short"
+          "unit": "s"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 6,
-        "w": 4,
+        "w": 24,
         "x": 0,
-        "y": 14
+        "y": 20
       },
-      "id": 103,
+      "id": 105,
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
+        "displayMode": "lcd",
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "top",
+        "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -738,9 +899,9 @@
           "fields": "",
           "values": false
         },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
       },
       "pluginVersion": "11.1.4",
       "targets": [
@@ -751,34 +912,15 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(http_server_requests_seconds_count{application=\"$instance\", uri!~\".*actuator.*\"})",
-          "instant": true,
+          "expr": "sum by(uri)(http_server_requests_seconds_sum{application=\"$instance\"}) / sum by(uri)(http_server_requests_seconds_count{application=\"$instance\"})",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{method}} {{uri}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "timeFrom": "24h",
-      "title": "Total Requests",
-      "transformations": [
-        {
-          "id": "seriesToRows",
-          "options": {}
-        },
-        {
-          "id": "sortBy",
-          "options": {
-            "fields": {},
-            "sort": [
-              {
-                "field": "Time"
-              }
-            ]
-          }
-        }
-      ],
-      "type": "stat"
+      "title": "Requests Average Duration",
+      "type": "bargauge"
     },
     {
       "datasource": {
@@ -792,8 +934,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -803,9 +944,9 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 20,
-        "x": 4,
-        "y": 14
+        "w": 24,
+        "x": 0,
+        "y": 26
       },
       "id": 104,
       "options": {
@@ -879,11 +1020,11 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
           },
           "mappings": [],
           "thresholds": {
-            "mode": "absolute",
+            "mode": "percentage",
             "steps": [
               {
                 "color": "green",
@@ -891,24 +1032,25 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 100
               }
             ]
-          }
+          },
+          "unit": "short"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 6,
-        "w": 4,
+        "w": 24,
         "x": 0,
-        "y": 20
+        "y": 32
       },
-      "id": 106,
+      "id": 158,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
-        "justifyMode": "auto",
+        "justifyMode": "center",
         "orientation": "auto",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
@@ -919,7 +1061,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "auto",
+        "textMode": "value_and_name",
         "wideLayout": true
       },
       "pluginVersion": "11.1.4",
@@ -931,15 +1073,40 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(http_server_requests_seconds_count{application=\"$instance\", outcome=\"SERVER_ERROR\"})",
+          "expr": "(spring_data_repository_invocations_seconds_count{application=\"$instance\"})",
+          "instant": true,
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{method}} {{uri}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "timeFrom": "24h",
-      "title": "Total Exceptions",
+      "title": "JPA Repository Calls ",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "Time"
+              }
+            ]
+          }
+        },
+        {
+          "id": "partitionByValues",
+          "options": {
+            "fields": [
+              "Metric"
+            ]
+          }
+        }
+      ],
       "type": "stat"
     },
     {
@@ -972,17 +1139,17 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 20,
-        "x": 4,
-        "y": 20
+        "w": 24,
+        "x": 0,
+        "y": 38
       },
-      "id": 105,
+      "id": 159,
       "options": {
-        "displayMode": "lcd",
+        "displayMode": "gradient",
         "maxVizHeight": 300,
-        "minVizHeight": 10,
+        "minVizHeight": 32,
         "minVizWidth": 0,
-        "namePlacement": "auto",
+        "namePlacement": "top",
         "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
@@ -1004,15 +1171,129 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum by(uri)(http_server_requests_seconds_sum{application=\"$instance\"}) / sum by(uri)(http_server_requests_seconds_count{application=\"$instance\"})",
+          "expr": "(spring_data_repository_invocations_seconds_count{application=\"$instance\"})",
           "interval": "",
           "legendFormat": "{{method}} {{uri}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Requests Average Duration",
+      "title": "JPA Repository Calls Duration",
       "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisGridShow": true,
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 44
+      },
+      "id": 151,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(http_server_requests_seconds_sum{instance=\"$instance\", status!~\"5..\"}[1m]))/sum(rate(http_server_requests_seconds_count{instance=\"$instance\", status!~\"5..\"}[1m]))",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "HTTP - AVG",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "expr": "max(http_server_requests_seconds_max{application=\"$application\", instance=\"$instance\", status!~\"5..\"})",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "HTTP - MAX",
+          "refId": "B"
+        }
+      ],
+      "title": "Requests Duration",
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -1041,7 +1322,10 @@
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -1062,12 +1346,12 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
+                "color": "green",
                 "value": null
               },
               {
-                "color": "green",
-                "value": 0.8
+                "color": "red",
+                "value": 80
               }
             ]
           },
@@ -1079,7 +1363,7 @@
         "h": 6,
         "w": 12,
         "x": 0,
-        "y": 26
+        "y": 51
       },
       "id": 107,
       "options": {
@@ -1090,10 +1374,11 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.1.4",
       "targets": [
         {
           "datasource": {
@@ -1139,7 +1424,7 @@
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -1177,7 +1462,7 @@
         "h": 6,
         "w": 12,
         "x": 12,
-        "y": 26
+        "y": 51
       },
       "id": 108,
       "options": {
@@ -1274,7 +1559,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 32
+        "y": 57
       },
       "id": 115,
       "options": {
@@ -1371,7 +1656,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 32
+        "y": 57
       },
       "id": 116,
       "options": {
@@ -1468,7 +1753,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 32
+        "y": 57
       },
       "id": 117,
       "options": {
@@ -1565,7 +1850,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 40
+        "y": 65
       },
       "id": 4,
       "options": {
@@ -1659,7 +1944,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 47
+        "y": 72
       },
       "id": 2,
       "options": {
@@ -1703,7 +1988,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 54
+        "y": 79
       },
       "id": 142,
       "panels": [],
@@ -1786,7 +2071,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 55
+        "y": 80
       },
       "id": 143,
       "options": {
@@ -1913,7 +2198,7 @@
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 55
+        "y": 80
       },
       "id": 93,
       "options": {
@@ -2026,7 +2311,7 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 55
+        "y": 80
       },
       "id": 32,
       "options": {
@@ -2255,7 +2540,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 55
+        "y": 80
       },
       "id": 124,
       "options": {
@@ -2357,7 +2642,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 62
+        "y": 87
       },
       "id": 138,
       "options": {
@@ -2533,7 +2818,7 @@
         "h": 7,
         "w": 12,
         "x": 6,
-        "y": 62
+        "y": 87
       },
       "id": 91,
       "options": {
@@ -2639,7 +2924,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 62
+        "y": 87
       },
       "id": 61,
       "options": {
@@ -2700,7 +2985,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 69
+        "y": 94
       },
       "id": 48,
       "panels": [],
@@ -2771,7 +3056,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 70
+        "y": 95
       },
       "id": 85,
       "options": {
@@ -2887,7 +3172,7 @@
         "h": 8,
         "w": 6,
         "x": 0,
-        "y": 78
+        "y": 103
       },
       "id": 88,
       "options": {
@@ -2987,109 +3272,13 @@
               "mode": "off"
             }
           },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 18,
-        "x": 6,
-        "y": 86
-      },
-      "id": 80,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "8.5.2",
-      "targets": [
-        {
-          "datasource": "PBFA97CFB590B2093",
-          "editorMode": "code",
-          "expr": "irate(jvm_classes_unloaded_classes_total{instance=\"$instance\", application=\"$application\"}[5m])",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Classes Unloaded",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Classes Unloaded",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
           "decimals": 0,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3103,9 +3292,9 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 94
+        "w": 18,
+        "x": 6,
+        "y": 111
       },
       "id": 50,
       "options": {
@@ -3187,8 +3376,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3201,10 +3389,104 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 94
+        "h": 8,
+        "w": 6,
+        "x": 0,
+        "y": 119
+      },
+      "id": 80,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.2",
+      "targets": [
+        {
+          "datasource": "PBFA97CFB590B2093",
+          "editorMode": "code",
+          "expr": "irate(jvm_classes_unloaded_classes_total{instance=\"$instance\", application=\"$application\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Classes Unloaded",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Classes Unloaded",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 6,
+        "y": 119
       },
       "id": 83,
       "options": {
@@ -3288,8 +3570,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3303,9 +3584,9 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 6,
         "x": 12,
-        "y": 101
+        "y": 119
       },
       "id": 78,
       "options": {
@@ -3388,8 +3669,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3402,10 +3682,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 102
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 119
       },
       "id": 82,
       "options": {
@@ -3488,8 +3768,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3505,7 +3784,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 109
+        "y": 127
       },
       "id": 68,
       "options": {
@@ -3529,7 +3808,7 @@
         {
           "datasource": "PBFA97CFB590B2093",
           "editorMode": "code",
-          "expr": "jvm_threads_daemon_threads{instance=\"$instance\", application=\"$application\"}",
+          "expr": "jvm_threads_daemon_threads{instance=\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Daemon",
@@ -3553,7 +3832,7 @@
           "refId": "C"
         }
       ],
-      "title": "Threads",
+      "title": "Daemon Threads",
       "type": "timeseries"
     },
     {
@@ -3566,7 +3845,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 117
+        "y": 135
       },
       "id": 72,
       "panels": [],
@@ -3678,7 +3957,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 118
+        "y": 136
       },
       "id": 74,
       "options": {
@@ -3816,7 +4095,7 @@
         "h": 10,
         "w": 12,
         "x": 12,
-        "y": 118
+        "y": 136
       },
       "id": 76,
       "options": {
@@ -3859,7 +4138,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 128
+        "y": 146
       },
       "id": 34,
       "panels": [],
@@ -3908,7 +4187,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 129
+        "y": 147
       },
       "id": 44,
       "maxDataPoints": 100,
@@ -4030,7 +4309,7 @@
         "h": 8,
         "w": 20,
         "x": 4,
-        "y": 129
+        "y": 147
       },
       "id": 36,
       "options": {
@@ -4121,7 +4400,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 133
+        "y": 151
       },
       "id": 46,
       "maxDataPoints": 100,
@@ -4220,7 +4499,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 137
+        "y": 155
       },
       "id": 38,
       "options": {
@@ -4312,7 +4591,7 @@
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 137
+        "y": 155
       },
       "id": 42,
       "options": {
@@ -4404,7 +4683,7 @@
         "h": 6,
         "w": 8,
         "x": 16,
-        "y": 137
+        "y": 155
       },
       "id": 40,
       "options": {
@@ -4442,7 +4721,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 143
+        "y": 161
       },
       "id": 22,
       "panels": [],
@@ -4491,7 +4770,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 144
+        "y": 162
       },
       "id": 28,
       "maxDataPoints": 100,
@@ -4592,7 +4871,7 @@
         "h": 7,
         "w": 9,
         "x": 4,
-        "y": 144
+        "y": 162
       },
       "id": 24,
       "options": {
@@ -4691,7 +4970,7 @@
         "h": 7,
         "w": 11,
         "x": 13,
-        "y": 144
+        "y": 162
       },
       "id": 26,
       "options": {
@@ -4776,7 +5055,7 @@
         "h": 3,
         "w": 4,
         "x": 0,
-        "y": 148
+        "y": 166
       },
       "id": 144,
       "maxDataPoints": 100,
@@ -4860,8 +5139,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4877,7 +5155,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 151
+        "y": 169
       },
       "id": 30,
       "options": {
@@ -4917,7 +5195,7 @@
           "refId": "B"
         }
       ],
-      "title": "Threads",
+      "title": "Tomcat Threads",
       "type": "timeseries"
     },
     {
@@ -4930,7 +5208,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 158
+        "y": 176
       },
       "id": 8,
       "panels": [],
@@ -5001,7 +5279,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 159
+        "y": 177
       },
       "id": 6,
       "options": {
@@ -5105,7 +5383,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 159
+        "y": 177
       },
       "id": 10,
       "options": {
@@ -5207,7 +5485,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 166
+        "y": 184
       },
       "id": 14,
       "options": {
@@ -5309,7 +5587,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 166
+        "y": 184
       },
       "id": 16,
       "options": {
@@ -5411,7 +5689,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 166
+        "y": 184
       },
       "id": 20,
       "options": {
@@ -5457,7 +5735,7 @@
     "list": [
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "Patient-Service",
           "value": "Patient-Service"
         },
@@ -5608,7 +5886,7 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -5639,6 +5917,6 @@
   "timezone": "",
   "title": "Spring Boot Statistics",
   "uid": "sOae4vCnk",
-  "version": 2,
+  "version": 7,
   "weekStart": ""
 }
