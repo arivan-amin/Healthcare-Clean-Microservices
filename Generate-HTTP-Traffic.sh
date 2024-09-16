@@ -10,15 +10,6 @@ declare -A endpoints=(
     ["/profiles"]="POST"
     ["/profiles/f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454"]="PUT"
     ["/profiles/f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454"]="DELETE"
-    ["/test1"]="GET"
-    ["/test2"]="GET"
-    ["/test3"]="GET"
-    ["/test4"]="GET"
-    ["/test5"]="GET"
-    ["/test6"]="GET"
-    ["/test7"]="GET"
-    ["/test8"]="GET"
-    ["/test9"]="GET"
 )
 
 # Data for POST and PUT requests
