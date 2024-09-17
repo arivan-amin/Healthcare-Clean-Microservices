@@ -6,10 +6,10 @@ BASE_URL="http://localhost:8080/api/patients/v1"
 # Endpoints and corresponding methods
 declare -A endpoints=(
     ["/profiles"]="GET"
+    ["/profiles/f8c3de3d-1fea-4d7c-a8b0-29f63c4c2387"]="DELETE"
     ["/profiles/f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454"]="GET"
-    ["/profiles"]="POST"
-    ["/profiles/f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454"]="PUT"
-    ["/profiles/f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454"]="DELETE"
+#    ["/profiles"]="POST"
+#    ["/profiles/f8c3de3d-1fea-4d7c-a8b0-29f63c4c9876"]="PUT"
 )
 
 # Data for POST and PUT requests
@@ -21,6 +21,9 @@ send_request() {
     local endpoint=$1
     local method=$2
     local url="${BASE_URL}${endpoint}"
+echo "$endpoint"
+echo "$method"
+echo "$url"
 
     case $method in
         GET)
@@ -47,6 +50,8 @@ send_request() {
 
 while true; do
     for endpoint in "${!endpoints[@]}"; do
+      echo "inside while endpoint: $endpoint"
+      echo "inside while endpoint index: ${endpoints[$endpoint]}"
         send_request "$endpoint" "${endpoints[$endpoint]}"
         echo -e "\n"
     done

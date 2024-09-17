@@ -30,7 +30,8 @@ public class SpringPatientPersistence implements PatientPersistence {
     }
     
     @Override
-    public Patient update (Patient patient) {
+    public Patient update (UUID id, Patient patient) {
+        Patient patientById = getPatientById(id).get();
         return repository.save(patient);
     }
     

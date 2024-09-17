@@ -8,7 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping ("/api/patients")
@@ -49,7 +50,7 @@ public class PatientController {
     @ResponseStatus (HttpStatus.CREATED)
     public Patient updatePatient (@PathVariable UUID id, @RequestBody Patient patient) {
         log.info("received patient to update = {}", patient);
-        return updateUseCase.execute(patient);
+        return updateUseCase.execute(id, patient);
     }
     
     @DeleteMapping ("/v1/profiles/{id}")

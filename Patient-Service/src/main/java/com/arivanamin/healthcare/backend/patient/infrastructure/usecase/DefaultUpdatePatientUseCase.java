@@ -6,6 +6,8 @@ import com.arivanamin.healthcare.backend.patient.domain.usecase.UpdatePatientUse
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class DefaultUpdatePatientUseCase implements UpdatePatientUseCase {
@@ -13,7 +15,7 @@ public class DefaultUpdatePatientUseCase implements UpdatePatientUseCase {
     private final PatientPersistence persistence;
     
     @Override
-    public Patient execute (Patient patient) {
-        return persistence.update(patient);
+    public Patient execute (UUID id, Patient patient) {
+        return persistence.update(id, patient);
     }
 }
