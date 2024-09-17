@@ -97,6 +97,7 @@ project to demonstrate the implementation of microservices using modern Java tec
     - API Gateway: `http://localhost:8080`
     - Eureka Dashboard: `http://localhost:8080/eureka/web`
     - Swagger UI: `http://localhost:8080/swagger-ui.html`
+    - Grafana: `http://localhost:3000/dashboards`
 
 ## Testing
 
