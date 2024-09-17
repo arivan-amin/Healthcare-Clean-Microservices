@@ -45,23 +45,13 @@ send_request() {
     esac
 }
 
-# Infinite loop to continuously send requests
 while true; do
-    # Loop through the endpoints and send requests
     for endpoint in "${!endpoints[@]}"; do
-        # Generate a random number between 0 and 1
-        random=$((RANDOM % 2))
-
-        # If random is 1, send the request; otherwise, skip
-        if [ $random -eq 1 ]; then
-            send_request "$endpoint" "${endpoints[$endpoint]}"
-        else
-            echo "Skipping request to ${endpoint}"
-        fi
-
+        send_request "$endpoint" "${endpoints[$endpoint]}"
         echo -e "\n"
     done
 
-    # Optional: Add a sleep delay between loops to avoid flooding the server
+    echo -e "Iteration finished \n"
+    echo -e "\n"
     sleep 5
 done

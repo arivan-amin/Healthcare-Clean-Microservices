@@ -44,7 +44,7 @@ public class PatientController {
         return createUseCase.execute(patient);
     }
     
-    @PostMapping ("/v1/profiles/{id}")
+    @PutMapping ("/v1/profiles/{id}")
     @Operation (summary = "Updates a patient profile")
     @ResponseStatus (HttpStatus.CREATED)
     public Patient updatePatient (@PathVariable UUID id, @RequestBody Patient patient) {

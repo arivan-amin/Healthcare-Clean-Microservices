@@ -36,6 +36,6 @@ public class SpringPatientPersistence implements PatientPersistence {
     
     @Override
     public void delete (UUID id) {
-        repository.deleteById(id);   
+        repository.deleteById(id);
     }
 }
