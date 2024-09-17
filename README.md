@@ -7,6 +7,106 @@ The system is designed to manage various healthcare-related operations such as p
 appointment scheduling, medical records management, billing, and more. It serves as a practice
 project to demonstrate the implementation of microservices using modern Java technologies.
 
+## Technologies Used
+
+- **Java 21**: Core programming language.
+- **Spring Boot**: Framework for building microservices.
+- **Spring Cloud**: For managing microservices, service discovery, and load balancing.
+- **Eureka**: Service registry for microservices.
+- **Feign Client**: For inter-service communication.
+- **MySQL**: Relational database for persistent storage.
+- **MongoDB**: NoSQL database for storing data.
+- **Docker**: Containerization of microservices.
+- **Kafka**: Message broker for event-driven communication between services.
+- **Swagger/OpenAPI**: API documentation and testing.
+- **JUnit & Mockito**: Testing frameworks for unit and integration testing.
+- **Flyway**: Database migration tools.
+- **Lombok**: Reducing boilerplate code.
+- **Keycloak**: For authentication and authorization management.
+- **Grafana**: For observability and monitoring services through dashboards.
+- **loki**: For centralized logging.
+- **tempo**: For distributed tracing.
+
+## Grafana Monitoring Screenshots
+
+### Services monitoring dashboard
+
+#### Main sections of the dashboard
+
+![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Screenshots/Grafana-Dashboard-1.png)
+
+#### Calls made to Jpa repository per minute
+
+![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Screenshots/Grafana-Dashboard-3.png)
+
+#### Data related to HTTP requests status and count
+
+![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Screenshots/Grafana-Dashboard-4.png)
+
+#### Requests and responses count and duration
+
+![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Screenshots/Grafana-Dashboard-5.png)
+
+#### Graph on log events and their volume per minute and much more
+
+![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Screenshots/Grafana-Dashboard-9.png)
+
+## Installation
+
+### Prerequisites
+
+- Java 21
+- Maven
+- Docker
+- Docker Compose
+
+### Steps to Run the Project
+
+1. **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/arivan-amin/Healthcare-Management-Microservices.git
+    cd Healthcare-Management-Microservices
+    ```
+
+2. **Build the project, and it will load the images to your local docker repository using JIB:**
+
+    ```bash
+    mvn clean package
+    ```
+
+3. **Set Eureka username and password environment variables and docker host ip:**
+    - on Linux: add the below variables to your .bashrc file and reload or reboot
+    ```bash
+    export EUREKA_USER=admin
+    export EUREKA_PASSWORD=admin
+    ```
+    - on Windows: run the below commands
+    ```bash
+    set EUREKA_USER=admin
+    set EUREKA_PASSWORD=admin
+    ```
+4. **Run the services using Docker Compose:**
+
+    ```bash
+    docker compose up -d
+    ```
+
+5. **Access the services:**
+
+    - API Gateway: `http://localhost:8080`
+    - Eureka Dashboard: `http://localhost:8080/eureka/web`
+    - Swagger UI: `http://localhost:8080/swagger-ui.html`
+
+## Testing
+
+- Unit and integration tests are available for each microservice.
+- Run the tests using Maven:
+
+    ```bash
+    mvn test
+    ```
+
 ## Microservices
 
 The system is divided into several microservices, each responsible for a specific domain:
@@ -17,6 +117,9 @@ The system is divided into several microservices, each responsible for a specifi
 - **Appointment Service**: Manages scheduling and rescheduling of patient appointments. It interacts
   with the Doctor and Patient services to ensure availability and updates the system with the latest
   appointment data.
+- **Audit Service**: Provides centralized logging and auditing for all actions within the system. It
+  records critical events, such as user activities and service interactions, to ensure transparency
+  and compliance.
 - **Billing Service**: Handles the generation and management of invoices and payments. It integrates
   with various services to collect billing information and ensures accurate billing for patient
   services and treatments.
@@ -51,7 +154,7 @@ The system is divided into several microservices, each responsible for a specifi
   prescription processing and medication delivery.
 - **Radiology Service**: Manages radiological imaging and reports. It handles requests for imaging
   procedures, stores image data, and provides reports and results to doctors and patients.
-- **Reporting Service**: Generates and manages reports related to various aspects of the system,
+- **Report Service**: Generates and manages reports related to various aspects of the system,
   including operational metrics, financial summaries, and patient statistics. It provides insights
   and data visualizations for analysis and decision-making.
 - **Security Service**: Ensures the security of the system by managing authentication,
@@ -63,81 +166,6 @@ The system is divided into several microservices, each responsible for a specifi
 - **Surgery Service**: Handles scheduling, management, and documentation of surgical procedures. It
   integrates with other services to coordinate pre-surgery preparations, manage surgical resources,
   and track post-operative care.
-
-## Technologies Used
-
-- **Java 21**: Core programming language.
-- **Spring Boot**: Framework for building microservices.
-- **Spring Cloud**: For managing microservices, service discovery, and load balancing.
-- **Eureka**: Service registry for microservices.
-- **Feign Client**: For inter-service communication.
-- **MySQL**: Relational database for persistent storage.
-- **MongoDB**: NoSQL database for storing data.
-- **Docker**: Containerization of microservices.
-- **Kafka**: Message broker for event-driven communication between services.
-- **Swagger/OpenAPI**: API documentation and testing.
-- **JUnit & Mockito**: Testing frameworks for unit and integration testing.
-- **Flyway**: Database migration tools.
-- **Lombok**: Reducing boilerplate code.
-- **Keycloak**: For authentication and authorization management.
-
-## Installation
-
-### Prerequisites
-
-- Java 21
-- Maven
-- Docker
-- Docker Compose
-
-### Steps to Run the Project
-
-1. **Clone the repository:**
-
-    ```bash
-    git clone https://github.com/arivan-amin/Healthcare-Management-Microservices.git
-    cd Healthcare-Management-Microservices
-    ```
-
-2. **Build the project, and it will load the images to your local docker repository using JIB:**
-
-    ```bash
-    mvn clean package
-    ```
-
-3. **Set Eureka username and password environment variables and docker host ip:**
-    - on Linux: add the below variables to your .bashrc file and reload or reboot
-    ```bash
-    export EUREKA_USER=admin
-    export EUREKA_PASSWORD=admin
-    export DOCKER_HOST_IP=172.17.0.1
-    ```
-    - on Windows: run the below commands
-    ```bash
-    set EUREKA_USER=admin
-    set EUREKA_PASSWORD=admin
-    set DOCKER_HOST_IP=host.docker.internal
-    ```
-4. **Run the services using Docker Compose:**
-
-    ```bash
-    docker compose up -d
-    ```
-
-5. **Access the services:**
-
-    - API Gateway: `http://localhost:8080`
-    - Eureka Dashboard: `http://localhost:8080/eureka/web`
-    - Swagger UI: `http://localhost:8080/swagger-ui.html`
-
-## Testing
-
-- Unit and integration tests are available for each microservice.
-- Run the tests using Maven:
-
-    ```bash
-    mvn test
-    ```
 
 ## Contributing
 
