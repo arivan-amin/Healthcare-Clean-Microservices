@@ -198,16 +198,16 @@ The system is divided into several microservices, each responsible for a specifi
 
 ## Contributing
 
-Contributions are welcome! Please fork the repository and submit a pull request for any improvements
+**Contributions are welcome!** Please fork the repository and submit a pull request for any improvements
 or bug fixes.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.
 
 ## Contact
 
 For any questions or inquiries, please contact:
 
-- **Name:** Arivan Amin
-- **Email:** arivanamin@gmail.com
+- **Name: Arivan Amin**
+- **Email: arivanamin@gmail.com**
