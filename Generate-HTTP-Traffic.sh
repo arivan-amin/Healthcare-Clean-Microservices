@@ -21,9 +21,6 @@ send_request() {
     local endpoint=$1
     local method=$2
     local url="${BASE_URL}${endpoint}"
-echo "$endpoint"
-echo "$method"
-echo "$url"
 
     case $method in
         GET)
@@ -50,8 +47,6 @@ echo "$url"
 
 while true; do
     for endpoint in "${!endpoints[@]}"; do
-      echo "inside while endpoint: $endpoint"
-      echo "inside while endpoint index: ${endpoints[$endpoint]}"
         send_request "$endpoint" "${endpoints[$endpoint]}"
         echo -e "\n"
     done

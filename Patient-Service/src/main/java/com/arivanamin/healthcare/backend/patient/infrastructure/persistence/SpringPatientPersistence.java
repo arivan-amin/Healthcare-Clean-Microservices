@@ -4,12 +4,14 @@ import com.arivanamin.healthcare.backend.patient.domain.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.domain.persistence.PatientPersistence;
 import com.arivanamin.healthcare.backend.patient.infrastructure.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class SpringPatientPersistence implements PatientPersistence {
     
     private final PatientRepository repository;
