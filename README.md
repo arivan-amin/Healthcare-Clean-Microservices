@@ -2,10 +2,10 @@
 
 ## Overview
 
-This project is a Healthcare Management System developed as a microservices architecture using Java.
+This project is a **Healthcare Management System** developed as a **Microservices Architecture** using **Java**.
 The system is designed to manage various healthcare-related operations such as patient registration,
 appointment scheduling, medical records management, billing, and more. It serves as a practice
-project to demonstrate the implementation of microservices using modern Java technologies.
+project to demonstrate the implementation of microservices using modern **Java** technologies.
 
 ## Technologies Used
 
@@ -33,39 +33,39 @@ project to demonstrate the implementation of microservices using modern Java tec
 
 ![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-1.png)
 
-### Total requests response time and response time per endpoint
+### Graphs for total requests response time and response time per endpoint
 
 ![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-2.png)
 
-### Total calls made to Jpa repository
+### Graphs for total calls made to Jpa repository
 
 ![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-4.png)
 
-### Percentage of HTTP request status codes, 2xx, 3xx, 4xx, and 5xx
+### Graphs for percentage of HTTP request status codes, 2xx, 3xx, 4xx, and 5xx
 
 ![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-6.png)
 
-### Graph on .95 and .99 percentile histogram to identify bottlenecks
+### Graphs for graph on .95 and .99 percentile histogram to identify bottlenecks
 
 ![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-7.png)
 
-### Graphs related to JVM performance, threads, GC, logs and IO
+### Graphs for JVM performance, threads, GC, logs and IO
 
 ![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-8.png)
 
-### Graph related to JVM memory usage, heap, non heap, and more
+### Graphs for JVM memory usage, heap, non heap, and more
 
 ![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-9.png)
 
-### Graph related to Hikari connection pool performance
+### Graphs for Hikari connection pool performance
 
 ![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-10.png)
 
-### Graph related to Tomcat sessions, send and receive and threads
+### Graphs for Tomcat sessions, send and receive and threads
 
 ![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-11.png)
 
-### Graph on log events and their volume per minute
+### Graphs for log events and their volume per minute
 
 ![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-12.png)
 
@@ -73,10 +73,10 @@ project to demonstrate the implementation of microservices using modern Java tec
 
 ### Prerequisites
 
-- Java 21
-- Maven
-- Docker
-- Docker Compose
+- **Java 21**
+- **Maven**
+- **Docker**
+- **Docker Compose**
 
 ### Steps to Run the Project
 
@@ -94,12 +94,12 @@ project to demonstrate the implementation of microservices using modern Java tec
     ```
 
 3. **Set Eureka username and password environment variables and docker host ip:**
-    - on Linux: add the below variables to your .bashrc file and reload or reboot
+    - on **Linux**: add the below variables to your **.bashrc** file and reload or reboot
     ```bash
     export EUREKA_USER=admin
     export EUREKA_PASSWORD=admin
     ```
-    - on Windows: run the below commands
+    - on **Windows**: run the below commands
     ```bash
     set EUREKA_USER=admin
     set EUREKA_PASSWORD=admin
@@ -112,19 +112,19 @@ project to demonstrate the implementation of microservices using modern Java tec
 
 5. **Access the services:**
 
-    - API Gateway: `http://localhost:8080`
-    - Eureka Dashboard: `http://localhost:8080/eureka/web`
-    - Swagger UI: `http://localhost:8080/swagger-ui.html`
-    - Grafana: `http://localhost:3000/dashboards`
+    - **API Gateway:** `http://localhost:8080`
+    - **Eureka Dashboard:** `http://localhost:8080/eureka/web`
+    - **Swagger UI:** `http://localhost:8080/swagger-ui.html`
+    - **Grafana:** `http://localhost:3000/dashboards`
 
 
 6. **Accessing the Grafana Dashboard**
 
-    - Open your browser and navigate to Grafana at: http://localhost:3000/dashboards
-    - In the Grafana dashboards page, click on the **New** icon on the top right side and select
-      Import.
-    - Choose the Spring-Boot-Dashboard.json file located at:
-      project-root/docker/grafana/directory
+    - Open your browser and navigate to **Grafana** at: http://localhost:3000/dashboards
+    - In the **Grafana** dashboards page, click on the **New** icon on the top right side and select
+      **Import**.
+    - Choose the **Spring-Boot-Dashboard.json** file located at:
+      **project-root/docker/grafana/directory**
     - Complete the import process, and the dashboard will be available for monitoring.
 
 ## Testing
