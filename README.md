@@ -29,27 +29,45 @@ project to demonstrate the implementation of microservices using modern Java tec
 
 ## Grafana Monitoring Screenshots
 
-### Services monitoring dashboard
+### Services monitoring dashboard main section
 
-#### Main sections of the dashboard
+![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-1.png)
 
-![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Screenshots/Grafana-Dashboard-1.png)
+### Total requests response time and response time per endpoint
 
-#### Calls made to Jpa repository per minute
+![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-2.png)
 
-![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Screenshots/Grafana-Dashboard-3.png)
+### Total calls made to Jpa repository
 
-#### Data related to HTTP requests status and count
+![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-4.png)
 
-![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Screenshots/Grafana-Dashboard-4.png)
+### Percentage of HTTP request status codes, 2xx, 3xx, 4xx, and 5xx
 
-#### Requests and responses count and duration
+![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-6.png)
 
-![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Screenshots/Grafana-Dashboard-5.png)
+### Graph on .95 and .99 percentile histogram to identify bottlenecks
 
-#### Graph on log events and their volume per minute and much more
+![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-7.png)
 
-![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Screenshots/Grafana-Dashboard-9.png)
+### Graphs related to JVM performance, threads, GC, logs and IO
+
+![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-8.png)
+
+### Graph related to JVM memory usage, heap, non heap, and more
+
+![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-9.png)
+
+### Graph related to Hikari connection pool performance
+
+![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-10.png)
+
+### Graph related to Tomcat sessions, send and receive and threads
+
+![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-11.png)
+
+### Graph on log events and their volume per minute
+
+![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-12.png)
 
 ## Installation
 
@@ -98,6 +116,16 @@ project to demonstrate the implementation of microservices using modern Java tec
     - Eureka Dashboard: `http://localhost:8080/eureka/web`
     - Swagger UI: `http://localhost:8080/swagger-ui.html`
     - Grafana: `http://localhost:3000/dashboards`
+
+
+6. **Accessing the Grafana Dashboard**
+
+    - Open your browser and navigate to Grafana at: http://localhost:3000/dashboards
+    - In the Grafana dashboards page, click on the **New** icon on the top right side and select
+      Import.
+    - Choose the Spring-Boot-Dashboard.json file located at:
+      project-root/docker/grafana/directory
+    - Complete the import process, and the dashboard will be available for monitoring.
 
 ## Testing
 
