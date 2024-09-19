@@ -17,16 +17,18 @@ import java.util.UUID;
 @Slf4j
 public class PatientController {
     
-    private final ReadPatientUseCase readUseCase;
-    private final CreatePatientUseCase createUseCase;
-    private final UpdatePatientUseCase updateUseCase;
-    private final DeletePatientUseCase deleteUseCase;
+    // todo 9/19/24 - it's better to be changed to command and query separation pattern
+    private final ReadPatientQuery readQuery;
+    private final ReadPatientByIdQuery readByIdQuery;
+    private final CreatePatientCommand createCommand;
+    private final UpdatePatientCommand updateCommand;
+    private final DeletePatientCommand deleteCommand;
     
     @GetMapping ("/v1/profiles")
     @Operation (summary = "Get a list of all patient profiles")
     @ResponseStatus (HttpStatus.OK)
     public List<Patient> getAllPatients () {
-        return readUseCase.executeFindAll();
+        return readQuery.execute();
     }
     
     @GetMapping ("/v1/profiles/{id}")
@@ -34,7 +36,7 @@ public class PatientController {
     @ResponseStatus (HttpStatus.OK)
     public Patient getPatientById (@PathVariable UUID id) {
         log.info("received patientId = {}", id);
-        return readUseCase.executeFindById(id).orElseThrow();
+        return readByIdQuery.execute(id).orElseThrow();
     }
     
     @PostMapping ("/v1/profiles")
@@ -42,7 +44,7 @@ public class PatientController {
     @ResponseStatus (HttpStatus.CREATED)
     public Patient createPatient (@RequestBody Patient patient) {
         log.info("received patient to create = {}", patient);
-        return createUseCase.execute(patient);
+        return createCommand.execute(patient);
     }
     
     @PutMapping ("/v1/profiles/{id}")
@@ -50,7 +52,7 @@ public class PatientController {
     @ResponseStatus (HttpStatus.CREATED)
     public Patient updatePatient (@PathVariable UUID id, @RequestBody Patient patient) {
         log.info("received patient to update = {}", patient);
-        return updateUseCase.execute(id, patient);
+        return updateCommand.execute(id, patient);
     }
     
     @DeleteMapping ("/v1/profiles/{id}")
@@ -58,6 +60,6 @@ public class PatientController {
     @ResponseStatus (HttpStatus.NO_CONTENT)
     public void deletePatient (@PathVariable UUID id) {
         log.info("received patient to delete = {}", id);
-        deleteUseCase.execute(id);
+        deleteCommand.execute(id);
     }
 }

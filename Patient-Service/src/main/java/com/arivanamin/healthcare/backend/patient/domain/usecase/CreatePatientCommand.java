@@ -2,10 +2,8 @@ package com.arivanamin.healthcare.backend.patient.domain.usecase;
 
 import com.arivanamin.healthcare.backend.patient.domain.entity.Patient;
 
-import java.util.UUID;
-
 @FunctionalInterface
-public interface UpdatePatientUseCase {
+public interface CreatePatientCommand {
     
-    public Patient execute (UUID id, Patient patient);
+    public Patient execute (Patient patient);
 }
