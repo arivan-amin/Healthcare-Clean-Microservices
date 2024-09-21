@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.patient.domain.usecase;
+package com.arivanamin.healthcare.backend.patient.domain.command;
 
 import java.util.UUID;
 

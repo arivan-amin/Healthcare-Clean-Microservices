@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.patient.domain.usecase;
+package com.arivanamin.healthcare.backend.patient.domain.query;
 
 import com.arivanamin.healthcare.backend.patient.domain.entity.Patient;
 

@@ -1,7 +1,7 @@
-package com.arivanamin.healthcare.backend.patient.infrastructure.usecase;
+package com.arivanamin.healthcare.backend.patient.infrastructure.command;
 
 import com.arivanamin.healthcare.backend.patient.domain.persistence.PatientPersistence;
-import com.arivanamin.healthcare.backend.patient.domain.usecase.DeletePatientCommand;
+import com.arivanamin.healthcare.backend.patient.domain.command.DeletePatientCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

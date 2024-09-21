@@ -1,8 +1,8 @@
-package com.arivanamin.healthcare.backend.patient.infrastructure.usecase;
+package com.arivanamin.healthcare.backend.patient.infrastructure.command;
 
 import com.arivanamin.healthcare.backend.patient.domain.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.domain.persistence.PatientPersistence;
-import com.arivanamin.healthcare.backend.patient.domain.usecase.UpdatePatientCommand;
+import com.arivanamin.healthcare.backend.patient.domain.command.UpdatePatientCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

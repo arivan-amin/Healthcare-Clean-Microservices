@@ -1,23 +1,22 @@
-package com.arivanamin.healthcare.backend.patient.infrastructure.usecase;
+package com.arivanamin.healthcare.backend.patient.infrastructure.query;
 
 import com.arivanamin.healthcare.backend.patient.domain.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.domain.persistence.PatientPersistence;
-import com.arivanamin.healthcare.backend.patient.domain.usecase.ReadPatientByIdQuery;
+import com.arivanamin.healthcare.backend.patient.domain.query.ReadPatientQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 // todo 9/19/24 - should this implementation be in infrastructure or domain package ?
-public class DefaultReadPatientByIdQuery implements ReadPatientByIdQuery {
+public class DefaultReadPatientQuery implements ReadPatientQuery {
     
     private final PatientPersistence persistence;
     
     @Override
-    public Optional<Patient> execute (UUID id) {
-        return persistence.getPatientById(id);
+    public List<Patient> execute () {
+        return persistence.getAllPatients();
     }
 }

@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.patient.infrastructure.exceptions;
+package com.arivanamin.healthcare.backend.patient.infrastructure.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
