@@ -1,7 +1,7 @@
 package com.arivanamin.healthcare.backend.patient.infrastructure.endpoints;
 
-import com.arivanamin.healthcare.backend.patient.domain.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.domain.command.*;
+import com.arivanamin.healthcare.backend.patient.domain.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.domain.query.ReadPatientByIdQuery;
 import com.arivanamin.healthcare.backend.patient.domain.query.ReadPatientQuery;
 import io.swagger.v3.oas.annotations.Operation;

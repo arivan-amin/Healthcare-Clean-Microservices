@@ -11,7 +11,6 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-// todo 9/19/24 - should this implementation be in infrastructure or domain package ?
 public class DefaultReadPatientByIdQuery implements ReadPatientByIdQuery {
     
     private final PatientPersistence persistence;
