@@ -1,6 +1,7 @@
 volumes:
   app-logs:
-    driver: local
+  mysql-data:
+  mongo-data:
 
 services:
   discovery-server:
@@ -41,7 +42,7 @@ services:
   loki:
     container_name: healthcare-loki
     restart: unless-stopped
-    image: grafana/loki:main
+    image: grafana/loki:3.2.0
     command: [ "-config.file=/etc/loki/local-config.yaml" ]
     ports:
       - "3100:3100"
@@ -49,7 +50,7 @@ services:
   promtail:
     container_name: healthcare-promtail
     restart: unless-stopped
-    image: grafana/promtail:2.8.5
+    image: grafana/promtail:3.2.0
     volumes:
       - ./docker/promtail/promtail-config.yaml:/etc/promtail/config.yml
       - app-logs:/logs
@@ -59,7 +60,7 @@ services:
   prometheus:
     container_name: healthcare-prometheus
     restart: unless-stopped
-    image: prom/prometheus:v2.53.2
+    image: prom/prometheus:v2.54.1
     command:
       - --enable-feature=exemplar-storage
       - --config.file=/etc/prometheus/prometheus.yml
@@ -71,7 +72,7 @@ services:
   grafana:
     container_name: healthcare-grafana
     restart: unless-stopped
-    image: grafana/grafana:11.1.4
+    image: grafana/grafana:11.2.0
     volumes:
       - ./docker/grafana:/etc/grafana/provisioning/datasources:ro
     environment:
@@ -82,20 +83,21 @@ services:
       - "3000:3000"
   
   mysql:
-    image: mysql:lts
     container_name: healthcare-mysql
     restart: unless-stopped
+    image: mysql:9.0.1
     environment:
       MYSQL_ROOT_PASSWORD: mysql
     ports:
       - "3306:3306"
     volumes:
+      - mysql-data:/var/lib/mysql
       - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
-    
+  
   mysqld-exporter:
-    image: prom/mysqld-exporter
     container_name: healthcare-mysql-exporter
     restart: unless-stopped
+    image: prom/mysqld-exporter:v0.15.1
     command:
       - --config.my-cnf=/cfg/.my.cnf
       - --mysqld.address=healthcare-mysql:3306
@@ -105,6 +107,32 @@ services:
       - "9104:9104"
     depends_on:
       - mysql
+
+  mongo:
+    container_name: healthcare-mongo
+    restart: unless-stopped
+    image: mongo:8.0.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+
+  mongodb-exporter:
+    container_name: healthcare-mongodb-exporter
+    restart: unless-stopped
+    image: percona/mongodb_exporter:0.41.0
+    environment:
+      - MONGODB_URI=mongodb://root:mongo@healthcare-mongo:27017
+      - COLLECT_DATABASES=true
+      - COLLECT_COLLECTION=true
+      - COLLECT_TOPMETRICS=true
+    ports:
+      - "9216:9216"
+    depends_on:
+      - mongo
 
   # Kafka
   zookeeper:

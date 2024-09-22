@@ -12,7 +12,13 @@ scrape_configs:
       - targets: [ '172.17.0.1:9104' ]
         labels:
           instance: 'MySQL-Database'
-        
+
+  - job_name: 'mongo'
+    static_configs:
+      - targets: [ '172.17.0.1:9216' ]
+        labels:
+          instance: 'MongoDB-Database'
+
   - job_name: 'api-gateway-service'
     metrics_path: '/api-gateway/actuator/prometheus'
     static_configs:

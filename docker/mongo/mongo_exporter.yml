@@ -1,0 +1,11 @@
+scrape_interval: 15s
+evaluation_interval: 15s
+
+metrics:
+  - name: mongodb_metrics_document_total
+    labels:
+      database: '$database'
+      collection: '$collection'
+    query:
+      - $match:
+          type: 'document'

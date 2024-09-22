@@ -2,7 +2,8 @@
 
 ## Overview
 
-This project is a **Healthcare Management System** developed as a **Microservices Architecture** using **Java**.
+This project is a **Healthcare Management System** developed as a **Microservices Architecture**
+using **Java**.
 The system is designed to manage various healthcare-related operations such as patient registration,
 appointment scheduling, medical records management, billing, and more. It serves as a practice
 project to demonstrate the implementation of microservices using modern **Java** technologies.
@@ -80,20 +81,20 @@ project to demonstrate the implementation of microservices using modern **Java**
 
 ### Steps to Run the Project
 
-1. **Clone the repository:**
+1. ### Clone the repository:
 
     ```bash
     git clone https://github.com/arivan-amin/Healthcare-Management-Microservices.git
     cd Healthcare-Management-Microservices
     ```
 
-2. **Build the project, and it will load the images to your local docker repository using JIB:**
+2. ### Build the project, and it will load the images to your local docker repository using JIB:
 
     ```bash
     mvn clean package
     ```
 
-3. **Set Eureka username and password environment variables and docker host ip:**
+3. ### Set Eureka username and password environment variables and docker host ip:
     - on **Linux**: add the below variables to your **.bashrc** file and reload or reboot
     ```bash
     export EUREKA_USER=admin
@@ -104,31 +105,26 @@ project to demonstrate the implementation of microservices using modern **Java**
     set EUREKA_USER=admin
     set EUREKA_PASSWORD=admin
     ```
-4. **Run the services using Docker Compose:**
-
+4. ### Run the services using Docker Compose:
     ```bash
     docker compose up -d
     ```
 
-5. **Access the services:**
-
+5. ### Access the services:
     - **API Gateway:** `http://localhost:8080`
     - **Eureka Dashboard:** `http://localhost:8080/eureka/web`
     - **Swagger UI:** `http://localhost:8080/swagger-ui.html`
     - **Grafana:** `http://localhost:3000/dashboards`
 
-
-6. **Accessing the Grafana Dashboard**
-
+6. ### Accessing the Grafana Dashboards for monitoring Spring Boot, MySQL and MongoDB
     - Open your browser and navigate to **Grafana** at: http://localhost:3000/dashboards
     - In the **Grafana** dashboards page, click on the **New** icon on the top right side and select
       **Import**.
-    - Choose the **Spring-Boot-Dashboard.json** file located at:
-      **project-root/docker/grafana/directory**
-    - Complete the import process, and the dashboard will be available for monitoring.
+    - Choose the all 3 json file located at: **project-root/docker/grafana/**
+    - Complete the import process for all 3 files.
+    - Now you should have 3 dashboards to monitor Spring Boot, MySQL and MongoDB.
 
 ## Testing
-
 - Unit and integration tests are available for each microservice.
 - Run the tests using Maven:
 
@@ -137,7 +133,6 @@ project to demonstrate the implementation of microservices using modern **Java**
     ```
 
 ## Microservices
-
 The system is divided into several microservices, each responsible for a specific domain:
 
 - **API Gateway**: Serves as the single entry point for all client requests, routing them to the
@@ -197,17 +192,15 @@ The system is divided into several microservices, each responsible for a specifi
   and track post-operative care.
 
 ## Contributing
-
-**Contributions are welcome!** Please fork the repository and submit a pull request for any improvements
+**Contributions are welcome!** Please fork the repository and submit a pull request for any
+improvements
 or bug fixes.
 
 ## License
-
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more
+details.
 
 ## Contact
-
 For any questions or inquiries, please contact:
-
 - **Name: Arivan Amin**
 - **Email: arivanamin@gmail.com**
