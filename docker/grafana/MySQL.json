@@ -20,7 +20,7 @@
       }
     ]
   },
-  "description": "Dashboard from Percona Monitoring and Management project. ",
+  "description": "Dashboard from Percona Monitoring and Management project.",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "gnetId": 7362,
@@ -4715,7 +4715,7 @@
     "type": "timepicker"
   },
   "timezone": "browser",
-  "title": "MySQL Overview",
+  "title": "MySQL Monitoring",
   "uid": "MQWgroiiz",
   "version": 2,
   "weekStart": ""
