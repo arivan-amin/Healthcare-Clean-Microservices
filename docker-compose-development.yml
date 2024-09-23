@@ -34,7 +34,7 @@ services:
     image: grafana/tempo:2.3.0
     command: [ "-config.file=/etc/tempo.yaml" ]
     volumes:
-      - ./docker/tempo/tempo.yml:/etc/tempo.yaml:ro
+      - ./Docker/tempo/tempo.yml:/etc/tempo.yaml:ro
     ports:
       - "3110:3100"  # Tempo
       - "9411:9411" # zipkin
@@ -52,7 +52,7 @@ services:
     restart: unless-stopped
     image: grafana/promtail:3.2.0
     volumes:
-      - ./docker/promtail/promtail-config.yaml:/etc/promtail/config.yml
+      - ./Docker/promtail/promtail-config.yaml:/etc/promtail/config.yml
       - app-logs:/logs
       - ${HOME}/Apps/Healthcare/Logs:/local-logs
     command: -config.file=/etc/promtail/config.yml
@@ -65,7 +65,7 @@ services:
       - --enable-feature=exemplar-storage
       - --config.file=/etc/prometheus/prometheus.yml
     volumes:
-      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./Docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
     ports:
       - "9090:9090"
 
@@ -74,7 +74,7 @@ services:
     restart: unless-stopped
     image: grafana/grafana:11.2.0
     volumes:
-      - ./docker/grafana:/etc/grafana/provisioning/datasources:ro
+      - ./Docker/grafana:/etc/grafana/provisioning/datasources:ro
     environment:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
@@ -92,7 +92,7 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./Docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
   
   mysqld-exporter:
     container_name: healthcare-mysql-exporter
@@ -102,7 +102,7 @@ services:
       - --config.my-cnf=/cfg/.my.cnf
       - --mysqld.address=healthcare-mysql:3306
     volumes:
-      - ./docker/mysql/mysql-exporter.cnf:/cfg/.my.cnf
+      - ./Docker/mysql/mysql-exporter.cnf:/cfg/.my.cnf
     ports:
       - "9104:9104"
     depends_on:
