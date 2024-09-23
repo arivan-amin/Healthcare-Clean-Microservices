@@ -120,17 +120,16 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: mongo
 
-  mongodb-exporter:
-    container_name: healthcare-mongodb-exporter
+  mongo-express:
+    container_name: mongo-express
     restart: unless-stopped
-    image: percona/mongodb_exporter:0.41.0
-    environment:
-      - MONGODB_URI=mongodb://root:mongo@healthcare-mongo:27017
-      - COLLECT_DATABASES=true
-      - COLLECT_COLLECTION=true
-      - COLLECT_TOPMETRICS=true
+    image: mongo-express:latest
     ports:
-      - "9216:9216"
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mongo
+      ME_CONFIG_MONGODB_SERVER: healthcare-mongo
     depends_on:
       - mongo
 
