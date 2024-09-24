@@ -3,7 +3,7 @@ package com.arivanamin.healthcare.backend.patient.infrastructure.endpoints;
 import com.arivanamin.healthcare.backend.patient.domain.command.*;
 import com.arivanamin.healthcare.backend.patient.domain.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.domain.query.ReadPatientByIdQuery;
-import com.arivanamin.healthcare.backend.patient.domain.query.ReadPatientQuery;
+import com.arivanamin.healthcare.backend.patient.domain.query.ReadPatientsQuery;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ import java.util.UUID;
 @Slf4j
 public class PatientController {
     
-    private final ReadPatientQuery readQuery;
+    private final ReadPatientsQuery readQuery;
     private final ReadPatientByIdQuery readByIdQuery;
     private final CreatePatientCommand createCommand;
     private final UpdatePatientCommand updateCommand;

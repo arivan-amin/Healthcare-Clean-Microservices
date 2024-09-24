@@ -1,9 +1,18 @@
 package com.arivanamin.healthcare.backend.patient.domain.command;
 
+import com.arivanamin.healthcare.backend.patient.domain.persistence.PatientPersistence;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import java.util.UUID;
 
-@FunctionalInterface
-public interface DeletePatientCommand {
+@Service
+@RequiredArgsConstructor
+public class DeletePatientCommand {
     
-    public void execute (UUID id);
+    private final PatientPersistence persistence;
+    
+    public void execute (UUID id) {
+        persistence.delete(id);
+    }
 }

@@ -1,10 +1,12 @@
 package com.arivanamin.healthcare.backend.patient.domain.query;
 
 import com.arivanamin.healthcare.backend.patient.domain.entity.Patient;
+import lombok.Value;
 
 import java.util.List;
 
-public interface ReadPatientQuery {
+@Value
+public class ReadPatientsResponse {
     
-    public List<Patient> execute ();
+    List<Patient> patients;
 }

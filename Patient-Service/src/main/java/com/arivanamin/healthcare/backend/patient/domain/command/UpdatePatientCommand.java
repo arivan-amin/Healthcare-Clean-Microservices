@@ -1,11 +1,19 @@
 package com.arivanamin.healthcare.backend.patient.domain.command;
 
 import com.arivanamin.healthcare.backend.patient.domain.entity.Patient;
+import com.arivanamin.healthcare.backend.patient.domain.persistence.PatientPersistence;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-@FunctionalInterface
-public interface UpdatePatientCommand {
+@Service
+@RequiredArgsConstructor
+public class UpdatePatientCommand {
     
-    public Patient execute (UUID id, Patient patient);
+    private final PatientPersistence persistence;
+    
+    public Patient execute (UUID id, Patient patient) {
+        return persistence.update(id, patient);
+    }
 }
