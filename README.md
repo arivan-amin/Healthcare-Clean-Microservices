@@ -116,13 +116,13 @@ project to demonstrate the implementation of microservices using modern **Java**
     - **Swagger UI:** `http://localhost:8080/swagger-ui.html`
     - **Grafana:** `http://localhost:3000/dashboards`
 
-6. ### Accessing the Grafana Dashboards for monitoring Spring Boot, MySQL and MongoDB
+6. ### Accessing the Grafana Dashboards for monitoring Spring Boot and MySQL
     - Open your browser and navigate to **Grafana** at: http://localhost:3000/dashboards
     - In the **Grafana** dashboards page, click on the **New** icon on the top right side and select
       **Import**.
-    - Choose the all 3 json file located at: **project-root/docker/grafana/**
-    - Complete the import process for all 3 files.
-    - Now you should have 3 dashboards to monitor Spring Boot, MySQL and MongoDB.
+    - Choose both json file located at: **project-root/docker/grafana/**
+    - Complete the import process for both files.
+    - Now you should have 2 dashboards to monitor Spring Boot, MySQL.
 
 ## Testing
 - Unit and integration tests are available for each microservice.
