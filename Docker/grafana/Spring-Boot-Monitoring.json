@@ -26,7 +26,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 6756,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 1,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -659,9 +659,11 @@
     },
     {
       "datasource": {
+        "default": false,
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
+      "description": "Key points about this metric:\n1-minute average: This metric specifically measures the load over the past 60 seconds.\nLoad calculation: The load is calculated as the average number of processes that are either running or waiting for CPU time.\nNormalized value: The metric is often normalized to the number of available CPUs. This allows for easier comparison across systems with different hardware configurations.\n\nInterpreting the value:\nValue less than 1: The system is underutilized, and there are likely spare CPU resources available.\nValue close to 1: The system is moderately loaded, and most CPUs are busy but not overwhelmed.\nValue greater than 1: The system is overloaded, and there is a backlog of processes waiting for CPU time.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -673,7 +675,7 @@
             "axisColorMode": "text",
             "axisGridShow": true,
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "right",
             "barAlignment": 0,
             "barWidthFactor": 0.6,
             "drawStyle": "line",
@@ -715,8 +717,7 @@
                 "value": 100
               }
             ]
-          },
-          "unit": "percentunit"
+          }
         },
         "overrides": []
       },
@@ -1400,6 +1401,7 @@
     },
     {
       "datasource": {
+        "default": false,
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
@@ -1458,13 +1460,12 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "percentunit"
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 12,
         "x": 0,
         "y": 68
@@ -1491,18 +1492,19 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(uri) (http_server_requests_seconds_count{application=\"$instance\", status=~\"2.*\", uri!~\".*actuator.*\"}) / sum by(uri) (http_server_requests_seconds_count{application=\"$instance\", uri!~\".*actuator.*\"})",
+          "expr": "sum by(uri) (rate(http_server_requests_seconds_count{application=\"$instance\", status=~\"2.*\", uri!~\".*actuator.*\"}[1m]) * 60)",
           "interval": "",
           "legendFormat": "{{path}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Percent of 2xx Requests",
+      "title": "Number of HTTP 2xx Responses",
       "type": "timeseries"
     },
     {
       "datasource": {
+        "default": false,
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
@@ -1561,13 +1563,12 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "percentunit"
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 12,
         "x": 12,
         "y": 68
@@ -1594,18 +1595,19 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(uri) (http_server_requests_seconds_count{application=\"$instance\", status=~\"5.*\", uri!~\".*actuator.*\"}) / sum by(uri) (http_server_requests_seconds_count{application=\"$instance\", uri!~\".*actuator.*\"})",
+          "expr": "sum by(uri) (rate(http_server_requests_seconds_count{application=\"$instance\", status=~\"5.*\", uri!~\".*actuator.*\"}[1m]) * 60)",
           "interval": "",
           "legendFormat": "{{path}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Percent of 5xx Requests",
+      "title": "Number of HTTP 5xx Responses",
       "type": "timeseries"
     },
     {
       "datasource": {
+        "default": false,
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
@@ -1664,16 +1666,15 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "percentunit"
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 12,
         "x": 0,
-        "y": 74
+        "y": 76
       },
       "id": 181,
       "options": {
@@ -1697,18 +1698,19 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(uri) (http_server_requests_seconds_count{application=\"$instance\", status=~\"3.*\", uri!~\".*actuator.*\"}) / sum by(uri) (http_server_requests_seconds_count{application=\"$instance\", uri!~\".*actuator.*\"})",
+          "expr": "sum by(uri) (rate(http_server_requests_seconds_count{application=\"$instance\", status=~\"3.*\", uri!~\".*actuator.*\"}[1m]) * 60)",
           "interval": "",
           "legendFormat": "{{path}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Percent of 3xx Requests",
+      "title": "Number of HTTP 3xx Responses",
       "type": "timeseries"
     },
     {
       "datasource": {
+        "default": false,
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
@@ -1760,16 +1762,15 @@
                 "value": null
               }
             ]
-          },
-          "unit": "percentunit"
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 12,
         "x": 12,
-        "y": 74
+        "y": 76
       },
       "id": 108,
       "options": {
@@ -1792,14 +1793,14 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(uri) (http_server_requests_seconds_count{application=\"$instance\", status=~\"4.*\", uri!~\".*actuator.*\"}) / sum by(uri) (http_server_requests_seconds_count{application=\"$instance\", uri!~\".*actuator.*\"})",
+          "expr": "sum by(uri) (rate(http_server_requests_seconds_count{application=\"$instance\", status=~\"4.*\", uri!~\".*actuator.*\"}[1m]) * 60)",
           "interval": "",
           "legendFormat": "{{uri}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Percent of 4xx Requests",
+      "title": "Number of HTTP 4xx Responses",
       "type": "timeseries"
     },
     {
@@ -1863,7 +1864,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 80
+        "y": 84
       },
       "id": 115,
       "options": {
@@ -1961,7 +1962,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 80
+        "y": 84
       },
       "id": 116,
       "options": {
@@ -2059,7 +2060,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 80
+        "y": 84
       },
       "id": 117,
       "options": {
@@ -2102,7 +2103,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 88
+        "y": 92
       },
       "id": 142,
       "panels": [],
@@ -2186,7 +2187,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 89
+        "y": 93
       },
       "id": 143,
       "options": {
@@ -2316,7 +2317,7 @@
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 89
+        "y": 93
       },
       "id": 93,
       "options": {
@@ -2430,7 +2431,7 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 89
+        "y": 93
       },
       "id": 32,
       "options": {
@@ -2660,7 +2661,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 89
+        "y": 93
       },
       "id": 124,
       "options": {
@@ -2763,7 +2764,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 96
+        "y": 100
       },
       "id": 138,
       "options": {
@@ -2940,7 +2941,7 @@
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 96
+        "y": 100
       },
       "id": 91,
       "options": {
@@ -3044,7 +3045,7 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 96
+        "y": 100
       },
       "id": 66,
       "options": {
@@ -3150,7 +3151,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 96
+        "y": 100
       },
       "id": 61,
       "options": {
@@ -3211,7 +3212,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 103
+        "y": 107
       },
       "id": 48,
       "panels": [],
@@ -3283,7 +3284,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 104
+        "y": 108
       },
       "id": 85,
       "options": {
@@ -3400,7 +3401,7 @@
         "h": 8,
         "w": 6,
         "x": 0,
-        "y": 112
+        "y": 116
       },
       "id": 88,
       "options": {
@@ -3524,7 +3525,7 @@
         "h": 8,
         "w": 9,
         "x": 6,
-        "y": 120
+        "y": 124
       },
       "id": 50,
       "options": {
@@ -3624,7 +3625,7 @@
         "h": 8,
         "w": 9,
         "x": 15,
-        "y": 120
+        "y": 124
       },
       "id": 68,
       "options": {
@@ -3740,7 +3741,7 @@
         "h": 6,
         "w": 6,
         "x": 0,
-        "y": 128
+        "y": 132
       },
       "id": 80,
       "options": {
@@ -3836,7 +3837,7 @@
         "h": 6,
         "w": 6,
         "x": 6,
-        "y": 128
+        "y": 132
       },
       "id": 83,
       "options": {
@@ -3938,7 +3939,7 @@
         "h": 6,
         "w": 6,
         "x": 12,
-        "y": 128
+        "y": 132
       },
       "id": 78,
       "options": {
@@ -4039,7 +4040,7 @@
         "h": 6,
         "w": 6,
         "x": 18,
-        "y": 128
+        "y": 132
       },
       "id": 82,
       "options": {
@@ -4085,7 +4086,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 134
+        "y": 138
       },
       "id": 72,
       "panels": [],
@@ -4198,7 +4199,7 @@
         "h": 6,
         "w": 12,
         "x": 0,
-        "y": 135
+        "y": 139
       },
       "id": 74,
       "options": {
@@ -4337,7 +4338,7 @@
         "h": 6,
         "w": 12,
         "x": 12,
-        "y": 135
+        "y": 139
       },
       "id": 76,
       "options": {
@@ -4380,7 +4381,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 141
+        "y": 145
       },
       "id": 34,
       "panels": [],
@@ -4429,7 +4430,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 142
+        "y": 146
       },
       "id": 44,
       "maxDataPoints": 100,
@@ -4552,7 +4553,7 @@
         "h": 8,
         "w": 20,
         "x": 4,
-        "y": 142
+        "y": 146
       },
       "id": 36,
       "options": {
@@ -4643,7 +4644,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 146
+        "y": 150
       },
       "id": 46,
       "maxDataPoints": 100,
@@ -4743,7 +4744,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 150
+        "y": 154
       },
       "id": 38,
       "options": {
@@ -4836,7 +4837,7 @@
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 150
+        "y": 154
       },
       "id": 42,
       "options": {
@@ -4929,7 +4930,7 @@
         "h": 6,
         "w": 8,
         "x": 16,
-        "y": 150
+        "y": 154
       },
       "id": 40,
       "options": {
@@ -4967,7 +4968,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 156
+        "y": 160
       },
       "id": 22,
       "panels": [],
@@ -5012,7 +5013,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 157
+        "y": 161
       },
       "id": 28,
       "maxDataPoints": 100,
@@ -5114,7 +5115,7 @@
         "h": 7,
         "w": 7,
         "x": 4,
-        "y": 157
+        "y": 161
       },
       "id": 24,
       "options": {
@@ -5214,7 +5215,7 @@
         "h": 7,
         "w": 7,
         "x": 11,
-        "y": 157
+        "y": 161
       },
       "id": 26,
       "options": {
@@ -5322,7 +5323,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 157
+        "y": 161
       },
       "id": 30,
       "options": {
@@ -5407,7 +5408,7 @@
         "h": 3,
         "w": 4,
         "x": 0,
-        "y": 161
+        "y": 165
       },
       "id": 144,
       "maxDataPoints": 100,
@@ -5454,7 +5455,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 164
+        "y": 168
       },
       "id": 8,
       "panels": [],
@@ -5526,7 +5527,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 165
+        "y": 169
       },
       "id": 6,
       "options": {
@@ -5631,7 +5632,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 165
+        "y": 169
       },
       "id": 10,
       "options": {
@@ -5734,7 +5735,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 172
+        "y": 176
       },
       "id": 14,
       "options": {
@@ -5837,7 +5838,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 172
+        "y": 176
       },
       "id": 16,
       "options": {
@@ -5940,7 +5941,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 172
+        "y": 176
       },
       "id": 20,
       "options": {
@@ -5986,7 +5987,7 @@
     "list": [
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "Patient-Service",
           "value": "Patient-Service"
         },
@@ -6137,7 +6138,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -6168,6 +6169,6 @@
   "timezone": "",
   "title": "Spring Boot Monitoring",
   "uid": "sOae4vCnk",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
