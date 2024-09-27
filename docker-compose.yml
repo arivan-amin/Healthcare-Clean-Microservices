@@ -200,54 +200,10 @@ services:
     depends_on:
       - discovery-server
 
-  billing-service:
-    container_name: healthcare-billing-service
-    restart: unless-stopped
-    image: arivanamin/healthcare-billing-service
-    env_file:
-      - .env
-    volumes:
-      - app-logs:/root/Apps/Healthcare/Logs/
-    depends_on:
-      - discovery-server
-
   doctor-service:
     container_name: healthcare-doctor-service
     restart: unless-stopped
     image: arivanamin/healthcare-doctor-service
-    env_file:
-      - .env
-    volumes:
-      - app-logs:/root/Apps/Healthcare/Logs/
-    depends_on:
-      - discovery-server
-
-  inventory-service:
-    container_name: healthcare-inventory-service
-    restart: unless-stopped
-    image: arivanamin/healthcare-inventory-service
-    env_file:
-      - .env
-    volumes:
-      - app-logs:/root/Apps/Healthcare/Logs/
-    depends_on:
-      - discovery-server
-
-  lab-service:
-    container_name: healthcare-lab-service
-    restart: unless-stopped
-    image: arivanamin/healthcare-lab-service
-    env_file:
-      - .env
-    volumes:
-      - app-logs:/root/Apps/Healthcare/Logs/
-    depends_on:
-      - discovery-server
-
-  medical-record-service:
-    container_name: healthcare-medical-record-service
-    restart: unless-stopped
-    image: arivanamin/healthcare-medical-record-service
     env_file:
       - .env
     volumes:
@@ -277,76 +233,10 @@ services:
     depends_on:
       - discovery-server
 
-  pharmacy-service:
-    container_name: healthcare-pharmacy-service
-    restart: unless-stopped
-    image: arivanamin/healthcare-pharmacy-service
-    env_file:
-      - .env
-    volumes:
-      - app-logs:/root/Apps/Healthcare/Logs/
-    depends_on:
-      - discovery-server
-
-  prescription-service:
-    container_name: healthcare-prescription-service
-    restart: unless-stopped
-    image: arivanamin/healthcare-prescription-service
-    env_file:
-      - .env
-    volumes:
-      - app-logs:/root/Apps/Healthcare/Logs/
-    depends_on:
-      - discovery-server
-
-  radiology-service:
-    container_name: healthcare-radiology-service
-    restart: unless-stopped
-    image: arivanamin/healthcare-radiology-service
-    env_file:
-      - .env
-    volumes:
-      - app-logs:/root/Apps/Healthcare/Logs/
-    depends_on:
-      - discovery-server
-
-  reporting-service:
-    container_name: healthcare-report-service
-    restart: unless-stopped
-    image: arivanamin/healthcare-report-service
-    env_file:
-      - .env
-    volumes:
-      - app-logs:/root/Apps/Healthcare/Logs/
-    depends_on:
-      - discovery-server
-
   security-service:
     container_name: healthcare-security-service
     restart: unless-stopped
     image: arivanamin/healthcare-security-service
-    env_file:
-      - .env
-    volumes:
-      - app-logs:/root/Apps/Healthcare/Logs/
-    depends_on:
-      - discovery-server
-
-  staff-service:
-    container_name: healthcare-staff-service
-    restart: unless-stopped
-    image: arivanamin/healthcare-staff-service
-    env_file:
-      - .env
-    volumes:
-      - app-logs:/root/Apps/Healthcare/Logs/
-    depends_on:
-      - discovery-server
-
-  surgery-service:
-    container_name: healthcare-surgery-service
-    restart: unless-stopped
-    image: arivanamin/healthcare-surgery-service
     env_file:
       - .env
     volumes:
