@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.patient.domain.query.response;
+package com.arivanamin.healthcare.backend.patient.infrastructure.response;
 
 import com.arivanamin.healthcare.backend.core.domain.gender.Gender;
 import lombok.Value;

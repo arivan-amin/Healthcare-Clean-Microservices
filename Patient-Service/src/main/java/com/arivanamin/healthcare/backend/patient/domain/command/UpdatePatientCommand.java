@@ -13,7 +13,7 @@ public class UpdatePatientCommand {
     
     private final PatientPersistence persistence;
     
-    public Patient execute (UUID id, Patient patient) {
-        return persistence.update(id, patient);
+    public void execute (UUID id, Patient patient) {
+        persistence.update(id, patient);
     }
 }

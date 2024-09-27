@@ -1,7 +1,7 @@
 package com.arivanamin.healthcare.backend.patient.domain.query;
 
+import com.arivanamin.healthcare.backend.patient.domain.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.domain.persistence.PatientPersistence;
-import com.arivanamin.healthcare.backend.patient.domain.query.response.PatientResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ public class ReadPatientByIdQuery {
     
     private final PatientPersistence persistence;
     
-    public PatientResponse execute (UUID id) {
+    public Patient execute (UUID id) {
         return null;
     }
 }

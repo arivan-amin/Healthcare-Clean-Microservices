@@ -5,13 +5,15 @@ import com.arivanamin.healthcare.backend.patient.domain.persistence.PatientPersi
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class CreatePatientCommand {
     
     private final PatientPersistence persistence;
     
-    public Patient execute (Patient patient) {
-        return persistence.create(patient);
+    public UUID execute (Patient patient) {
+        return persistence.create(patient).getId();
     }
 }

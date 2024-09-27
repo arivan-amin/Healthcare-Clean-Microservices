@@ -13,8 +13,7 @@ public class ReadPatientsQuery {
     
     private final PatientPersistence persistence;
     
-    public ReadPatientsResponse execute () {
-        List<Patient> patients = persistence.getAllPatients();
-        return new ReadPatientsResponse(null);
+    public List<Patient> execute () {
+        return persistence.getAllPatients();
     }
 }
