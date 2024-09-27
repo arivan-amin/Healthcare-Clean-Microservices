@@ -45,20 +45,10 @@
         <module>Backend-Core</module>
         <module>Appointment-Service</module>
         <module>Audit-Service</module>
-        <module>Billing-Service</module>
         <module>Doctor-Service</module>
-        <module>Inventory-Service</module>
-        <module>Lab-Service</module>
-        <module>Medical-Record-Service</module>
         <module>Notification-Service</module>
         <module>Patient-Service</module>
-        <module>Pharmacy-Service</module>
-        <module>Prescription-Service</module>
-        <module>Radiology-Service</module>
-        <module>Report-Service</module>
         <module>Security-Service</module>
-        <module>Staff-Service</module>
-        <module>Surgery-Service</module>
     </modules>
 
     <dependencies>
