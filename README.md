@@ -88,13 +88,20 @@ project to demonstrate the implementation of microservices using modern **Java**
     cd Healthcare-Management-Microservices
     ```
 
-2. ### Build the project, and it will load the images to your local docker repository using JIB:
+2. ### Build and install the Core Module because all modules depend on it:
+
+    ```bash
+    cd Core
+    mvn clean install
+    cd ..
+    ```
+3. ### Build the project, and it will load the images to your local docker repository using JIB:
 
     ```bash
     mvn clean package
     ```
 
-3. ### Set Eureka username and password environment variables and docker host ip:
+4. ### Set Eureka username and password environment variables and docker host ip:
     - on **Linux**: add the below variables to your **.bashrc** file and reload or reboot
     ```bash
     export EUREKA_USER=admin
@@ -105,18 +112,18 @@ project to demonstrate the implementation of microservices using modern **Java**
     set EUREKA_USER=admin
     set EUREKA_PASSWORD=admin
     ```
-4. ### Run the services using Docker Compose:
+5. ### Run the services using Docker Compose:
     ```bash
     docker compose up -d
     ```
 
-5. ### Access the services:
+6. ### Access the services:
     - **API Gateway:** `http://localhost:8080`
     - **Eureka Dashboard:** `http://localhost:8080/eureka/web`
     - **Swagger UI:** `http://localhost:8080/swagger-ui.html`
     - **Grafana:** `http://localhost:3000/dashboards`
 
-6. ### Accessing the Grafana Dashboards for monitoring Spring Boot and MySQL
+7. ### Accessing the Grafana Dashboards for monitoring Spring Boot and MySQL
     - Open your browser and navigate to **Grafana** at: http://localhost:3000/dashboards
     - In the **Grafana** dashboards page, click on the **New** icon on the top right side and select
       **Import**.
@@ -144,9 +151,6 @@ The system is divided into several microservices, each responsible for a specifi
 - **Audit Service**: Provides centralized logging and auditing for all actions within the system. It
   records critical events, such as user activities and service interactions, to ensure transparency
   and compliance.
-- **Billing Service**: Handles the generation and management of invoices and payments. It integrates
-  with various services to collect billing information and ensures accurate billing for patient
-  services and treatments.
 - **Core Service**: Provides foundational services and shared functionality used across other
   microservices. This could include utility functions, common data access layers, or basic service
   management features.
@@ -156,40 +160,15 @@ The system is divided into several microservices, each responsible for a specifi
 - **Doctor Service**: Manages information related to doctors, including their profiles, specialties,
   schedules, and availability. It supports operations related to doctor management and integrates
   with other services for scheduling and patient care.
-- **Inventory Service**: Tracks and manages the inventory of medical supplies, equipment, and
-  pharmaceuticals. It provides real-time updates on stock levels and handles inventory-related
-  operations such as ordering and restocking.
-- **Lab Service**: Handles laboratory tests and results. It manages the submission, tracking, and
-  reporting of lab test orders, as well as the retrieval of test results for patients and doctors.
-- **Medical Record Service**: Manages patient medical records, including history, diagnoses,
-  treatment plans, and other health-related information. It ensures secure access and updates to
-  patient records as required by various services.
 - **Notification Service**: Sends notifications and alerts to users, such as appointment reminders,
   billing notifications, or system updates. It handles different communication channels like email,
   SMS, or in-app notifications.
 - **Patient Service**: Manages patient information, including personal details, medical history, and
   contact information. It supports patient registration, updates, and interactions with other
   services such as appointments and billing.
-- **Pharmacy Service**: Manages prescriptions and pharmaceutical inventory. It processes
-  prescription orders, tracks medication stock, and provides information about available drugs and
-  their interactions.
-- **Prescription Service**: Handles the creation, management, and fulfillment of medical
-  prescriptions. It integrates with the Doctor, Pharmacy, and Patient services to ensure accurate
-  prescription processing and medication delivery.
-- **Radiology Service**: Manages radiological imaging and reports. It handles requests for imaging
-  procedures, stores image data, and provides reports and results to doctors and patients.
-- **Report Service**: Generates and manages reports related to various aspects of the system,
-  including operational metrics, financial summaries, and patient statistics. It provides insights
-  and data visualizations for analysis and decision-making.
 - **Security Service**: Ensures the security of the system by managing authentication,
   authorization, and encryption. It handles user access controls, secure communication, and
   protection of sensitive data.
-- **Staff Service**: Manages information related to hospital or clinic staff, including roles,
-  schedules, and personal details. It supports operations related to staff management and
-  integration with other services for scheduling and notifications.
-- **Surgery Service**: Handles scheduling, management, and documentation of surgical procedures. It
-  integrates with other services to coordinate pre-surgery preparations, manage surgical resources,
-  and track post-operative care.
 
 ## Contributing
 **Contributions are welcome!** Please fork the repository and submit a pull request for any
