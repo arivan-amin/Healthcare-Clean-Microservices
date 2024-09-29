@@ -12,8 +12,8 @@
 
     <artifactId>Core</artifactId>
     <version>0.1</version>
-    <name>Backend-Core</name>
-    <description>Backend Core Module</description>
+    <name>Core</name>
+    <description>Core Module</description>
 
     <properties>
         <spring-boot.repackage.skip>true</spring-boot.repackage.skip>
