@@ -32,7 +32,7 @@
 
         <dependency>
             <groupId>com.arivanamin.healthcare</groupId>
-            <artifactId>backend-core</artifactId>
+            <artifactId>Core</artifactId>
             <version>${core-module-version}</version>
         </dependency>
 
