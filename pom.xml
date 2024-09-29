@@ -42,7 +42,7 @@
     <modules>
         <module>Discovery-Server</module>
         <module>Api-Gateway</module>
-        <module>Backend-Core</module>
+        <module>Core</module>
         <module>Appointment-Service</module>
         <module>Audit-Service</module>
         <module>Doctor-Service</module>

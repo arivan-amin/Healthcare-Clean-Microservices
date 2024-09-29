@@ -10,7 +10,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>backend-core</artifactId>
+    <artifactId>Core</artifactId>
     <version>0.1</version>
     <name>Backend-Core</name>
     <description>Backend Core Module</description>
