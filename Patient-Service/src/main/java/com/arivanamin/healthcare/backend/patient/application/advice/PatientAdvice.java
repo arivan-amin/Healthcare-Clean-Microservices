@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.patient.infrastructure.advice;
+package com.arivanamin.healthcare.backend.patient.application.advice;
 
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.MissingServletRequestParameterException;

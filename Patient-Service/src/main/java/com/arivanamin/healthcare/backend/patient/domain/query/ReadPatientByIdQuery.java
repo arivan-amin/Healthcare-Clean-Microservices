@@ -14,6 +14,6 @@ public class ReadPatientByIdQuery {
     private final PatientPersistence persistence;
     
     public Patient execute (UUID id) {
-        return null;
+        return persistence.getPatientById(id).orElseThrow();
     }
 }

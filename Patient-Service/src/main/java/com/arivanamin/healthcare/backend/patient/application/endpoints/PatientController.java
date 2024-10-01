@@ -1,10 +1,11 @@
-package com.arivanamin.healthcare.backend.patient.infrastructure.endpoints;
+package com.arivanamin.healthcare.backend.patient.application.endpoints;
 
+import com.arivanamin.healthcare.backend.patient.application.response.*;
 import com.arivanamin.healthcare.backend.patient.domain.command.*;
 import com.arivanamin.healthcare.backend.patient.domain.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.domain.query.ReadPatientByIdQuery;
 import com.arivanamin.healthcare.backend.patient.domain.query.ReadPatientsQuery;
-import com.arivanamin.healthcare.backend.patient.infrastructure.mapper.PatientMapper;
+import com.arivanamin.healthcare.backend.patient.application.mapper.PatientMapper;
 import com.arivanamin.healthcare.backend.patient.infrastructure.response.*;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.patient.infrastructure.response;
+package com.arivanamin.healthcare.backend.patient.application.response;
 
 import lombok.Value;
 
