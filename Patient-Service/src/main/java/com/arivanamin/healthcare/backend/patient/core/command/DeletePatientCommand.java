@@ -1,6 +1,6 @@
-package com.arivanamin.healthcare.backend.patient.domain.command;
+package com.arivanamin.healthcare.backend.patient.core.command;
 
-import com.arivanamin.healthcare.backend.patient.domain.persistence.PatientPersistence;
+import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

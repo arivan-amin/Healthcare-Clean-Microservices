@@ -1,7 +1,7 @@
-package com.arivanamin.healthcare.backend.patient.domain.query;
+package com.arivanamin.healthcare.backend.patient.core.query;
 
-import com.arivanamin.healthcare.backend.patient.domain.entity.Patient;
-import com.arivanamin.healthcare.backend.patient.domain.persistence.PatientPersistence;
+import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
+import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
