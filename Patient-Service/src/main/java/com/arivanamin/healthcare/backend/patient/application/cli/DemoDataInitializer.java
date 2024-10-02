@@ -1,8 +1,8 @@
 package com.arivanamin.healthcare.backend.patient.application.cli;
 
 import com.arivanamin.healthcare.backend.core.domain.gender.Gender;
-import com.arivanamin.healthcare.backend.patient.domain.entity.Patient;
-import com.arivanamin.healthcare.backend.patient.domain.persistence.PatientPersistence;
+import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
+import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
 import com.github.javafaker.Faker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;

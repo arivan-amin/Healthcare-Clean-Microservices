@@ -1,6 +1,6 @@
 package com.arivanamin.healthcare.backend.patient.application.mapper;
 
-import com.arivanamin.healthcare.backend.patient.domain.entity.Patient;
+import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.application.response.PatientResponse;
 
 public class PatientMapper {
