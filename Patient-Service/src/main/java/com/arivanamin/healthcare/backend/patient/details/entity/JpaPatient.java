@@ -1,10 +1,10 @@
-package com.arivanamin.healthcare.backend.patient.domain.entity;
+package com.arivanamin.healthcare.backend.patient.details.entity;
 
 import com.arivanamin.healthcare.backend.core.domain.gender.Gender;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
-import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -15,7 +15,7 @@ import java.util.UUID;
 @Setter
 @Builder
 @ToString
-public class Patient {
+public class JpaPatient {
     
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
