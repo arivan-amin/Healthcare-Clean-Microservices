@@ -7,6 +7,7 @@ import com.arivanamin.healthcare.backend.patient.details.mapper.JpaPatientMapper
 import com.arivanamin.healthcare.backend.patient.details.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -20,26 +21,28 @@ public class JpaPatientPersistence implements PatientPersistence {
     
     private final JpaPatientMapper mapper;
     
+    private final ModelMapper modelMapper;
+    
     @Override
     public List<Patient> getAllPatients () {
-        return mapper.mapToEntity(repository.findAll());
+        return mapper.mapToEntities(repository.findAll());
     }
     
     @Override
     public Optional<Patient> getPatientById (UUID id) {
-        JpaPatient jpaEntity = repository.findById(id).get();
-        return Optional.ofNullable(mapper.mapJpaToEntity(jpaEntity));
+        return repository.findById(id).map(mapper::mapToEntity);
     }
     
     @Override
     public UUID create (Patient patient) {
-        return repository.save(mapper.mapEntityToJpa(patient)).getId();
+        return repository.save(mapper.mapToJpa(patient)).getId();
     }
     
     @Override
-    public void update (UUID id, Patient patient) {
-        JpaPatient patientById = repository.findById(id).get();
-        repository.save(patientById);
+    public void update (UUID id, Patient patientEntity) {
+        JpaPatient jpaPatient = repository.findById(id).orElseThrow();
+        modelMapper.map(patientEntity, jpaPatient);
+        repository.save(jpaPatient);
     }
     
     @Override

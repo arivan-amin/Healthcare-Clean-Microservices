@@ -1,12 +1,16 @@
 package com.arivanamin.healthcare.backend.patient.application.mapper;
 
-import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.application.response.PatientResponse;
+import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 
+@RequiredArgsConstructor
 public class PatientMapper {
     
+    private final ModelMapper modelMapper;
+    
     public PatientResponse mapToResponse (Patient entity) {
-        return new PatientResponse(entity.getId(), entity.getFirstName(), entity.getLastName(),
-            entity.getEmail(), entity.getDateOfBirth(), entity.getGender(), entity.getAddress());
+        return modelMapper.map(entity, PatientResponse.class);
     }
 }

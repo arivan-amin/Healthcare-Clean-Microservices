@@ -12,19 +12,15 @@ public class JpaPatientMapper {
     
     private ModelMapper modelMapper;
     
-    public List<Patient> mapToEntity (List<JpaPatient> jpaEntities) {
-        return jpaEntities.stream().map(this::mapJpaToEntity).toList();
+    public List<Patient> mapToEntities (List<JpaPatient> jpaEntities) {
+        return jpaEntities.stream().map(this::mapToEntity).toList();
     }
     
-    public Patient mapJpaToEntity (JpaPatient jpaEntity) {
+    public Patient mapToEntity (JpaPatient jpaEntity) {
         return modelMapper.map(jpaEntity, Patient.class);
     }
     
-    public List<JpaPatient> mapToJpa (List<Patient> entities) {
-        return entities.stream().map(this::mapEntityToJpa).toList();
-    }
-    
-    public JpaPatient mapEntityToJpa (Patient entity) {
+    public JpaPatient mapToJpa (Patient entity) {
         return modelMapper.map(entity, JpaPatient.class);
     }
 }

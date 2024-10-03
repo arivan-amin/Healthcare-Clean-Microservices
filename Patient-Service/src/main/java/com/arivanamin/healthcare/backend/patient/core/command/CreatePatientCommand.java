@@ -14,6 +14,6 @@ public class CreatePatientCommand {
     private final PatientPersistence persistence;
     
     public UUID execute (Patient patient) {
-        return persistence.create(patient).getId();
+        return persistence.create(patient);
     }
 }
