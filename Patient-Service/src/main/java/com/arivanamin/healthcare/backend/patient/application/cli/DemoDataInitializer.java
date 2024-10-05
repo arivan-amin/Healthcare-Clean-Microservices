@@ -31,7 +31,8 @@ class DemoDataInitializer {
     }
     
     private void populatePatientRepository (PatientPersistence persistence, int numberOfEntities) {
-        IntStream.rangeClosed(1, numberOfEntities).mapToObj(this::createPatient)
+        IntStream.rangeClosed(1, numberOfEntities)
+            .mapToObj(this::createPatient)
             .forEachOrdered(persistence::create);
     }
     

@@ -20,8 +20,10 @@ public class OpenApiConfig {
         server.setDescription("Server URL");
         
         Info info = new Info().title("Patient Service API")
-            .description("Provides all the API related to Patient service").version("1.0")
-            .contact(getOpenApiContactDetails()).termsOfService(getOpenApiTermsOfService())
+            .description("Provides all the API related to Patient service")
+            .version("1.0")
+            .contact(getOpenApiContactDetails())
+            .termsOfService(getOpenApiTermsOfService())
             .license(getOpenApiLicence());
         
         return new OpenAPI().info(info).servers(List.of(server));

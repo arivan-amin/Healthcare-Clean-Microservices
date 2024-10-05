@@ -1,17 +1,17 @@
 package com.arivanamin.healthcare.backend.patient.infrastructure.mapper;
 
 import com.arivanamin.healthcare.backend.core.domain.testing.BaseUnitTest;
-import com.arivanamin.healthcare.backend.patient.application.mapper.PatientMapper;
+import com.arivanamin.healthcare.backend.patient.application.presenter.PatientPresenter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-class PatientMapperTest implements BaseUnitTest {
+class PatientPresenterTest implements BaseUnitTest {
     
-    private PatientMapper mapper;
+    private PatientPresenter mapper;
     
     @BeforeEach
     void setUp () {
-        mapper = new PatientMapper();
+        mapper = new PatientPresenter();
     }
     
     @AfterEach
