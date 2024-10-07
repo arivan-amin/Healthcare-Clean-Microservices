@@ -3,7 +3,6 @@ package com.arivanamin.healthcare.backend.patient.details.persistence;
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
 import com.arivanamin.healthcare.backend.patient.details.entity.JpaPatient;
-import com.arivanamin.healthcare.backend.patient.details.mapper.JpaPatientMapper;
 import com.arivanamin.healthcare.backend.patient.details.repository.PatientRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -21,23 +20,21 @@ public class JpaPatientPersistence implements PatientPersistence {
     
     private final PatientRepository repository;
     
-    private final JpaPatientMapper mapper;
-    
     private final ModelMapper modelMapper;
     
     @Override
     public List<Patient> getAllPatients () {
-        return mapper.mapToEntities(repository.findAll());
+        return repository.findAll().stream().map(JpaPatient::toDomain).toList();
     }
     
     @Override
     public Optional<Patient> getPatientById (UUID id) {
-        return repository.findById(id).map(mapper::mapToEntity);
+        return repository.findById(id).map(JpaPatient::toDomain);
     }
     
     @Override
     public UUID create (Patient patient) {
-        return repository.save(mapper.mapToJpa(patient)).getId();
+        return repository.save(JpaPatient.fromDomain(patient)).getId();
     }
     
     @Override
