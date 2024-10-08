@@ -1,6 +1,5 @@
 package com.arivanamin.healthcare.backend.patient.application.endpoints;
 
-import com.arivanamin.healthcare.backend.patient.application.presenter.PatientPresenter;
 import com.arivanamin.healthcare.backend.patient.application.request.CreatePatientRequest;
 import com.arivanamin.healthcare.backend.patient.application.response.*;
 import com.arivanamin.healthcare.backend.patient.core.command.*;
@@ -13,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -28,24 +26,18 @@ public class PatientController {
     private final UpdatePatientCommand updateCommand;
     private final DeletePatientCommand deleteCommand;
     
-    private final PatientPresenter presenter;
-    
     @GetMapping ("/v1/profiles")
     @Operation (summary = "Get a list of all patient profiles")
     @ResponseStatus (HttpStatus.OK)
     public ReadPatientsResponse getAllPatients () {
-        List<Patient> patients = readQuery.execute();
-        List<PatientResponse> responses =
-            patients.stream().map(presenter::mapToEntityResponse).toList();
-        return new ReadPatientsResponse(responses);
+        return ReadPatientsResponse.of(readQuery.execute());
     }
     
     @GetMapping ("/v1/profiles/{id}")
     @Operation (summary = "Get a single patient profile by id")
     @ResponseStatus (HttpStatus.OK)
     public PatientResponse getPatientById (@PathVariable UUID id) {
-        Patient patient = readByIdQuery.execute(id);
-        return presenter.mapToEntityResponse(patient);
+        return PatientResponse.of(readByIdQuery.execute(id));
     }
     
     @PostMapping ("/v1/profiles")
@@ -53,7 +45,7 @@ public class PatientController {
     @ResponseStatus (HttpStatus.CREATED)
     public CreatePatientResponse createPatient (@RequestBody (required = true) Patient patient) {
         UUID createdPatientId = createCommand.execute(patient);
-        return new CreatePatientResponse(createdPatientId);
+        return CreatePatientResponse.of(createdPatientId);
     }
     
     @PutMapping ("/v1/profiles/{id}")

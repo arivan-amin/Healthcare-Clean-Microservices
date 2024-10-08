@@ -8,4 +8,8 @@ import java.util.UUID;
 public class CreatePatientResponse {
     
     UUID id;
+    
+    public static CreatePatientResponse of (UUID id) {
+        return new CreatePatientResponse(id);
+    }
 }
