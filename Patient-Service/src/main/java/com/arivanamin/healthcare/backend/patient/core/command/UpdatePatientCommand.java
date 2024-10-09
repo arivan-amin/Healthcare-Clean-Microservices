@@ -14,7 +14,7 @@ public class UpdatePatientCommand {
     
     private final PatientPersistence persistence;
     
-    private final ModelMapper mapper;
+    ModelMapper mapper = new ModelMapper();
     
     public void execute (UUID id, CreatePatientRequest request) {
         

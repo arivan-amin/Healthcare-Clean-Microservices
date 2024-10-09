@@ -6,11 +6,10 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-@Service
+// @Service
 @RequiredArgsConstructor
 @Slf4j
 @Transactional
@@ -18,7 +17,7 @@ public class JpaPatientPersistence implements PatientPersistence {
     
     private final PatientRepository repository;
     
-    private final ModelMapper modelMapper;
+    ModelMapper modelMapper = new ModelMapper();
     
     @Override
     public List<Patient> getAllPatients () {
