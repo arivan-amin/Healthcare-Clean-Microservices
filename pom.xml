@@ -32,6 +32,7 @@
         <commons-collections-version>4.4</commons-collections-version>
         <commons-validator-version>1.7</commons-validator-version>
         <commons-io-version>2.14.0</commons-io-version>
+        <model-mapper-version>3.2.1</model-mapper-version>
         <!-- Plugin versions -->
         <jib-plugin-version>3.4.3</jib-plugin-version>
         <!-- Inherited dependency versions -->
@@ -184,6 +185,12 @@
             <groupId>net.ttddyy.observation</groupId>
             <artifactId>datasource-micrometer-spring-boot</artifactId>
             <version>1.0.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>${model-mapper-version}</version>
         </dependency>
     </dependencies>
 
