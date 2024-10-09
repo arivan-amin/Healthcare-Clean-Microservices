@@ -36,7 +36,7 @@ public class PatientController {
     @GetMapping ("/v1/profiles/{id}")
     @Operation (summary = "Get a single patient profile by id")
     @ResponseStatus (HttpStatus.OK)
-    public PatientResponse getPatientById (@PathVariable UUID id) {
+    public PatientResponse getPatientById (@PathVariable (required = true) UUID id) {
         return PatientResponse.of(readByIdQuery.execute(id));
     }
     

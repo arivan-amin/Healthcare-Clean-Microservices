@@ -13,7 +13,7 @@ import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.ProblemDetail.forStatusAndDetail;
 
 @RestControllerAdvice
-public class PatientAdvice {
+class PatientAdvice {
     
     @ExceptionHandler (MissingServletRequestParameterException.class)
     ProblemDetail handleMissingParameterException (

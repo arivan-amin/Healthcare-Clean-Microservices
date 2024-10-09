@@ -1,9 +1,7 @@
-package com.arivanamin.healthcare.backend.patient.details.persistence;
+package com.arivanamin.healthcare.backend.patient.details.profile;
 
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
-import com.arivanamin.healthcare.backend.patient.details.entity.JpaPatient;
-import com.arivanamin.healthcare.backend.patient.details.repository.PatientRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

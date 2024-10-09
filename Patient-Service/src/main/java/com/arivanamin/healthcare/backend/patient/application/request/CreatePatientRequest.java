@@ -6,10 +6,7 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Value
 public class CreatePatientRequest {
     
     UUID id;
