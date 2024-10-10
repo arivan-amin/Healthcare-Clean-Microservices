@@ -16,6 +16,18 @@ import static org.springframework.http.ProblemDetail.forStatusAndDetail;
 @RestControllerAdvice
 class PatientAdvice {
     
+    @ExceptionHandler (PatientNotFoundException.class)
+    ProblemDetail handlePatientNotFound (PatientNotFoundException exception) {
+        ProblemDetail detail = forStatusAndDetail(NOT_FOUND, exception.getMessage());
+        detail.setTitle("Bad Request, Patient not found");
+        detail.setType(URI.create("https://docs.oracle.com/en/java/javase/21/docs/api/java" +
+            ".base/java/lang/RuntimeException.html"));
+        detail.setProperty("errorCategory", "Resource not found");
+        detail.setProperty("timestamp", Instant.now());
+        detail.setDetail(exception.getMessage());
+        return detail;
+    }
+    
     @ExceptionHandler (MissingPathVariableException.class)
     ProblemDetail handleMissingPathVariable (HttpMessageNotReadableException exception) {
         ProblemDetail detail = forStatusAndDetail(BAD_REQUEST, exception.getMessage());
@@ -64,19 +76,6 @@ class PatientAdvice {
             "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework" +
                 "/web/bind/MissingServletRequestParameterException.html"));
         detail.setProperty("errorCategory", "Missing Parameter");
-        detail.setProperty("timestamp", Instant.now());
-        detail.setDetail(exception.getMessage());
-        return detail;
-    }
-    
-    @ExceptionHandler (PatientNotFoundException.class)
-    ProblemDetail handlePatientNotFound (PatientNotFoundException exception) {
-        ProblemDetail detail = forStatusAndDetail(NOT_FOUND, exception.getMessage());
-        detail.setTitle("Bad Request, Patient not found");
-        detail.setType(URI.create(
-            "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception" +
-                ".html"));
-        detail.setProperty("errorCategory", "Resource not found");
         detail.setProperty("timestamp", Instant.now());
         detail.setDetail(exception.getMessage());
         return detail;
