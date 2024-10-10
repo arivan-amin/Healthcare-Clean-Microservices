@@ -20,12 +20,12 @@ public class JpaPatientPersistence implements PatientPersistence {
     ModelMapper modelMapper = new ModelMapper();
     
     @Override
-    public List<Patient> getAllPatients () {
+    public List<Patient> findAll () {
         return repository.findAll().stream().map(JpaPatient::toDomain).toList();
     }
     
     @Override
-    public Optional<Patient> getPatientById (UUID id) {
+    public Optional<Patient> findById (UUID id) {
         return repository.findById(id).map(JpaPatient::toDomain);
     }
     

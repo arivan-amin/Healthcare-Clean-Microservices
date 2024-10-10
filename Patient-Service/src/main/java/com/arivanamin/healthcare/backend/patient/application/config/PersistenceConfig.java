@@ -10,32 +10,7 @@ import org.springframework.stereotype.Component;
 public class PersistenceConfig {
     
     @Bean
-    public PatientPersistence patientPersistence (PatientRepository repository) {
+    public PatientPersistence persistence (PatientRepository repository) {
         return new JpaPatientPersistence(repository);
     }
-    
-    /*@Bean
-    public ReadPatientsQuery readPatientsQuery (PatientPersistence persistence) {
-        return new ReadPatientsQuery(persistence);
-    }
-    
-    @Bean
-    public ReadPatientByIdQuery readPatientByIdQuery (PatientPersistence persistence) {
-        return new ReadPatientByIdQuery(persistence);
-    }
-    
-    @Bean
-    public CreatePatientCommand createPatientCommand (PatientPersistence persistence) {
-        return new CreatePatientCommand(persistence);
-    }
-    
-    @Bean
-    public UpdatePatientCommand updatePatientCommand (PatientPersistence persistence) {
-        return new UpdatePatientCommand(persistence);
-    }
-    
-    @Bean
-    public DeletePatientCommand deletePatientCommand (PatientPersistence persistence) {
-        return new DeletePatientCommand(persistence);
-    }*/
 }

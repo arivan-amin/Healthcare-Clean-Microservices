@@ -6,9 +6,9 @@ import java.util.*;
 
 public interface PatientPersistence {
     
-    List<Patient> getAllPatients ();
+    List<Patient> findAll ();
     
-    Optional<Patient> getPatientById (UUID id);
+    Optional<Patient> findById (UUID id);
     
     UUID create (Patient patient);
     

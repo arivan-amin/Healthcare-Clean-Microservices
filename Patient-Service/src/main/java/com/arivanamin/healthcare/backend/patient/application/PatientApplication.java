@@ -11,7 +11,7 @@ import static com.arivanamin.healthcare.backend.core.domain.base.CoreApplication
 
 @SpringBootApplication (scanBasePackages = BASE_PACKAGE)
 @EntityScan (BASE_PACKAGE)
-@EnableJpaRepositories(basePackages = BASE_PACKAGE)
+@EnableJpaRepositories (basePackages = BASE_PACKAGE)
 @EnableDiscoveryClient
 @EnableCaching
 public class PatientApplication {

@@ -14,6 +14,6 @@ public class ReadPatientsQuery {
     private final PatientPersistence persistence;
     
     public List<Patient> execute () {
-        return persistence.getAllPatients();
+        return persistence.findAll();
     }
 }

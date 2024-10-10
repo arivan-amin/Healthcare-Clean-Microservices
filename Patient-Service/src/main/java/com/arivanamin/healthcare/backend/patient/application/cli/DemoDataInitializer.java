@@ -23,8 +23,8 @@ class DemoDataInitializer {
     @Bean
     CommandLineRunner initDatabase (PatientPersistence persistence) {
         return args -> {
-            if (persistence.getAllPatients().isEmpty()) {
-                int numberOfEntities = faker.number().numberBetween(5, 10);
+            if (persistence.findAll().isEmpty()) {
+                int numberOfEntities = faker.number().numberBetween(5, 15);
                 populatePatientRepository(persistence, numberOfEntities);
             }
         };
