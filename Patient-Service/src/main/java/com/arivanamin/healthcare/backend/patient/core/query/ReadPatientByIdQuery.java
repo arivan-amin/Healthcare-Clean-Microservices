@@ -15,8 +15,6 @@ public class ReadPatientByIdQuery {
     private final PatientPersistence persistence;
     
     public Patient execute (UUID id) {
-        return persistence.findById(id)
-            .orElseThrow(
-                () -> new PatientNotFoundException("patient by the requested id not found"));
+        return persistence.findById(id).orElseThrow(PatientNotFoundException::new);
     }
 }
