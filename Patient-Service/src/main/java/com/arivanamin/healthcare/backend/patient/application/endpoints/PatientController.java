@@ -36,14 +36,14 @@ public class PatientController {
     @GetMapping ("/v1/profiles/{id}")
     @Operation (summary = "Get a single patient profile by id")
     @ResponseStatus (HttpStatus.OK)
-    public PatientResponse getPatientById (@PathVariable (required = true) UUID id) {
+    public PatientResponse getPatientById (@PathVariable UUID id) {
         return PatientResponse.of(readByIdQuery.execute(id));
     }
     
     @PostMapping ("/v1/profiles")
     @Operation (summary = "Creates a patient profile")
     @ResponseStatus (HttpStatus.CREATED)
-    public CreatePatientResponse createPatient (@RequestBody (required = true) Patient patient) {
+    public CreatePatientResponse createPatient (@RequestBody Patient patient) {
         UUID createdPatientId = createCommand.execute(patient);
         return CreatePatientResponse.of(createdPatientId);
     }
@@ -51,15 +51,14 @@ public class PatientController {
     @PutMapping ("/v1/profiles/{id}")
     @Operation (summary = "Updates a patient profile")
     @ResponseStatus (HttpStatus.OK)
-    public void updatePatient (@PathVariable (required = true) UUID id,
-                               @RequestBody (required = true) CreatePatientRequest request) {
+    public void updatePatient (@PathVariable UUID id, @RequestBody CreatePatientRequest request) {
         updateCommand.execute(id, request);
     }
     
     @DeleteMapping ("/v1/profiles/{id}")
     @Operation (summary = "Deletes a patient profile")
     @ResponseStatus (HttpStatus.NO_CONTENT)
-    public void deletePatient (@PathVariable (required = true) UUID id) {
+    public void deletePatient (@PathVariable UUID id) {
         deleteCommand.execute(id);
     }
 }

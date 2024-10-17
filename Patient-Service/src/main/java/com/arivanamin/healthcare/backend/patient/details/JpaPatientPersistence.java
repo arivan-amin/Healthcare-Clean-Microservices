@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.patient.details.profile;
+package com.arivanamin.healthcare.backend.patient.details;
 
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
@@ -9,7 +9,6 @@ import org.modelmapper.ModelMapper;
 
 import java.util.*;
 
-// @Service
 @RequiredArgsConstructor
 @Slf4j
 @Transactional

@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.patient.details.profile;
+package com.arivanamin.healthcare.backend.patient.details;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

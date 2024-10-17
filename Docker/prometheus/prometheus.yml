@@ -21,38 +21,6 @@ scrape_configs:
           instance: 'Api-Gateway-Service'
           application: 'Api-Gateway-Service'
 
-  - job_name: 'appointment-service'
-    metrics_path: '/appointments/actuator/prometheus'
-    static_configs:
-      - targets: [ '172.17.0.1:8080' ]
-        labels:
-          instance: 'Appointment-Service'
-          application: 'Appointment-Service'
-
-  - job_name: 'audit-service'
-    metrics_path: '/audits/actuator/prometheus'
-    static_configs:
-      - targets: [ '172.17.0.1:8080' ]
-        labels:
-          instance: 'Audit-Service'
-          application: 'Audit-Service'
-
-  - job_name: 'doctor-service'
-    metrics_path: '/doctors/actuator/prometheus'
-    static_configs:
-      - targets: [ '172.17.0.1:8080' ]
-        labels:
-          instance: 'Doctor-Service'
-          application: 'Doctor-Service'
-
-  - job_name: 'notification-service'
-    metrics_path: '/notifications/actuator/prometheus'
-    static_configs:
-      - targets: [ '172.17.0.1:8080' ]
-        labels:
-          instance: 'Notification-Service'
-          application: 'Notification-Service'
-
   - job_name: 'patient-service'
     metrics_path: '/patients/actuator/prometheus'
     static_configs:
@@ -60,11 +28,3 @@ scrape_configs:
         labels:
           instance: 'Patient-Service'
           application: 'Patient-Service'
-
-  - job_name: 'security-service'
-    metrics_path: '/securities/actuator/prometheus'
-    static_configs:
-      - targets: [ '172.17.0.1:8080' ]
-        labels:
-          instance: 'Security-Service'
-          application: 'Security-Service'

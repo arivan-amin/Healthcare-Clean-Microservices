@@ -22,11 +22,9 @@ public class ApiGatewayConfig {
         return builder.routes()
             .route(getDiscoveryServerRoute())
             .route(getDiscoveryServerStaticResourcesRoute())
-            .route(getAppointmentServiceRoute())
-            .route(getDoctorServiceRoute())
-            .route(getNotificationServiceRoute())
             .route(getPatientServiceRoute())
-            .route(getSecurityServiceRoute())
+            .route(getPatientApiDocRoute())
+            .route(getPatientActuatorRoute())
             .build();
     }
     
@@ -38,28 +36,19 @@ public class ApiGatewayConfig {
         return r -> r.path("/eureka/**").uri(EUREKA_URL);
     }
     
-    private Function<PredicateSpec, Buildable<Route>> getAppointmentServiceRoute () {
-        return r -> r.path("/appointment-service/**", "/api/appointments/**",
-            "/appointments/actuator/**").uri("lb://appointment-service");
-    }
-    
-    private Function<PredicateSpec, Buildable<Route>> getDoctorServiceRoute () {
-        return r -> r.path("/doctor-service/**", "/api/doctors/**", "/doctors/actuator/**")
-            .uri("lb://doctor-service");
-    }
-    
-    private Function<PredicateSpec, Buildable<Route>> getNotificationServiceRoute () {
-        return r -> r.path("/notification-service/**", "/api/notifications/**",
-            "/notifications/actuator/**").uri("lb://notification-service");
-    }
-    
     private Function<PredicateSpec, Buildable<Route>> getPatientServiceRoute () {
-        return r -> r.path("/patient-service/**", "/api/patients/**", "/patients/actuator/**")
+        return r -> r.path("/patient-service/**", "/api/patients/**").uri("lb://patient-service");
+    }
+    
+    private Function<PredicateSpec, Buildable<Route>> getPatientApiDocRoute () {
+        return r -> r.path("/patient-service/**")
+            .filters(f -> f.setPath("/api-docs"))
             .uri("lb://patient-service");
     }
     
-    private Function<PredicateSpec, Buildable<Route>> getSecurityServiceRoute () {
-        return r -> r.path("/security-service/**", "/api/security/**", "/security/actuator/**")
-            .uri("lb://security-service");
+    private Function<PredicateSpec, Buildable<Route>> getPatientActuatorRoute () {
+        return r -> r.path("/patients/actuator/**")
+            .filters(f -> f.setPath("/actuator"))
+            .uri("lb://patient-service");
     }
 }
