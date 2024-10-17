@@ -21,7 +21,7 @@
       }
     ]
   },
-  "description": "Dashboard for Spring Boot2 Statistics(by micrometer-prometheus).",
+  "description": "Dashboard for Spring Boot 3 with Prometheus",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "gnetId": 6756,
@@ -5987,7 +5987,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "Patient-Service",
           "value": "Patient-Service"
         },
@@ -5995,7 +5995,7 @@
           "type": "prometheus",
           "uid": "PBFA97CFB590B2093"
         },
-        "definition": "label_values(jvm_classes_loaded_classes, instance)",
+        "definition": "label_values(instance)",
         "hide": 0,
         "includeAll": false,
         "label": "Instance",
@@ -6003,8 +6003,9 @@
         "name": "instance",
         "options": [],
         "query": {
-          "query": "label_values(jvm_classes_loaded_classes, instance)",
-          "refId": "StandardVariableQuery"
+          "qryType": 1,
+          "query": "label_values(instance)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": "",
@@ -6025,7 +6026,7 @@
           "type": "prometheus",
           "uid": "PBFA97CFB590B2093"
         },
-        "definition": "label_values(jvm_classes_loaded_classes{instance=\"$instance\"}, application)",
+        "definition": "label_values({instance=\"$instance\"},application)",
         "hide": 0,
         "includeAll": false,
         "label": "Application",
@@ -6033,8 +6034,9 @@
         "name": "application",
         "options": [],
         "query": {
-          "query": "label_values(jvm_classes_loaded_classes{instance=\"$instance\"}, application)",
-          "refId": "StandardVariableQuery"
+          "qryType": 1,
+          "query": "label_values({instance=\"$instance\"},application)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": "",
