@@ -11,7 +11,7 @@ import java.util.function.Function;
 import static java.lang.System.getenv;
 
 @Configuration
-public class GatewayConfig {
+public class ApiGatewayConfig {
     
     public static final String EUREKA_HOST = getenv().getOrDefault("EUREKA_HOST", "localhost");
     
