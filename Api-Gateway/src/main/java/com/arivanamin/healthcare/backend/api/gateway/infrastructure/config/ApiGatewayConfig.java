@@ -37,17 +37,19 @@ public class ApiGatewayConfig {
     }
     
     private Function<PredicateSpec, Buildable<Route>> getPatientServiceRoute () {
-        return r -> r.path("/patient-service/**", "/api/patients/**").uri("lb://patient-service");
+        return r -> r.path("/api/patients/**")
+            .filters(f -> f.setPath("/api/protected"))
+            .uri("lb://patient-service");
     }
     
     private Function<PredicateSpec, Buildable<Route>> getPatientApiDocRoute () {
-        return r -> r.path("/patient-service/**")
-            .filters(f -> f.setPath("/api-docs"))
+        return r -> r.path("/patient-service/api-docs")
+            .filters(f -> f.setPath("/v3/api-docs"))
             .uri("lb://patient-service");
     }
     
     private Function<PredicateSpec, Buildable<Route>> getPatientActuatorRoute () {
-        return r -> r.path("/patients/actuator/**")
+        return r -> r.path("/actuator/patients/**")
             .filters(f -> f.setPath("/actuator"))
             .uri("lb://patient-service");
     }

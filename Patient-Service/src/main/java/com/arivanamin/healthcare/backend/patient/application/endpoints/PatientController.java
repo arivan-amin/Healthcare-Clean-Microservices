@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
+import static com.arivanamin.healthcare.backend.patient.application.config.ApiConfig.API_BASE_PATH;
+
 @RestController
-@RequestMapping ("/api/patients")
+@RequestMapping (API_BASE_PATH)
 @RequiredArgsConstructor
 @Slf4j
 public class PatientController {
@@ -26,37 +28,37 @@ public class PatientController {
     private final UpdatePatientCommand updateCommand;
     private final DeletePatientCommand deleteCommand;
     
-    @GetMapping ("/v1/profiles")
-    @Operation (summary = "Get a list of all patient profiles")
+    @GetMapping ("/v1/patients")
+    @Operation (summary = "Get a list of patients")
     @ResponseStatus (HttpStatus.OK)
     public ReadPatientsResponse getAllPatients () {
         return ReadPatientsResponse.of(readQuery.execute());
     }
     
-    @GetMapping ("/v1/profiles/{id}")
-    @Operation (summary = "Get a single patient profile by id")
+    @GetMapping ("/v1/patients/{id}")
+    @Operation (summary = "Get a single patient by id")
     @ResponseStatus (HttpStatus.OK)
     public PatientResponse getPatientById (@PathVariable UUID id) {
         return PatientResponse.of(readByIdQuery.execute(id));
     }
     
-    @PostMapping ("/v1/profiles")
-    @Operation (summary = "Creates a patient profile")
+    @PostMapping ("/v1/patients")
+    @Operation (summary = "Creates a patient")
     @ResponseStatus (HttpStatus.CREATED)
     public CreatePatientResponse createPatient (@RequestBody Patient patient) {
         UUID createdPatientId = createCommand.execute(patient);
         return CreatePatientResponse.of(createdPatientId);
     }
     
-    @PutMapping ("/v1/profiles/{id}")
-    @Operation (summary = "Updates a patient profile")
+    @PutMapping ("/v1/patients/{id}")
+    @Operation (summary = "Updates a patient")
     @ResponseStatus (HttpStatus.OK)
     public void updatePatient (@PathVariable UUID id, @RequestBody CreatePatientRequest request) {
         updateCommand.execute(id, request);
     }
     
-    @DeleteMapping ("/v1/profiles/{id}")
-    @Operation (summary = "Deletes a patient profile")
+    @DeleteMapping ("/v1/patients/{id}")
+    @Operation (summary = "Deletes a patient")
     @ResponseStatus (HttpStatus.NO_CONTENT)
     public void deletePatient (@PathVariable UUID id) {
         deleteCommand.execute(id);
