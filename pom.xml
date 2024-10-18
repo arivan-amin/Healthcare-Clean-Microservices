@@ -36,7 +36,7 @@
         <!-- Plugin versions -->
         <jib-plugin-version>3.4.3</jib-plugin-version>
         <!-- Inherited dependency versions -->
-        <core-module-version>0.1</core-module-version>
+        <core-module-version>1.0.0</core-module-version>
     </properties>
 
     <modules>
