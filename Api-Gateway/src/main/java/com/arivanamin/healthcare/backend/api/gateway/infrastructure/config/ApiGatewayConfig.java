@@ -50,7 +50,8 @@ public class ApiGatewayConfig {
     
     private Function<PredicateSpec, Buildable<Route>> getPatientActuatorRoute () {
         return r -> r.path("/actuator/patients/**")
-            .filters(f -> f.setPath("/actuator"))
+            .filters(
+                f -> f.rewritePath("/actuator/patients/(?<segment>.*)", "/actuator/${segment}"))
             .uri("lb://patient-service");
     }
 }
