@@ -189,39 +189,6 @@ services:
       DYNAMIC_CONFIG_ENABLED: 'true'
 
   # Services
-  appointment-service:
-    container_name: healthcare-appointment-service
-    restart: unless-stopped
-    image: arivanamin/healthcare-appointment-service
-    env_file:
-      - .env
-    volumes:
-      - app-logs:/root/Apps/Healthcare/Logs/
-    depends_on:
-      - discovery-server
-
-  doctor-service:
-    container_name: healthcare-doctor-service
-    restart: unless-stopped
-    image: arivanamin/healthcare-doctor-service
-    env_file:
-      - .env
-    volumes:
-      - app-logs:/root/Apps/Healthcare/Logs/
-    depends_on:
-      - discovery-server
-
-  notification-service:
-    container_name: healthcare-notification-service
-    restart: unless-stopped
-    image: arivanamin/healthcare-notification-service
-    env_file:
-      - .env
-    volumes:
-      - app-logs:/root/Apps/Healthcare/Logs/
-    depends_on:
-      - discovery-server
-
   patient-service:
     container_name: healthcare-patient-service
     restart: unless-stopped
@@ -233,13 +200,47 @@ services:
     depends_on:
       - discovery-server
 
-  security-service:
-    container_name: healthcare-security-service
-    restart: unless-stopped
-    image: arivanamin/healthcare-security-service
-    env_file:
-      - .env
-    volumes:
-      - app-logs:/root/Apps/Healthcare/Logs/
-    depends_on:
-      - discovery-server
+#  appointment-service:
+#    container_name: healthcare-appointment-service
+#    restart: unless-stopped
+#    image: arivanamin/healthcare-appointment-service
+#    env_file:
+#      - .env
+#    volumes:
+#      - app-logs:/root/Apps/Healthcare/Logs/
+#    depends_on:
+#      - discovery-server
+#
+#  doctor-service:
+#    container_name: healthcare-doctor-service
+#    restart: unless-stopped
+#    image: arivanamin/healthcare-doctor-service
+#    env_file:
+#      - .env
+#    volumes:
+#      - app-logs:/root/Apps/Healthcare/Logs/
+#    depends_on:
+#      - discovery-server
+#
+#  notification-service:
+#    container_name: healthcare-notification-service
+#    restart: unless-stopped
+#    image: arivanamin/healthcare-notification-service
+#    env_file:
+#      - .env
+#    volumes:
+#      - app-logs:/root/Apps/Healthcare/Logs/
+#    depends_on:
+#      - discovery-server
+
+
+#  security-service:
+#    container_name: healthcare-security-service
+#    restart: unless-stopped
+#    image: arivanamin/healthcare-security-service
+#    env_file:
+#      - .env
+#    volumes:
+#      - app-logs:/root/Apps/Healthcare/Logs/
+#    depends_on:
+#      - discovery-server
