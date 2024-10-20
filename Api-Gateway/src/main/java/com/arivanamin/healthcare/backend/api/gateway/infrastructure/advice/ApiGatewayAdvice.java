@@ -21,7 +21,7 @@ class ApiGatewayAdvice {
         detail.setTitle("Resource Not Found");
         detail.setType(URI.create(
             "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework" +
-                "/web/servlet/resource/NoResourceFoundException.html"));
+                "/web/reactive/resource/NoResourceFoundException.html"));
         detail.setProperty("errorCategory", "Resource Not Found");
         detail.setProperty("timestamp", Instant.now());
         detail.setDetail(exception.getMessage());
