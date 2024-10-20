@@ -6,5 +6,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor (access = AccessLevel.PRIVATE)
 public final class ApiConfig {
     
-    public static final String API_BASE_PATH = "/api/protected";
+    public static final String API_BASE_PATH = "/patients";
 }

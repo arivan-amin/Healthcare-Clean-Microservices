@@ -28,21 +28,21 @@ public class PatientController {
     private final UpdatePatientCommand updateCommand;
     private final DeletePatientCommand deleteCommand;
     
-    @GetMapping ("/v1/patients")
+    @GetMapping ("/v1/accounts")
     @Operation (summary = "Get a list of patients")
     @ResponseStatus (HttpStatus.OK)
     public ReadPatientsResponse getAllPatients () {
         return ReadPatientsResponse.of(readQuery.execute());
     }
     
-    @GetMapping ("/v1/patients/{id}")
+    @GetMapping ("/v1/accounts/{id}")
     @Operation (summary = "Get a single patient by id")
     @ResponseStatus (HttpStatus.OK)
     public PatientResponse getPatientById (@PathVariable UUID id) {
         return PatientResponse.of(readByIdQuery.execute(id));
     }
     
-    @PostMapping ("/v1/patients")
+    @PostMapping ("/v1/accounts")
     @Operation (summary = "Creates a patient")
     @ResponseStatus (HttpStatus.CREATED)
     public CreatePatientResponse createPatient (@RequestBody Patient patient) {
@@ -50,14 +50,14 @@ public class PatientController {
         return CreatePatientResponse.of(createdPatientId);
     }
     
-    @PutMapping ("/v1/patients/{id}")
+    @PutMapping ("/v1/accounts/{id}")
     @Operation (summary = "Updates a patient")
     @ResponseStatus (HttpStatus.OK)
     public void updatePatient (@PathVariable UUID id, @RequestBody CreatePatientRequest request) {
         updateCommand.execute(id, request);
     }
     
-    @DeleteMapping ("/v1/patients/{id}")
+    @DeleteMapping ("/v1/accounts/{id}")
     @Operation (summary = "Deletes a patient")
     @ResponseStatus (HttpStatus.NO_CONTENT)
     public void deletePatient (@PathVariable UUID id) {
