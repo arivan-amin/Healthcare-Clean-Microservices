@@ -6,6 +6,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.*;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.net.URI;
 import java.time.Instant;
@@ -76,6 +77,20 @@ class PatientControllerAdvice {
             "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework" +
                 "/web/bind/MissingServletRequestParameterException.html"));
         detail.setProperty("errorCategory", "Missing Parameter");
+        detail.setProperty("timestamp", Instant.now());
+        detail.setDetail(exception.getMessage());
+        return detail;
+    }
+    
+    @ExceptionHandler (NoResourceFoundException.class)
+    ProblemDetail handleResourceNotFound (NoResourceFoundException exception) {
+        ProblemDetail detail = forStatusAndDetail(NOT_FOUND, exception.getMessage());
+        detail.setTitle("Resource not found");
+        detail.setType(URI.create(
+            "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework" +
+                "/web/servlet/resource/NoResourceFoundException.html" +
+                ".base/java/lang/RuntimeException.html"));
+        detail.setProperty("errorCategory", "Resource not found");
         detail.setProperty("timestamp", Instant.now());
         detail.setDetail(exception.getMessage());
         return detail;
