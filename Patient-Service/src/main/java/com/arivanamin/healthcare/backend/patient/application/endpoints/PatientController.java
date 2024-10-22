@@ -9,6 +9,7 @@ import com.arivanamin.healthcare.backend.patient.core.query.ReadPatientsQuery;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,7 @@ public class PatientController {
     private final UpdatePatientCommand updateCommand;
     private final DeletePatientCommand deleteCommand;
     
+    @Cacheable(cacheNames = "patientsCache")
     @GetMapping ("/v1/accounts")
     @Operation (summary = "Get a list of patients")
     @ResponseStatus (HttpStatus.OK)
@@ -35,6 +37,7 @@ public class PatientController {
         return ReadPatientsResponse.of(readQuery.execute());
     }
     
+    @Cacheable(cacheNames = "patientByIdCache")
     @GetMapping ("/v1/accounts/{id}")
     @Operation (summary = "Get a single patient by id")
     @ResponseStatus (HttpStatus.OK)
