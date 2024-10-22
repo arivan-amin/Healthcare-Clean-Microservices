@@ -29,7 +29,7 @@ public class PatientController {
     private final UpdatePatientCommand updateCommand;
     private final DeletePatientCommand deleteCommand;
     
-    @Cacheable(cacheNames = "patientsCache")
+    @Cacheable (cacheNames = "patientsCache")
     @GetMapping ("/v1/accounts")
     @Operation (summary = "Get a list of patients")
     @ResponseStatus (HttpStatus.OK)
@@ -37,7 +37,7 @@ public class PatientController {
         return ReadPatientsResponse.of(readQuery.execute());
     }
     
-    @Cacheable(cacheNames = "patientByIdCache")
+    @Cacheable (cacheNames = "patientByIdCache")
     @GetMapping ("/v1/accounts/{id}")
     @Operation (summary = "Get a single patient by id")
     @ResponseStatus (HttpStatus.OK)
