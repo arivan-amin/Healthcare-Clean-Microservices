@@ -1,5 +1,6 @@
 package com.arivanamin.healthcare.backend.patient.application.advice;
 
+import com.arivanamin.healthcare.backend.patient.core.exception.PatientAlreadyExistsException;
 import com.arivanamin.healthcare.backend.patient.core.exception.PatientNotFoundException;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -24,6 +25,18 @@ class PatientControllerAdvice {
         detail.setType(URI.create("https://docs.oracle.com/en/java/javase/21/docs/api/java" +
             ".base/java/lang/RuntimeException.html"));
         detail.setProperty("errorCategory", "Resource not found");
+        detail.setProperty("timestamp", Instant.now());
+        detail.setDetail(exception.getMessage());
+        return detail;
+    }
+    
+    @ExceptionHandler (PatientAlreadyExistsException.class)
+    ProblemDetail handlePatientNotFound (PatientAlreadyExistsException exception) {
+        ProblemDetail detail = forStatusAndDetail(CONFLICT, exception.getMessage());
+        detail.setTitle("Conflict, Patient already exists");
+        detail.setType(URI.create("https://docs.oracle.com/en/java/javase/21/docs/api/java" +
+            ".base/java/lang/RuntimeException.html"));
+        detail.setProperty("errorCategory", "Patient already exists");
         detail.setProperty("timestamp", Instant.now());
         detail.setDetail(exception.getMessage());
         return detail;
