@@ -19,9 +19,12 @@ public class CreatePatientCommand {
         return persistence.create(patient);
     }
     
-    private boolean doesPatientExist (Patient patientToBeCreated) {
-        return persistence.findAll()
-            .stream()
-            .anyMatch(patient -> patientToBeCreated.getEmail().equals(patient.getEmail()));
+    private boolean doesPatientExist (Patient patient) {
+        return persistence.findAll().stream().anyMatch(p -> checkEmailDuplication(patient, p));
+    }
+    
+    private static boolean checkEmailDuplication (Patient patientToBeCreated,
+                                                  Patient existingPatient) {
+        return patientToBeCreated.getEmail().equals(existingPatient.getEmail());
     }
 }

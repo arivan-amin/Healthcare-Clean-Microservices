@@ -4,7 +4,6 @@ import com.arivanamin.healthcare.backend.core.domain.testing.BaseUnitTest;
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.core.exception.PatientNotFoundException;
 import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -14,7 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-@Tag ("current")
 class ReadPatientByIdQueryTest implements BaseUnitTest {
     
     private final Patient patient = RANDOM.nextObject(Patient.class);
@@ -57,11 +55,11 @@ class ReadPatientByIdQueryTest implements BaseUnitTest {
     
     @Test
     void shouldThrowWhenPatientIsNotFound () {
-        givenQueryWithMockThatThrowsWhenIdNotFound();
+        givenQueryWithMockThatThrowsException();
         thenAssertQueryThrowsPatientNotFoundException();
     }
     
-    private void givenQueryWithMockThatThrowsWhenIdNotFound () {
+    private void givenQueryWithMockThatThrowsException () {
         persistence = mock(PatientPersistence.class);
         when(persistence.findById(id)).thenThrow(PatientNotFoundException.class);
         query = new ReadPatientByIdQuery(persistence);
