@@ -2,9 +2,9 @@ package com.arivanamin.healthcare.backend.patient.core.command;
 
 import com.arivanamin.healthcare.backend.patient.application.request.CreatePatientRequest;
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
+import com.arivanamin.healthcare.backend.patient.core.exception.PatientNotFoundException;
 import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 
 import java.util.UUID;
 
@@ -13,14 +13,10 @@ public class UpdatePatientCommand {
     
     private final PatientPersistence persistence;
     
-    ModelMapper mapper = new ModelMapper();
-    
     public void execute (UUID id, CreatePatientRequest request) {
-        Patient patient = mapRequestToPatientEntity(request);
+        Patient DatabasePatient =
+            persistence.findById(id).orElseThrow(PatientNotFoundException::new);
+        Patient patient = request.toEntity();
         persistence.update(id, patient);
-    }
-    
-    private Patient mapRequestToPatientEntity (CreatePatientRequest request) {
-        return mapper.map(request, Patient.class);
     }
 }

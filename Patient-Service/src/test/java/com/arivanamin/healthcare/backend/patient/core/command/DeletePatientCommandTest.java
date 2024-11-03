@@ -47,6 +47,8 @@ class DeletePatientCommandTest implements BaseUnitTest {
     private void thenVerifyIdIsSentToPersistence () {
         ArgumentCaptor<UUID> idCaptor = ArgumentCaptor.forClass(UUID.class);
         verify(persistence).delete(idCaptor.capture());
-        assertThat(id).isSameAs(idCaptor);
+        
+        UUID capturedId = idCaptor.getValue();
+        assertThat(id).isSameAs(capturedId);
     }
 }

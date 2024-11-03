@@ -1,6 +1,7 @@
 package com.arivanamin.healthcare.backend.patient.details;
 
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
+import com.arivanamin.healthcare.backend.patient.core.exception.PatientNotFoundException;
 import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +36,7 @@ public class JpaPatientPersistence implements PatientPersistence {
     
     @Override
     public void update (UUID id, Patient patientEntity) {
-        JpaPatient jpaPatient = repository.findById(id).orElseThrow();
+        JpaPatient jpaPatient = repository.findById(id).orElseThrow(PatientNotFoundException::new);
         modelMapper.map(patientEntity, jpaPatient);
         repository.save(jpaPatient);
     }

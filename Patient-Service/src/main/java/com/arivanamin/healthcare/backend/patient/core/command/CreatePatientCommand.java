@@ -1,5 +1,6 @@
 package com.arivanamin.healthcare.backend.patient.core.command;
 
+import com.arivanamin.healthcare.backend.patient.application.request.CreatePatientRequest;
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.core.exception.PatientAlreadyExistsException;
 import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
@@ -12,7 +13,8 @@ public class CreatePatientCommand {
     
     private final PatientPersistence persistence;
     
-    public UUID execute (Patient patient) {
+    public UUID execute (CreatePatientRequest request) {
+        Patient patient = request.toEntity();
         if (doesPatientExist(patient)) {
             throw new PatientAlreadyExistsException();
         }

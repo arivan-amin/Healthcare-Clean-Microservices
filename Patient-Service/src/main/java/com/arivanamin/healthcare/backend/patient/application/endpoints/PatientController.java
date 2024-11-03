@@ -3,7 +3,6 @@ package com.arivanamin.healthcare.backend.patient.application.endpoints;
 import com.arivanamin.healthcare.backend.patient.application.request.CreatePatientRequest;
 import com.arivanamin.healthcare.backend.patient.application.response.*;
 import com.arivanamin.healthcare.backend.patient.core.command.*;
-import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.core.query.ReadPatientByIdQuery;
 import com.arivanamin.healthcare.backend.patient.core.query.ReadPatientsQuery;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,8 +47,8 @@ public class PatientController {
     @PostMapping ("/v1/accounts")
     @Operation (summary = "Creates a patient")
     @ResponseStatus (HttpStatus.CREATED)
-    public CreatePatientResponse createPatient (@RequestBody Patient patient) {
-        UUID createdPatientId = createCommand.execute(patient);
+    public CreatePatientResponse createPatient (@RequestBody CreatePatientRequest request) {
+        UUID createdPatientId = createCommand.execute(request);
         return CreatePatientResponse.of(createdPatientId);
     }
     
