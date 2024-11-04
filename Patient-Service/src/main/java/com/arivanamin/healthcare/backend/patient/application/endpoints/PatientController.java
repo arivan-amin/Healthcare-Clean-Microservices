@@ -1,6 +1,7 @@
 package com.arivanamin.healthcare.backend.patient.application.endpoints;
 
 import com.arivanamin.healthcare.backend.patient.application.request.CreatePatientRequest;
+import com.arivanamin.healthcare.backend.patient.application.request.UpdatePatientRequest;
 import com.arivanamin.healthcare.backend.patient.application.response.*;
 import com.arivanamin.healthcare.backend.patient.core.command.*;
 import com.arivanamin.healthcare.backend.patient.core.query.ReadPatientByIdQuery;
@@ -48,15 +49,15 @@ public class PatientController {
     @Operation (summary = "Creates a patient")
     @ResponseStatus (HttpStatus.CREATED)
     public CreatePatientResponse createPatient (@RequestBody CreatePatientRequest request) {
-        UUID createdPatientId = createCommand.execute(request);
+        UUID createdPatientId = createCommand.execute(request.toEntity());
         return CreatePatientResponse.of(createdPatientId);
     }
     
     @PutMapping ("/v1/accounts/{id}")
     @Operation (summary = "Updates a patient")
     @ResponseStatus (HttpStatus.OK)
-    public void updatePatient (@PathVariable UUID id, @RequestBody CreatePatientRequest request) {
-        updateCommand.execute(id, request);
+    public void updatePatient (@PathVariable UUID id, @RequestBody UpdatePatientRequest request) {
+        updateCommand.execute(request.toEntity(id));
     }
     
     @DeleteMapping ("/v1/accounts/{id}")

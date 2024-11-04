@@ -6,11 +6,12 @@ import lombok.*;
 import org.modelmapper.ModelMapper;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreatePatientRequest {
+public class UpdatePatientRequest {
     
     String firstName;
     String lastName;
@@ -21,7 +22,9 @@ public class CreatePatientRequest {
     
     ModelMapper mapper = new ModelMapper();
     
-    public Patient toEntity () {
-        return mapper.map(this, Patient.class);
+    public Patient toEntity (UUID id) {
+        Patient patient = mapper.map(this, Patient.class);
+        patient.setId(id);
+        return patient;
     }
 }

@@ -1,7 +1,6 @@
 package com.arivanamin.healthcare.backend.patient.core.command;
 
 import com.arivanamin.healthcare.backend.core.domain.testing.BaseUnitTest;
-import com.arivanamin.healthcare.backend.patient.application.request.CreatePatientRequest;
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.core.exception.PatientAlreadyExistsException;
 import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
@@ -22,7 +21,7 @@ class CreatePatientCommandTest implements BaseUnitTest {
     private PatientPersistence persistence;
     private CreatePatientCommand command;
     
-    private CreatePatientRequest request;
+    private Patient patient;
     
     @Test
     void shouldThrowExceptionWhenPatientExists () {
@@ -40,12 +39,12 @@ class CreatePatientCommandTest implements BaseUnitTest {
     }
     
     private void whenEmailIsDuplicate () {
-        request = RANDOM.nextObject(CreatePatientRequest.class);
-        request.setEmail(emailAddress);
+        patient = RANDOM.nextObject(Patient.class);
+        patient.setEmail(emailAddress);
     }
     
     private void thenThrowPatientAlreadyExistsException () {
-        assertThatException().isThrownBy(() -> command.execute(request))
+        assertThatException().isThrownBy(() -> command.execute(patient))
             .isInstanceOf(PatientAlreadyExistsException.class);
     }
     
@@ -60,15 +59,15 @@ class CreatePatientCommandTest implements BaseUnitTest {
         persistence = mock(PatientPersistence.class);
         command = new CreatePatientCommand(persistence);
         when(persistence.create(any())).thenReturn(createdPatientId);
-        request = RANDOM.nextObject(CreatePatientRequest.class);
+        patient = RANDOM.nextObject(Patient.class);
     }
     
     private UUID whenCommandIsExecuted () {
-        return command.execute(request);
+        return command.execute(patient);
     }
     
     private void thenVerifyCommandCallsCreate () {
-        verify(persistence, times(1)).create(request.toEntity());
+        verify(persistence, times(1)).create(patient);
     }
     
     @Test

@@ -1,12 +1,10 @@
 package com.arivanamin.healthcare.backend.patient.details;
 
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
-import com.arivanamin.healthcare.backend.patient.core.exception.PatientNotFoundException;
 import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 
 import java.util.*;
 
@@ -16,8 +14,6 @@ import java.util.*;
 public class JpaPatientPersistence implements PatientPersistence {
     
     private final PatientRepository repository;
-    
-    ModelMapper modelMapper = new ModelMapper();
     
     @Override
     public List<Patient> findAll () {
@@ -35,10 +31,8 @@ public class JpaPatientPersistence implements PatientPersistence {
     }
     
     @Override
-    public void update (UUID id, Patient patientEntity) {
-        JpaPatient jpaPatient = repository.findById(id).orElseThrow(PatientNotFoundException::new);
-        modelMapper.map(patientEntity, jpaPatient);
-        repository.save(jpaPatient);
+    public void update (Patient patient) {
+        repository.save(JpaPatient.fromDomain(patient));
     }
     
     @Override

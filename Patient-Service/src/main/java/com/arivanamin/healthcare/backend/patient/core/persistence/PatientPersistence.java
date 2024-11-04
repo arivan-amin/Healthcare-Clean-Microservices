@@ -12,7 +12,7 @@ public interface PatientPersistence {
     
     UUID create (Patient patient);
     
-    void update (UUID id, Patient patient);
+    void update (Patient patient);
     
     void delete (UUID id);
 }

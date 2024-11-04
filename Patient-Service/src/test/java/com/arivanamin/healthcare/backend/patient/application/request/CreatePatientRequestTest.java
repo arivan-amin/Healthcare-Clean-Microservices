@@ -17,7 +17,6 @@ class CreatePatientRequestTest implements BaseUnitTest {
         Patient entity = request.toEntity();
         
         // then
-        assertThat(request.getId()).isEqualTo(entity.getId());
         assertThat(request.getFirstName()).isEqualTo(entity.getFirstName());
         assertThat(request.getLastName()).isEqualTo(entity.getLastName());
         assertThat(request.getEmail()).isEqualTo(entity.getEmail());

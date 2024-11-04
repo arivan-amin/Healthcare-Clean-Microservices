@@ -25,7 +25,7 @@ class ReadPatientByIdQueryTest implements BaseUnitTest {
     void shouldCallPersistenceFindById () {
         givenQueryWithMockPersistence();
         whenQueryIsExecuted();
-        thenVerifyQueryCallsFindById();
+        thenVerifyQueryCallsPersistenceFindById();
     }
     
     private void givenQueryWithMockPersistence () {
@@ -38,7 +38,7 @@ class ReadPatientByIdQueryTest implements BaseUnitTest {
         return query.execute(id);
     }
     
-    private void thenVerifyQueryCallsFindById () {
+    private void thenVerifyQueryCallsPersistenceFindById () {
         verify(persistence, times(1)).findById(id);
     }
     
