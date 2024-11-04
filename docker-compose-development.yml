@@ -93,20 +93,6 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
       - ./Docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
-  
-  mysqld-exporter:
-    container_name: healthcare-mysql-exporter
-    restart: unless-stopped
-    image: prom/mysqld-exporter:v0.15.1
-    command:
-      - --config.my-cnf=/cfg/.my.cnf
-      - --mysqld.address=healthcare-mysql:3306
-    volumes:
-      - ./Docker/mysql/mysql-exporter.cnf:/cfg/.my.cnf
-    ports:
-      - "9104:9104"
-    depends_on:
-      - mysql
 
   mongo:
     container_name: healthcare-mongo

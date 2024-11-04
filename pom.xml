@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.4</version>
+        <version>3.3.5</version>
         <relativePath />
     </parent>
 
@@ -44,12 +44,8 @@
         <module>Discovery-Server</module>
         <module>Api-Gateway</module>
         <module>Core</module>
-        <module>Appointment-Service</module>
         <module>Audit-Service</module>
-        <module>Doctor-Service</module>
-        <module>Notification-Service</module>
         <module>Patient-Service</module>
-        <module>Security-Service</module>
     </modules>
 
     <dependencies>

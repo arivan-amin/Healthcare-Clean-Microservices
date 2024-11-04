@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>discovery-server</artifactId>
-    <version>0.1</version>
+    <version>1.0.0</version>
     <name>Discovery-Server</name>
     <description>Discovery Server Module</description>
 

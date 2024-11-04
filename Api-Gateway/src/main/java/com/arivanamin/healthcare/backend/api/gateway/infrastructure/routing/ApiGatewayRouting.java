@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.api.gateway.infrastructure.config;
+package com.arivanamin.healthcare.backend.api.gateway.infrastructure.routing;
 
 import org.springframework.cloud.gateway.route.Route;
 import org.springframework.cloud.gateway.route.RouteLocator;
@@ -11,7 +11,7 @@ import java.util.function.Function;
 import static java.lang.System.getenv;
 
 @Configuration
-public class ApiGatewayConfig {
+public class ApiGatewayRouting {
     
     public static final String EUREKA_HOST = getenv().getOrDefault("EUREKA_HOST", "localhost");
     
@@ -23,8 +23,8 @@ public class ApiGatewayConfig {
             .route(getDiscoveryServerRoute())
             .route(getDiscoveryServerStaticResourcesRoute())
             .route(getPatientServiceRoute())
-            .route(getPatientApiDocRoute())
-            .route(getPatientActuatorRoute())
+            .route(getPatientServiceApiDocRoute())
+            .route(getPatientServiceActuatorRoute())
             .build();
     }
     
@@ -40,13 +40,13 @@ public class ApiGatewayConfig {
         return r -> r.path("/patients/**").uri("lb://patient-service");
     }
     
-    private Function<PredicateSpec, Buildable<Route>> getPatientApiDocRoute () {
+    private Function<PredicateSpec, Buildable<Route>> getPatientServiceApiDocRoute () {
         return r -> r.path("/patient-service/api-docs")
             .filters(f -> f.setPath("/v3/api-docs"))
             .uri("lb://patient-service");
     }
     
-    private Function<PredicateSpec, Buildable<Route>> getPatientActuatorRoute () {
+    private Function<PredicateSpec, Buildable<Route>> getPatientServiceActuatorRoute () {
         return r -> r.path("/actuator/patients/**")
             .filters(
                 f -> f.rewritePath("/actuator/patients/(?<segment>.*)", "/actuator/${segment}"))

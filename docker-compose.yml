@@ -93,20 +93,6 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
       - ./Docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
-  
-  mysqld-exporter:
-    container_name: healthcare-mysql-exporter
-    restart: unless-stopped
-    image: prom/mysqld-exporter:v0.15.1
-    command:
-      - --config.my-cnf=/cfg/.my.cnf
-      - --mysqld.address=healthcare-mysql:3306
-    volumes:
-      - ./Docker/mysql/mysql-exporter.cnf:/cfg/.my.cnf
-    ports:
-      - "9104:9104"
-    depends_on:
-      - mysql
 
   mongo:
     container_name: healthcare-mongo
@@ -199,48 +185,3 @@ services:
       - app-logs:/root/Apps/Healthcare/Logs/
     depends_on:
       - discovery-server
-
-#  appointment-service:
-#    container_name: healthcare-appointment-service
-#    restart: unless-stopped
-#    image: arivanamin/healthcare-appointment-service
-#    env_file:
-#      - .env
-#    volumes:
-#      - app-logs:/root/Apps/Healthcare/Logs/
-#    depends_on:
-#      - discovery-server
-#
-#  doctor-service:
-#    container_name: healthcare-doctor-service
-#    restart: unless-stopped
-#    image: arivanamin/healthcare-doctor-service
-#    env_file:
-#      - .env
-#    volumes:
-#      - app-logs:/root/Apps/Healthcare/Logs/
-#    depends_on:
-#      - discovery-server
-#
-#  notification-service:
-#    container_name: healthcare-notification-service
-#    restart: unless-stopped
-#    image: arivanamin/healthcare-notification-service
-#    env_file:
-#      - .env
-#    volumes:
-#      - app-logs:/root/Apps/Healthcare/Logs/
-#    depends_on:
-#      - discovery-server
-
-
-#  security-service:
-#    container_name: healthcare-security-service
-#    restart: unless-stopped
-#    image: arivanamin/healthcare-security-service
-#    env_file:
-#      - .env
-#    volumes:
-#      - app-logs:/root/Apps/Healthcare/Logs/
-#    depends_on:
-#      - discovery-server

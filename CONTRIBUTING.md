@@ -1,6 +1,7 @@
-# Contributing to Healthcare Management System
+# Contributing to Healthcare Clean Microservices
 
-Thank you for considering contributing to [Project Name]! We're excited to collaborate with the
+Thank you for considering contributing to Healthcare Clean Microservices We're excited to
+collaborate with the
 open-source community to improve this project. Below are some guidelines to help you get started.
 
 ## Table of Contents
@@ -21,7 +22,7 @@ open-source community to improve this project. Below are some guidelines to help
 This project adheres to
 the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/).
 By participating, you are expected to uphold this code. Please report unacceptable behavior
-to [email@example.com](mailto:email@example.com).
+to [arivanamin@gmail.com](mailto:email@example.com).
 
 ## How Can I Contribute?
 
