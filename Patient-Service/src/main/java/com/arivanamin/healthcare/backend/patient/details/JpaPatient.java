@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
+@Table (name = "patients")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -22,7 +23,7 @@ class JpaPatient {
     private static ModelMapper mapper = new ModelMapper();
     
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue
     UUID id;
     
     @NotBlank

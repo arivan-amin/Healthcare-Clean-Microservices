@@ -85,7 +85,7 @@ services:
   mysql:
     container_name: healthcare-mysql
     restart: unless-stopped
-    image: mysql:9.0.1
+    image: mysql:9.1.0
     environment:
       MYSQL_ROOT_PASSWORD: mysql
     ports:
@@ -173,15 +173,3 @@ services:
       KAFKA_CLUSTERS_NAME: local
       KAFKA_CLUSTERS_BOOTSTRAPSERVERS: broker:29092
       DYNAMIC_CONFIG_ENABLED: 'true'
-
-  # Services
-  patient-service:
-    container_name: healthcare-patient-service
-    restart: unless-stopped
-    image: arivanamin/healthcare-patient-service
-    env_file:
-      - .env
-    volumes:
-      - app-logs:/root/Apps/Healthcare/Logs/
-    depends_on:
-      - discovery-server
