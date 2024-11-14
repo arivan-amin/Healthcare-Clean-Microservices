@@ -1,18 +1,21 @@
 package com.arivanamin.healthcare.backend.patient.details;
 
 import com.arivanamin.healthcare.backend.core.domain.testing.BaseUnitTest;
+import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Tag ("current")
 @ExtendWith (SpringExtension.class)
 @DataJpaTest
-@AutoConfigureTestDatabase (replace = AutoConfigureTestDatabase.Replace.NONE)
 @Slf4j
 class JpaPatientPersistenceTest implements BaseUnitTest {
     
@@ -20,6 +23,7 @@ class JpaPatientPersistenceTest implements BaseUnitTest {
     private PatientRepository repository;
     
     private JpaPatientPersistence persistence;
+    private int numberOfSavedEntities;
     
     @BeforeEach
     void setUp () {
@@ -28,10 +32,23 @@ class JpaPatientPersistenceTest implements BaseUnitTest {
     
     @Test
     void shouldReturnAllPatients () {
-        // given
-        log.info("persistence.findAll() = {}", persistence.findAll());
-        // when
-        
-        // then
+        givenRepositoryWithSavedPatients();
+        List<Patient> result = whenFindAllIsCalled();
+        thenAllTheEntitiesOfRepositoryIsReturned(result);
+    }
+    
+    private void givenRepositoryWithSavedPatients () {
+        numberOfSavedEntities = FAKER.number().numberBetween(3, 10);
+        for (int i = 0; i < numberOfSavedEntities; i++) {
+            repository.save(RANDOM.nextObject(JpaPatient.class));
+        }
+    }
+    
+    private List<Patient> whenFindAllIsCalled () {
+        return persistence.findAll();
+    }
+    
+    private void thenAllTheEntitiesOfRepositoryIsReturned (List<Patient> result) {
+        assertThat(result.size()).isEqualTo(numberOfSavedEntities);
     }
 }
