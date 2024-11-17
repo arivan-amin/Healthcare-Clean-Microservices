@@ -4,8 +4,8 @@ import com.arivanamin.healthcare.backend.patient.core.command.*;
 import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
 import com.arivanamin.healthcare.backend.patient.core.query.ReadPatientByIdQuery;
 import com.arivanamin.healthcare.backend.patient.core.query.ReadPatientsQuery;
-import com.arivanamin.healthcare.backend.patient.details.JpaPatientPersistence;
-import com.arivanamin.healthcare.backend.patient.details.PatientRepository;
+import com.arivanamin.healthcare.backend.patient.persistence.JpaPatientPersistence;
+import com.arivanamin.healthcare.backend.patient.persistence.PatientRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 

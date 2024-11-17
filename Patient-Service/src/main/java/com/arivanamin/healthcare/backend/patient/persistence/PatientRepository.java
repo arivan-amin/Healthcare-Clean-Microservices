@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.patient.details;
+package com.arivanamin.healthcare.backend.patient.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
