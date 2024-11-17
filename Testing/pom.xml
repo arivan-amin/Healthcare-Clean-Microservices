@@ -27,6 +27,17 @@
             <version>${arch-unit-version}</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.arivanamin.healthcare</groupId>
+            <artifactId>Core</artifactId>
+            <version>${core-module-version}</version>
+        </dependency>
     </dependencies>
 
 </project>
