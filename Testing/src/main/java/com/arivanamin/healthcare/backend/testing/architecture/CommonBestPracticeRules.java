@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.testing.infrastructure.architecture;
+package com.arivanamin.healthcare.backend.testing.architecture;
 
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;

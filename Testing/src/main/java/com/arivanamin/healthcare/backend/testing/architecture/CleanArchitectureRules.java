@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.testing.infrastructure.architecture;
+package com.arivanamin.healthcare.backend.testing.architecture;
 
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
@@ -19,7 +19,7 @@ public interface CleanArchitectureRules {
     
     String APPLICATION_LAYER = "Controllers";
     
-    String CORE_LAYER = "Services";
+    String CORE_LAYER = "Core";
     
     String PERSISTENCE_LAYER = "Persistence";
     
@@ -155,6 +155,14 @@ public interface CleanArchitectureRules {
         .areAssignableTo(Controller.class)
         .should()
         .haveSimpleNameEndingWith("Controller");
+    
+    @ArchTest
+    ArchRule CONTROLLERS_SHOULD_BE_IN_ENDPOINTS_PACKAGE = classes().that()
+        .areAnnotatedWith(RestController.class)
+        .or()
+        .areAssignableTo(Controller.class)
+        .should()
+        .resideInAPackage("..endpoints..");
     
     @ArchTest
     ArchRule CLASSES_NAMED_CONTROLLER_SHOULD_BE_IN_A_CONTROLLER_PACKAGE = classes().that()
