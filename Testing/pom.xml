@@ -12,7 +12,7 @@
 
     <artifactId>Testing</artifactId>
     <version>1.0.0</version>
-    <name>Test</name>
+    <name>Testing</name>
     <description>Testing Module</description>
 
     <properties>

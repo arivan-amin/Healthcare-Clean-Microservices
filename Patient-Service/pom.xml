@@ -35,6 +35,11 @@
             <artifactId>Core</artifactId>
             <version>${core-module-version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.arivanamin.healthcare</groupId>
+            <artifactId>Testing</artifactId>
+            <version>${testing-module-version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -42,6 +42,7 @@
         <jib-plugin-version>3.4.4</jib-plugin-version>
         <!-- Inherited dependency versions -->
         <core-module-version>1.0.0</core-module-version>
+        <testing-module-version>1.0.0</testing-module-version>
         <mysql-version>9.1.0</mysql-version>
     </properties>
 

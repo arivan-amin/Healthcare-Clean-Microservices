@@ -1,18 +1,15 @@
 package com.arivanamin.healthcare.backend.testing.architecture;
 
-import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
 
 import java.util.logging.Logger;
 
-import static com.arivanamin.healthcare.backend.core.domain.base.CoreApplicationConfig.BASE_PACKAGE;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.fields;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 import static com.tngtech.archunit.library.DependencyRules.NO_CLASSES_SHOULD_DEPEND_UPPER_PACKAGES;
 import static com.tngtech.archunit.library.GeneralCodingRules.*;
 
-@AnalyzeClasses (packages = BASE_PACKAGE)
 public interface CommonBestPracticeRules {
     
     // todo 11/17/24 - check if needed
