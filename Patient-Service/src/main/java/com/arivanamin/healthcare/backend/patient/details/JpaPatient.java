@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.patient.persistence;
+package com.arivanamin.healthcare.backend.patient.details;
 
 import com.arivanamin.healthcare.backend.core.domain.gender.Gender;
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
@@ -18,7 +18,7 @@ import java.util.UUID;
 @Setter
 @Builder
 @ToString
-class JpaPatient {
+public class JpaPatient {
     
     private static ModelMapper mapper = new ModelMapper();
     

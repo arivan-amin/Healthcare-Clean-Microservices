@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.patient.persistence;
+package com.arivanamin.healthcare.backend.patient.details;
 
 import com.arivanamin.healthcare.backend.core.domain.testing.BaseUnitTest;
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
