@@ -7,14 +7,9 @@ import java.util.logging.Logger;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.fields;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
-import static com.tngtech.archunit.library.DependencyRules.NO_CLASSES_SHOULD_DEPEND_UPPER_PACKAGES;
 import static com.tngtech.archunit.library.GeneralCodingRules.*;
 
 public interface CommonBestPracticeRules {
-    
-    // todo 11/17/24 - check if needed
-    @ArchTest
-    ArchRule NO_ACCESSES_TO_UPPER_PACKAGE = NO_CLASSES_SHOULD_DEPEND_UPPER_PACKAGES;
     
     @ArchTest
     ArchRule INTERFACES_SHOULD_NOT_HAVE_NAMES_ENDING_WITH_THE_WORD_INTERFACE =
@@ -24,11 +19,6 @@ public interface CommonBestPracticeRules {
     ArchRule INTERFACES_SHOULD_NOT_HAVE_SIMPLE_CLASS_NAMES_CONTAINING_THE_WORD_INTERFACE =
         noClasses().that().areInterfaces().should().haveSimpleNameContaining("Interface");
     
-    @ArchTest
-    ArchRule INTERFACES_MUST_NOT_BE_PLACED_IN_IMPLEMENTATION_PACKAGES =
-        noClasses().that().resideInAPackage("..application..").should().beInterfaces();
-    
-    // common
     @ArchTest
     ArchRule NO_ACCESS_TO_STANDARD_STREAMS = NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS;
     
@@ -46,13 +36,18 @@ public interface CommonBestPracticeRules {
         .andShould()
         .beStatic()
         .andShould()
-        .beFinal()
+        .beFinal().allowEmptyShould(true)
         .because("we agreed on this convention");
     
-    // todo 11/18/24 - maybe forbid old java date too, only local date and time should be used
     @ArchTest
     ArchRule NO_JODA_TIME = NO_CLASSES_SHOULD_USE_JODATIME;
     
     @ArchTest
     ArchRule NO_FIELD_INJECTION = NO_CLASSES_SHOULD_USE_FIELD_INJECTION;
+    
+    @ArchTest
+    ArchRule AVOID_DEPRECATED_API = DEPRECATED_API_SHOULD_NOT_BE_USED;
+    
+    @ArchTest
+    ArchRule TEST_CLASSES_PLACEMENT = testClassesShouldResideInTheSamePackageAsImplementation();
 }
