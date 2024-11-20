@@ -16,7 +16,7 @@ import static java.time.LocalDate.now;
 
 @Configuration
 @RequiredArgsConstructor
-class DemoDataInitializer {
+public class DemoDataInitializer {
     
     Faker faker = new Faker();
     

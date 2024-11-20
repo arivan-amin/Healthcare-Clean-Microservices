@@ -16,7 +16,7 @@ import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.ProblemDetail.forStatusAndDetail;
 
 @RestControllerAdvice
-class PatientControllerAdvice {
+public class PatientControllerAdvice {
     
     @ExceptionHandler (PatientNotFoundException.class)
     ProblemDetail handlePatientNotFound (PatientNotFoundException exception) {
