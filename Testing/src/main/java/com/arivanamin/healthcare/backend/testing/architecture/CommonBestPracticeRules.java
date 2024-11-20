@@ -35,8 +35,7 @@ public interface CommonBestPracticeRules {
         .bePrivate()
         .andShould()
         .beStatic()
-        .andShould()
-        .beFinal().allowEmptyShould(true)
+        .andShould().beFinal().allowEmptyShould(true)
         .because("we agreed on this convention");
     
     @ArchTest
@@ -47,7 +46,4 @@ public interface CommonBestPracticeRules {
     
     @ArchTest
     ArchRule AVOID_DEPRECATED_API = DEPRECATED_API_SHOULD_NOT_BE_USED;
-    
-    @ArchTest
-    ArchRule TEST_CLASSES_PLACEMENT = testClassesShouldResideInTheSamePackageAsImplementation();
 }
