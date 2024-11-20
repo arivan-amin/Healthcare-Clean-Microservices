@@ -1,7 +1,8 @@
 package com.arivanamin.healthcare.backend.testing.architecture;
 
+import com.tngtech.archunit.core.domain.JavaMethod;
 import com.tngtech.archunit.junit.ArchTest;
-import com.tngtech.archunit.lang.ArchRule;
+import com.tngtech.archunit.lang.*;
 import jakarta.persistence.Entity;
 import org.springframework.data.repository.Repository;
 import org.springframework.scheduling.annotation.Async;
@@ -43,7 +44,7 @@ public interface CleanArchitectureRules {
     
     String REPOSITORY_SUFFIX = "Repository";
     
-    String API_RESPONSE_SUFFIX = "*Response";
+    String API_RESPONSE_SUFFIX = "Response";
     
     String SPRING_FRAMEWORK_PACKAGES = "org.springframework..";
     
@@ -51,16 +52,18 @@ public interface CleanArchitectureRules {
         { "..jakarta.persistence..", "..jakarta.validation..", "..jakarta.transaction.." };
     
     @ArchTest
-    ArchRule CORE_SHOULD_NOT_DEPEND_ON_ANY_PERSISTENCE_MECHANISM =
-        noClasses().that().resideInAPackage(CORE_PACKAGE)
+    ArchRule CORE_SHOULD_NOT_DEPEND_ON_ANY_PERSISTENCE_MECHANISM = noClasses().that()
+        .resideInAPackage(CORE_PACKAGE)
         .should()
-        .accessClassesThat().resideInAnyPackage(PERSISTENCE_PACKAGES);
+        .accessClassesThat()
+        .resideInAnyPackage(PERSISTENCE_PACKAGES);
     
     @ArchTest
     ArchRule CORE_SHOULD_NOT_DEPEND_ON_DETAILS_OR_APPLICATION = noClasses().that()
         .resideInAPackage(CORE_PACKAGE)
         .should()
-        .accessClassesThat().resideInAnyPackage(DETAILS_PACKAGE, APPLICATION_PACKAGE);
+        .accessClassesThat()
+        .resideInAnyPackage(DETAILS_PACKAGE, APPLICATION_PACKAGE);
     
     @ArchTest
     ArchRule CORE_SHOULD_NOT_ACCESS_APPLICATION_LAYER =
@@ -70,18 +73,25 @@ public interface CleanArchitectureRules {
         .resideInAPackage(APPLICATION_PACKAGE);
     
     @ArchTest
-    ArchRule CORE_SHOULD_NOT_DEPEND_ON_SPRING = noClasses().that().resideInAPackage(CORE_PACKAGE)
-        .should().accessClassesThat().resideInAPackage(SPRING_FRAMEWORK_PACKAGES);
+    ArchRule CORE_SHOULD_NOT_DEPEND_ON_SPRING = noClasses().that()
+        .resideInAPackage(CORE_PACKAGE)
+        .should()
+        .accessClassesThat()
+        .resideInAPackage(SPRING_FRAMEWORK_PACKAGES);
     
     @ArchTest
-    ArchRule CORE_SHOULD_NOT_ACCESS_DETAILS_LAYER =
-        noClasses().that().resideInAPackage(CORE_PACKAGE)
-        .should().accessClassesThat().resideInAPackage(DETAILS_PACKAGE);
+    ArchRule CORE_SHOULD_NOT_ACCESS_DETAILS_LAYER = noClasses().that()
+        .resideInAPackage(CORE_PACKAGE)
+        .should()
+        .accessClassesThat()
+        .resideInAPackage(DETAILS_PACKAGE);
     
     @ArchTest
-    ArchRule DETAILS_SHOULD_NOT_ACCESS_APPLICATION =
-        noClasses().that().resideInAPackage(DETAILS_PACKAGE)
-        .should().accessClassesThat().resideInAPackage(APPLICATION_PACKAGE);
+    ArchRule DETAILS_SHOULD_NOT_ACCESS_APPLICATION = noClasses().that()
+        .resideInAPackage(DETAILS_PACKAGE)
+        .should()
+        .accessClassesThat()
+        .resideInAPackage(APPLICATION_PACKAGE);
     
     @ArchTest
     ArchRule DETAILS_SHOULD_NOT_DEPEND_ON_APPLICATION =
@@ -91,9 +101,11 @@ public interface CleanArchitectureRules {
         .resideInAPackage(APPLICATION_PACKAGE);
     
     @ArchTest
-    ArchRule DETAILS_SHOULD_ONLY_BE_ACCESSED_BY_APPLICATION =
-        classes().that().resideInAPackage(DETAILS_PACKAGE)
-        .should().onlyBeAccessed().byAnyPackage(APPLICATION_PACKAGE, DETAILS_PACKAGE);
+    ArchRule DETAILS_SHOULD_ONLY_BE_ACCESSED_BY_APPLICATION = classes().that()
+        .resideInAPackage(DETAILS_PACKAGE)
+        .should()
+        .onlyBeAccessed()
+        .byAnyPackage(APPLICATION_PACKAGE, DETAILS_PACKAGE);
     
     @ArchTest
     ArchRule INTERFACES_MUST_NOT_BE_PLACED_IN_IMPLEMENTATION_PACKAGES =
@@ -144,9 +156,12 @@ public interface CleanArchitectureRules {
     
     @ArchTest
     ArchRule ALL_PUBLIC_METHODS_IN_THE_CONTROLLER_LAYER_SHOULD_RETURN_RESPONSE_WRAPPERS =
-        methods().that().areDeclaredInClassesThat().resideInAPackage(CONTROLLER_PACKAGE)
+        methods().that()
+            .areDeclaredInClassesThat()
+            .resideInAPackage(CONTROLLER_PACKAGE)
             .and()
-            .arePublic().should().haveRawReturnType(API_RESPONSE_SUFFIX)
+            .arePublic()
+            .should(haveReturnTypeWithResponseSuffix())
             .because("we do not want to couple the api directly to the return types of the " +
                 "core module");
     
@@ -163,17 +178,22 @@ public interface CleanArchitectureRules {
         .haveSimpleNameEndingWith(QUERY_SUFFIX);
     
     @ArchTest
-    ArchRule CONTROLLERS_SHOULD_BE_SUFFIXED = classes().that().resideInAPackage(APPLICATION_PACKAGE)
+    ArchRule CONTROLLERS_SHOULD_BE_SUFFIXED = classes().that()
+        .resideInAPackage(APPLICATION_PACKAGE)
         .and()
         .areAnnotatedWith(RestController.class)
         .or()
-        .areAssignableTo(Controller.class).should().haveSimpleNameEndingWith(CONTROLLER_SUFFIX);
+        .areAssignableTo(Controller.class)
+        .should()
+        .haveSimpleNameEndingWith(CONTROLLER_SUFFIX);
     
     @ArchTest
     ArchRule CONTROLLERS_SHOULD_BE_IN_ENDPOINTS_PACKAGE = classes().that()
         .areAnnotatedWith(RestController.class)
         .or()
-        .areAssignableTo(Controller.class).should().resideInAPackage(CONTROLLER_PACKAGE);
+        .areAssignableTo(Controller.class)
+        .should()
+        .resideInAPackage(CONTROLLER_PACKAGE);
     
     @ArchTest
     ArchRule CLASSES_NAMED_CONTROLLER_SHOULD_BE_IN_A_CONTROLLER_PACKAGE = classes().that()
@@ -185,4 +205,18 @@ public interface CleanArchitectureRules {
     ArchRule NO_BYPASS_OF_PROXY_LOGIC =
         no_classes_should_directly_call_other_methods_declared_in_the_same_class_that_are_annotated_with(
             Async.class);
+    
+    private static ArchCondition<JavaMethod> haveReturnTypeWithResponseSuffix () {
+        return new ArchCondition<>("") {
+            @Override
+            public void check (JavaMethod method, ConditionEvents events) {
+                String returnType = method.getRawReturnType().getName();
+                boolean matches =
+                    "void".equals(returnType) || returnType.endsWith(API_RESPONSE_SUFFIX);
+                events.add(new SimpleConditionEvent(method, matches,
+                    "Method %s in %s does not return a type ending with '%s'".formatted(
+                        method.getName(), method.getOwner().getName(), API_RESPONSE_SUFFIX)));
+            }
+        };
+    }
 }
