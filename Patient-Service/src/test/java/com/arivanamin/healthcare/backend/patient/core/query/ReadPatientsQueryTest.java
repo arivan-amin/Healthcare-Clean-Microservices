@@ -1,8 +1,8 @@
 package com.arivanamin.healthcare.backend.patient.core.query;
 
-import com.arivanamin.healthcare.backend.core.domain.testing.BaseUnitTest;
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
+import com.arivanamin.healthcare.backend.testing.architecture.bases.BaseUnitTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

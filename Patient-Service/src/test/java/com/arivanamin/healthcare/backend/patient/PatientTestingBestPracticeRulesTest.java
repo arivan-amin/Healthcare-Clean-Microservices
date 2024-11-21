@@ -1,6 +1,6 @@
 package com.arivanamin.healthcare.backend.patient;
 
-import com.arivanamin.healthcare.backend.testing.architecture.TestingBestPracticeRules;
+import com.arivanamin.healthcare.backend.testing.architecture.rules.TestingBestPracticeRules;
 import com.tngtech.archunit.core.importer.ImportOption;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 
