@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.core.domain.dates;
+package com.arivanamin.healthcare.backend.base.domain.dates;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

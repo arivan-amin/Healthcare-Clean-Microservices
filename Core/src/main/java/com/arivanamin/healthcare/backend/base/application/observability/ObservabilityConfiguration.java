@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.core.application.observability;
+package com.arivanamin.healthcare.backend.base.application.observability;
 
 import io.micrometer.observation.ObservationRegistry;
 import io.micrometer.observation.aop.ObservedAspect;

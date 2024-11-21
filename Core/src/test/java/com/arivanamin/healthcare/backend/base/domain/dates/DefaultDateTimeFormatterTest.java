@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.core.domain.dates;
+package com.arivanamin.healthcare.backend.base.domain.dates;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

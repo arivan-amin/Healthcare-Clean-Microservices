@@ -1,6 +1,6 @@
-package com.arivanamin.healthcare.backend.core.application.aspects;
+package com.arivanamin.healthcare.backend.base.application.aspects;
 
-import com.arivanamin.healthcare.backend.core.domain.aspects.ExecuteAndLogPerformance;
+import com.arivanamin.healthcare.backend.base.domain.aspects.ExecuteAndLogPerformance;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;

@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.core.application.openapi;
+package com.arivanamin.healthcare.backend.base.application.openapi;
 
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.License;

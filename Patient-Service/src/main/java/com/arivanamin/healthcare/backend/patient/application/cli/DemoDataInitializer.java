@@ -1,6 +1,6 @@
 package com.arivanamin.healthcare.backend.patient.application.cli;
 
-import com.arivanamin.healthcare.backend.core.domain.gender.Gender;
+import com.arivanamin.healthcare.backend.base.domain.gender.Gender;
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
 import com.github.javafaker.Faker;

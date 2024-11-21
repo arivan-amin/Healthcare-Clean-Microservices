@@ -1,11 +1,11 @@
-package com.arivanamin.healthcare.backend.core.domain.dates;
+package com.arivanamin.healthcare.backend.base.domain.dates;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 
-import static com.arivanamin.healthcare.backend.core.domain.base.CoreApplicationConfig.ZONE_ID;
+import static com.arivanamin.healthcare.backend.base.domain.base.CoreApplicationConfig.ZONE_ID;
 import static java.time.Instant.ofEpochMilli;
 import static java.time.LocalDateTime.ofInstant;
 import static lombok.AccessLevel.PRIVATE;

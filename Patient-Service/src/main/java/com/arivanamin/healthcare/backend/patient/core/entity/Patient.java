@@ -1,6 +1,6 @@
 package com.arivanamin.healthcare.backend.patient.core.entity;
 
-import com.arivanamin.healthcare.backend.core.domain.gender.Gender;
+import com.arivanamin.healthcare.backend.base.domain.gender.Gender;
 import lombok.*;
 
 import java.time.LocalDate;
