@@ -1,12 +1,12 @@
-package com.arivanamin.healthcare.backend.core.infrastructure.openapi;
+package com.arivanamin.healthcare.backend.core.application.openapi;
 
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.License;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor (access = AccessLevel.PRIVATE)
 public final class OpenApiDetails {
-    
-    private OpenApiDetails () {
-    }
     
     public static Contact getOpenApiContactDetails () {
         Contact contact = new Contact();
@@ -21,6 +21,6 @@ public final class OpenApiDetails {
     }
     
     public static String getOpenApiTermsOfService () {
-        return "https://www.arivan-amin.com/healthcare-management-microservices/terms";
+        return "https://www.arivan-amin.com/healthcare-clean-microservices/terms";
     }
 }

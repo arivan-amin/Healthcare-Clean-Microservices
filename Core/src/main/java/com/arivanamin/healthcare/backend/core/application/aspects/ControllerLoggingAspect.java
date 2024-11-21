@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.core.infrastructure.aspects;
+package com.arivanamin.healthcare.backend.core.application.aspects;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
