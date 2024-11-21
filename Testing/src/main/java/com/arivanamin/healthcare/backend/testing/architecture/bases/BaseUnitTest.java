@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.core.domain.testing;
+package com.arivanamin.healthcare.backend.testing.architecture.bases;
 
 import com.github.javafaker.Faker;
 import org.jeasy.random.EasyRandom;

@@ -1,5 +1,6 @@
-package com.arivanamin.healthcare.backend.testing.architecture;
+package com.arivanamin.healthcare.backend.testing.architecture.rules;
 
+import com.arivanamin.healthcare.backend.testing.architecture.bases.BaseUnitTest;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
 
@@ -9,7 +10,7 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.fields;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 import static com.tngtech.archunit.library.GeneralCodingRules.*;
 
-public interface CommonBestPracticeRules {
+public interface CommonBestPracticeRules extends BaseUnitTest {
     
     @ArchTest
     ArchRule INTERFACES_SHOULD_NOT_HAVE_NAMES_ENDING_WITH_THE_WORD_INTERFACE =

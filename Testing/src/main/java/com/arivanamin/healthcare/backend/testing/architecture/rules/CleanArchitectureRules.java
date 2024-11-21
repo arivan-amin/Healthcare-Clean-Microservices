@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.testing.architecture;
+package com.arivanamin.healthcare.backend.testing.architecture.rules;
 
 import com.tngtech.archunit.core.domain.*;
 import com.tngtech.archunit.junit.ArchTest;
@@ -62,7 +62,7 @@ public interface CleanArchitectureRules {
     
     Set<String> PROHIBITED_JPA_METHODS = Set.of("equals", "hashCode", "toString");
     
-    Collection<String> REQUIRED_PREFIXES = List.of("public/", "protected/");
+    Collection<String> REQUIRED_API_PREFIXES = List.of("/public/", "/protected/");
     
     @ArchTest
     ArchRule CORE_SHOULD_NOT_DEPEND_ON_ANY_PERSISTENCE_MECHANISM = noClasses().that()
@@ -271,18 +271,18 @@ public interface CleanArchitectureRules {
                     return;
                 
                 long validMappingsCount = Arrays.stream(mappings)
-                    .filter(mapping -> REQUIRED_PREFIXES.stream().anyMatch(mapping::startsWith))
+                    .filter(mapping -> REQUIRED_API_PREFIXES.stream().anyMatch(mapping::contains))
                     .count();
                 
                 if (validMappingsCount == 0) {
                     events.add(SimpleConditionEvent.violated(method,
                         String.format("Method %s does not use any of the required prefixes: %s",
-                            method.getFullName(), REQUIRED_PREFIXES)));
+                            method.getFullName(), REQUIRED_API_PREFIXES)));
                 }
                 else if (validMappingsCount != mappings.length) {
                     events.add(SimpleConditionEvent.violated(method, String.format(
                         "Method %s contains mappings with prefixes not recognized: %s",
-                        method.getFullName(), REQUIRED_PREFIXES)));
+                        method.getFullName(), REQUIRED_API_PREFIXES)));
                 }
             }
         })
