@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-import static com.arivanamin.healthcare.backend.patient.application.config.ApiConfig.PROTECTED_API_BASE_PATH;
+import static com.arivanamin.healthcare.backend.patient.application.config.PatientApiConfig.PROTECTED_API_BASE_PATH;
 
 @Tag (name = "Patient Controller")
 @RestController

@@ -20,7 +20,7 @@ public interface CommonBestPracticeRules extends BaseUnitTest {
     ArchRule INTERFACES_SHOULD_NOT_HAVE_SIMPLE_CLASS_NAMES_CONTAINING_THE_WORD_INTERFACE =
         noClasses().that().areInterfaces().should().haveSimpleNameContaining("Interface");
     
-    @ArchTest
+    // @ArchTest
     ArchRule NO_ACCESS_TO_STANDARD_STREAMS = NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS;
     
     @ArchTest

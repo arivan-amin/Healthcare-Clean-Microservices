@@ -64,6 +64,9 @@ public interface CleanArchitectureRules {
     
     Collection<String> REQUIRED_API_PREFIXES = List.of("/public/", "/protected/");
     
+    Collection<String> API_VERSIONING_PATTERNS =
+        List.of("^/[a-z]+/protected/v[1-9]/.*", "^/[a-z]+/public/v[1-9]/.*");
+    
     @ArchTest
     ArchRule CORE_SHOULD_NOT_DEPEND_ON_ANY_PERSISTENCE_MECHANISM = noClasses().that()
         .resideInAPackage(CORE_PACKAGE)
@@ -253,39 +256,7 @@ public interface CleanArchitectureRules {
         .areDeclaredInClassesThat()
         .areAnnotatedWith(RestController.class)
         .or()
-        .areMetaAnnotatedWith(RestController.class)
-        .should(new ArchCondition<>("") {
-            
-            @Override
-            public void check (JavaMethod method, ConditionEvents events) {
-                method.getAnnotations()
-                    .stream()
-                    .filter(annotation -> annotation.getRawType().getName().endsWith("Mapping"))
-                    .forEach(annotation -> validateMappingAnnotation(annotation, method, events));
-            }
-            
-            private void validateMappingAnnotation (JavaAnnotation<JavaMethod> annotation,
-                                                    JavaMethod method, ConditionEvents events) {
-                String[] mappings = (String[]) annotation.get("value").orElse(null);
-                if (mappings == null || mappings.length == 0)
-                    return;
-                
-                long validMappingsCount = Arrays.stream(mappings)
-                    .filter(mapping -> REQUIRED_API_PREFIXES.stream().anyMatch(mapping::contains))
-                    .count();
-                
-                if (validMappingsCount == 0) {
-                    events.add(SimpleConditionEvent.violated(method,
-                        String.format("Method %s does not use any of the required prefixes: %s",
-                            method.getFullName(), REQUIRED_API_PREFIXES)));
-                }
-                else if (validMappingsCount != mappings.length) {
-                    events.add(SimpleConditionEvent.violated(method, String.format(
-                        "Method %s contains mappings with prefixes not recognized: %s",
-                        method.getFullName(), REQUIRED_API_PREFIXES)));
-                }
-            }
-        })
+        .areMetaAnnotatedWith(RestController.class).should(new ControllerUrlPrefixCheck())
         .because(
             "URLs must be recognized based on their path, whether they are public or require " +
                 "authentication");
@@ -358,6 +329,17 @@ public interface CleanArchitectureRules {
         .resideInAPackage(DETAILS_PACKAGE)
         .should(notImplementEqualsHashCodeOrToString());
     
+    @ArchTest
+    ArchRule CONTROLLER_ENDPOINTS_SHOULD_BE_VERSIONED = methods().that()
+        .areNotPrivate()
+        .and()
+        .areDeclaredInClassesThat()
+        .areAnnotatedWith(RestController.class)
+        .or()
+        .areMetaAnnotatedWith(RestController.class)
+        .should(new ApiVersioningCheck())
+        .because("All endpoints should be versioned");
+    
     private static ArchCondition<JavaMethod> haveReturnTypeWithResponseSuffix () {
         
         return new ArchCondition<>("") {
@@ -376,25 +358,94 @@ public interface CleanArchitectureRules {
     
     private static ArchCondition<JavaClass> notImplementEqualsHashCodeOrToString () {
         
-        return new ArchCondition<>("") {
+        return new JpaProhibitedMethodsCheck();
+    }
+    
+    class ApiVersioningCheck extends ArchCondition<JavaMethod> {
+        
+        public ApiVersioningCheck () {
+            super("");
+        }
+        
+        @Override
+        public void check (JavaMethod method, ConditionEvents events) {
+            method.getAnnotations()
+                .stream()
+                .filter(annotation -> annotation.getRawType().getName().endsWith("Mapping"))
+                .forEach(annotation -> validateVersioning(annotation, method, events));
+        }
+        
+        private void validateVersioning (JavaAnnotation<JavaMethod> annotation, JavaMethod method,
+                                         ConditionEvents events) {
+            final String[] urlPatterns = (String[]) annotation.get("value").orElse(new String[0]);
+            final boolean isNotVersioned = Arrays.stream(urlPatterns)
+                .noneMatch(url -> API_VERSIONING_PATTERNS.stream().anyMatch(url::matches));
+            if (isNotVersioned) {
+                final String message =
+                    "Method %s should be versioned".formatted(method.getFullName());
+                events.add(SimpleConditionEvent.violated(method, message));
+            }
+        }
+    }
+    
+    class JpaProhibitedMethodsCheck extends ArchCondition<JavaClass> {
+        
+        public JpaProhibitedMethodsCheck () {
+            super("");
+        }
+        
+        @Override
+        public void check (JavaClass javaClass, ConditionEvents conditionEvents) {
             
-            @Override
-            public void check (JavaClass javaClass, ConditionEvents conditionEvents) {
-                
-                for (JavaMethod method : javaClass.getMethods()) {
-                    if (isProhibitedMethodImplemented(javaClass, method)) {
-                        String message =
-                            "Class %s implements %s method".formatted(javaClass.getName(),
-                                method.getName());
-                        conditionEvents.add(SimpleConditionEvent.violated(javaClass, message));
-                    }
+            for (JavaMethod method : javaClass.getMethods()) {
+                if (isProhibitedMethodImplemented(javaClass, method)) {
+                    String message = "Class %s implements %s method".formatted(javaClass.getName(),
+                        method.getName());
+                    conditionEvents.add(SimpleConditionEvent.violated(javaClass, message));
                 }
             }
+        }
+        
+        private boolean isProhibitedMethodImplemented (JavaClass javaClass, JavaMethod method) {
+            return PROHIBITED_JPA_METHODS.contains(method.getName()) &&
+                method.getOwner().equals(javaClass);
+        }
+    }
+    
+    class ControllerUrlPrefixCheck extends ArchCondition<JavaMethod> {
+        
+        public ControllerUrlPrefixCheck () {
+            super("");
+        }
+        
+        @Override
+        public void check (JavaMethod method, ConditionEvents events) {
+            method.getAnnotations()
+                .stream()
+                .filter(annotation -> annotation.getRawType().getName().endsWith("Mapping"))
+                .forEach(annotation -> validateMappingAnnotation(annotation, method, events));
+        }
+        
+        private void validateMappingAnnotation (JavaAnnotation<JavaMethod> annotation,
+                                                JavaMethod method, ConditionEvents events) {
+            String[] mappings = (String[]) annotation.get("value").orElse(null);
+            if (mappings == null || mappings.length == 0)
+                return;
             
-            private boolean isProhibitedMethodImplemented (JavaClass javaClass, JavaMethod method) {
-                return PROHIBITED_JPA_METHODS.contains(method.getName()) &&
-                    method.getOwner().equals(javaClass);
+            long validMappingsCount = Arrays.stream(mappings)
+                .filter(mapping -> REQUIRED_API_PREFIXES.stream().anyMatch(mapping::contains))
+                .count();
+            
+            if (validMappingsCount == 0) {
+                events.add(SimpleConditionEvent.violated(method,
+                    String.format("Method %s does not use any of the required prefixes: %s",
+                        method.getFullName(), REQUIRED_API_PREFIXES)));
             }
-        };
+            else if (validMappingsCount != mappings.length) {
+                events.add(SimpleConditionEvent.violated(method,
+                    String.format("Method %s contains mappings with prefixes not recognized: %s",
+                        method.getFullName(), REQUIRED_API_PREFIXES)));
+            }
+        }
     }
 }
