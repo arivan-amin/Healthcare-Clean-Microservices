@@ -1,6 +1,6 @@
 package com.arivanamin.healthcare.backend.patient.application.request;
 
-import com.arivanamin.healthcare.backend.core.domain.gender.Gender;
+import com.arivanamin.healthcare.backend.base.domain.gender.Gender;
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import lombok.*;
 import org.modelmapper.ModelMapper;

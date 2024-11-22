@@ -1,7 +1,7 @@
 package com.arivanamin.healthcare.backend.patient.application.request;
 
-import com.arivanamin.healthcare.backend.core.domain.testing.BaseUnitTest;
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
+import com.arivanamin.healthcare.backend.testing.architecture.bases.BaseUnitTest;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

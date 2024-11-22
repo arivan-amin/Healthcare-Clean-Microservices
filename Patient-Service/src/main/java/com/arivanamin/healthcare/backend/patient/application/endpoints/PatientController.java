@@ -7,6 +7,8 @@ import com.arivanamin.healthcare.backend.patient.core.command.*;
 import com.arivanamin.healthcare.backend.patient.core.query.ReadPatientByIdQuery;
 import com.arivanamin.healthcare.backend.patient.core.query.ReadPatientsQuery;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
@@ -15,13 +17,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-import static com.arivanamin.healthcare.backend.patient.application.config.ApiConfig.API_BASE_PATH;
+import static com.arivanamin.healthcare.backend.patient.application.config.PatientApiConfig.PROTECTED_API_BASE_PATH;
 
+@Tag (name = "Patient Controller")
 @RestController
-@RequestMapping (API_BASE_PATH)
 @RequiredArgsConstructor
 @Slf4j
-public class PatientController {
+class PatientController {
     
     private final ReadPatientsQuery readQuery;
     private final ReadPatientByIdQuery readByIdQuery;
@@ -29,38 +31,39 @@ public class PatientController {
     private final UpdatePatientCommand updateCommand;
     private final DeletePatientCommand deleteCommand;
     
+    @GetMapping (PROTECTED_API_BASE_PATH + "/v1/accounts")
     @Cacheable (cacheNames = "patientsCache")
-    @GetMapping ("/v1/accounts")
     @Operation (summary = "Get a list of patients")
     @ResponseStatus (HttpStatus.OK)
     public ReadPatientsResponse getAllPatients () {
         return ReadPatientsResponse.of(readQuery.execute());
     }
     
+    @GetMapping (PROTECTED_API_BASE_PATH + "/v1/accounts/{id}")
     @Cacheable (cacheNames = "patientByIdCache")
-    @GetMapping ("/v1/accounts/{id}")
     @Operation (summary = "Get a single patient by id")
     @ResponseStatus (HttpStatus.OK)
     public PatientResponse getPatientById (@PathVariable UUID id) {
         return PatientResponse.of(readByIdQuery.execute(id));
     }
     
-    @PostMapping ("/v1/accounts")
+    @PostMapping (PROTECTED_API_BASE_PATH + "/v1/accounts")
     @Operation (summary = "Creates a patient")
     @ResponseStatus (HttpStatus.CREATED)
-    public CreatePatientResponse createPatient (@RequestBody CreatePatientRequest request) {
+    public CreatePatientResponse createPatient (@RequestBody @Valid CreatePatientRequest request) {
         UUID createdPatientId = createCommand.execute(request.toEntity());
         return CreatePatientResponse.of(createdPatientId);
     }
     
-    @PutMapping ("/v1/accounts/{id}")
+    @PutMapping (PROTECTED_API_BASE_PATH + "/v1/accounts/{id}")
     @Operation (summary = "Updates a patient")
     @ResponseStatus (HttpStatus.OK)
-    public void updatePatient (@PathVariable UUID id, @RequestBody UpdatePatientRequest request) {
+    public void updatePatient (@PathVariable UUID id,
+                               @RequestBody @Valid UpdatePatientRequest request) {
         updateCommand.execute(request.toEntity(id));
     }
     
-    @DeleteMapping ("/v1/accounts/{id}")
+    @DeleteMapping (PROTECTED_API_BASE_PATH + "/v1/accounts/{id}")
     @Operation (summary = "Deletes a patient")
     @ResponseStatus (HttpStatus.NO_CONTENT)
     public void deletePatient (@PathVariable UUID id) {

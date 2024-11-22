@@ -1,7 +1,7 @@
 package com.arivanamin.healthcare.backend.patient.details;
 
-import com.arivanamin.healthcare.backend.core.domain.testing.BaseUnitTest;
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
+import com.arivanamin.healthcare.backend.testing.architecture.bases.BaseUnitTest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;

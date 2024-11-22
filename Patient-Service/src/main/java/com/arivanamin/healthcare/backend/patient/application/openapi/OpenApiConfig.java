@@ -8,10 +8,10 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
-import static com.arivanamin.healthcare.backend.core.infrastructure.openapi.OpenApiDetails.*;
+import static com.arivanamin.healthcare.backend.base.application.openapi.OpenApiDetails.*;
 
 @Configuration
-public class OpenApiConfig {
+class OpenApiConfig {
     
     @Bean
     public OpenAPI myOpenAPI () {
