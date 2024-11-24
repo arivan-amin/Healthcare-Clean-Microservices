@@ -17,6 +17,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
+@ToString
 public class JpaPatient {
     
     private static ModelMapper mapper = new ModelMapper();

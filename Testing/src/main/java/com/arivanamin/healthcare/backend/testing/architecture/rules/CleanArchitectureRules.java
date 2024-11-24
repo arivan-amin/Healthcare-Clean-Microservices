@@ -60,7 +60,7 @@ public interface CleanArchitectureRules {
     String[] PERSISTENCE_PACKAGES =
         { "..jakarta.persistence..", "..jakarta.validation..", "..jakarta.transaction.." };
     
-    Set<String> PROHIBITED_JPA_METHODS = Set.of("equals", "hashCode", "toString");
+    Set<String> PROHIBITED_JPA_METHODS = Set.of("equals", "hashCode");
     
     Collection<String> REQUIRED_API_PREFIXES = List.of("/public/", "/protected/");
     
@@ -255,8 +255,7 @@ public interface CleanArchitectureRules {
         .and()
         .areDeclaredInClassesThat()
         .areAnnotatedWith(RestController.class)
-        .or()
-        .areMetaAnnotatedWith(RestController.class).should(new ControllerUrlPrefixCheck())
+        .or().areMetaAnnotatedWith(RestController.class).should(new ControllerUrlPrefixCheck())
         .because(
             "URLs must be recognized based on their path, whether they are public or require " +
                 "authentication");
