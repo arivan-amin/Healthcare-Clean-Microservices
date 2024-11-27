@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.audit.infrastructure.openapi;
+package com.arivanamin.healthcare.backend.audit.application.openapi;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -20,8 +20,10 @@ class AuditOpenApiConfig {
         server.setDescription("Server URL");
         
         Info info = new Info().title("Audit Service API")
-            .description("Provides all the API related to Audit service").version("1.0")
-            .contact(getOpenApiContactDetails()).termsOfService(getOpenApiTermsOfService())
+            .description("Provides all the API related to Audit service")
+            .version("1.0")
+            .contact(getOpenApiContactDetails())
+            .termsOfService(getOpenApiTermsOfService())
             .license(getOpenApiLicence());
         
         return new OpenAPI().info(info).servers(List.of(server));
