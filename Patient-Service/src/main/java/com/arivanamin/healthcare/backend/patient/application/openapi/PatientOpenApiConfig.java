@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.audit.infrastructure.openapi;
+package com.arivanamin.healthcare.backend.patient.application.openapi;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -11,7 +11,7 @@ import java.util.List;
 import static com.arivanamin.healthcare.backend.base.application.openapi.OpenApiDetails.*;
 
 @Configuration
-class OpenApiConfig {
+class PatientOpenApiConfig {
     
     @Bean
     public OpenAPI myOpenAPI () {
@@ -19,9 +19,11 @@ class OpenApiConfig {
         server.setUrl("localhost:8080/");
         server.setDescription("Server URL");
         
-        Info info = new Info().title("Audit Service API")
-            .description("Provides all the API related to Audit service").version("1.0")
-            .contact(getOpenApiContactDetails()).termsOfService(getOpenApiTermsOfService())
+        Info info = new Info().title("Patient Service API")
+            .description("Provides all the API related to Patient service")
+            .version("1.0")
+            .contact(getOpenApiContactDetails())
+            .termsOfService(getOpenApiTermsOfService())
             .license(getOpenApiLicence());
         
         return new OpenAPI().info(info).servers(List.of(server));

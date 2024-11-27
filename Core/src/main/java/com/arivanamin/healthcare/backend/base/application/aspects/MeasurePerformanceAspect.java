@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 import static com.arivanamin.healthcare.backend.base.domain.aspects.ExecuteAndLogPerformance.executeThrowable;
-import static com.arivanamin.healthcare.backend.base.domain.base.CoreApplicationConfig.BASE_PACKAGE;
+import static com.arivanamin.healthcare.backend.base.domain.config.CoreApplicationConfig.BASE_PACKAGE;
 
 @Aspect
 @Component
 @Slf4j
 public class MeasurePerformanceAspect {
     
-    @Around ("@annotation(" + BASE_PACKAGE + ".core.domain.aspects.LogExecutionTime)")
+    @Around ("@annotation(" + BASE_PACKAGE + ".base.domain.aspects.LogExecutionTime)")
     public Object logExecutionTimeOfMethod (ProceedingJoinPoint joinPoint) throws Throwable {
         List<Object> args = List.of(joinPoint.getArgs());
         

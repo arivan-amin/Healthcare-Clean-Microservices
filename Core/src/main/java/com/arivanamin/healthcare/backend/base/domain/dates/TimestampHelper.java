@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 
-import static com.arivanamin.healthcare.backend.base.domain.base.CoreApplicationConfig.ZONE_ID;
+import static com.arivanamin.healthcare.backend.base.domain.config.CoreApplicationConfig.ZONE_ID;
 import static java.time.Instant.ofEpochMilli;
 import static java.time.LocalDateTime.ofInstant;
 import static lombok.AccessLevel.PRIVATE;

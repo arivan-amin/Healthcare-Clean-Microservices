@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.base.domain.base;
+package com.arivanamin.healthcare.backend.base.domain.config;
 
 import java.nio.file.Path;
 import java.time.ZoneId;
