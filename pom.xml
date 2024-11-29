@@ -40,6 +40,7 @@
         <liquibase-version>4.30.0</liquibase-version>
         <!-- Plugin versions -->
         <jib-plugin-version>3.4.4</jib-plugin-version>
+        <jacoco-plugin-ver>0.8.12</jacoco-plugin-ver>
         <maven-resources-version>3.3.1</maven-resources-version>
         <!-- Inherited dependency versions -->
         <core-module-version>1.0.0</core-module-version>
@@ -256,6 +257,25 @@
                         <phase>package</phase>
                         <goals>
                             <goal>dockerBuild</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-plugin-ver}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report-aggregate</goal>
                         </goals>
                     </execution>
                 </executions>
