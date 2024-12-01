@@ -17,7 +17,8 @@ public final class OpenApiDetails {
     }
     
     public static License getOpenApiLicence () {
-        return new License().name("MIT License").url("https://choosealicense.com/licenses/mit/");
+        return new License().name("MIT License")
+            .url("https://choosealicense.com/licenses/mit/");
     }
     
     public static String getOpenApiTermsOfService () {

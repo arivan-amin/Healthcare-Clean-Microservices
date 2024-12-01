@@ -50,6 +50,7 @@ class UpdatePatientCommandTest implements BaseUnitTest {
         ArgumentCaptor<Patient> captor = ArgumentCaptor.forClass(Patient.class);
         verify(persistence).update(captor.capture());
         Patient result = captor.getValue();
-        Assertions.assertThat(result).isSameAs(patient);
+        Assertions.assertThat(result)
+            .isSameAs(patient);
     }
 }

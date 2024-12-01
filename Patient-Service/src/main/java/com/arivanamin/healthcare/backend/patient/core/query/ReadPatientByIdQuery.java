@@ -13,6 +13,7 @@ public class ReadPatientByIdQuery {
     private final PatientPersistence persistence;
     
     public Patient execute (UUID id) {
-        return persistence.findById(id).orElseThrow(PatientNotFoundException::new);
+        return persistence.findById(id)
+            .orElseThrow(PatientNotFoundException::new);
     }
 }

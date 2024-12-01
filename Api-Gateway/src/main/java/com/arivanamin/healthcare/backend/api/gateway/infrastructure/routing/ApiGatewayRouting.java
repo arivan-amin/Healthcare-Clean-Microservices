@@ -29,15 +29,19 @@ public class ApiGatewayRouting {
     }
     
     private Function<PredicateSpec, Buildable<Route>> getDiscoveryServerRoute () {
-        return r -> r.path("/eureka/web").filters(f -> f.setPath("/")).uri(EUREKA_URL);
+        return r -> r.path("/eureka/web")
+            .filters(f -> f.setPath("/"))
+            .uri(EUREKA_URL);
     }
     
     private Function<PredicateSpec, Buildable<Route>> getDiscoveryServerStaticResourcesRoute () {
-        return r -> r.path("/eureka/**").uri(EUREKA_URL);
+        return r -> r.path("/eureka/**")
+            .uri(EUREKA_URL);
     }
     
     private Function<PredicateSpec, Buildable<Route>> getPatientServiceRoute () {
-        return r -> r.path("/patients/**").uri("lb://patient-service");
+        return r -> r.path("/patients/**")
+            .uri("lb://patient-service");
     }
     
     private Function<PredicateSpec, Buildable<Route>> getPatientServiceApiDocRoute () {

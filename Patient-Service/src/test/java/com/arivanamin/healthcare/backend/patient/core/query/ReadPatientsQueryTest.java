@@ -23,12 +23,18 @@ class ReadPatientsQueryTest implements BaseUnitTest {
         thenVerifyQueryCallsFindAll();
     }
     
-    private void thenVerifyQueryCallsFindAll () {
-        verify(persistence, times(1)).findAll();
+    private void givenQueryWithMockPersistence () {
+        persistence = mock(PatientPersistence.class);
+        when(persistence.findAll()).thenReturn(patients);
+        query = new ReadPatientsQuery(persistence);
     }
     
     private List<Patient> whenQueryIsExecuted () {
         return query.execute();
+    }
+    
+    private void thenVerifyQueryCallsFindAll () {
+        verify(persistence, times(1)).findAll();
     }
     
     @Test
@@ -36,12 +42,6 @@ class ReadPatientsQueryTest implements BaseUnitTest {
         givenQueryWithMockPersistence();
         List<Patient> result = whenQueryIsExecuted();
         thenVerifyFindAllResultIsReturned(result);
-    }
-    
-    private void givenQueryWithMockPersistence () {
-        persistence = mock(PatientPersistence.class);
-        when(persistence.findAll()).thenReturn(patients);
-        query = new ReadPatientsQuery(persistence);
     }
     
     private void thenVerifyFindAllResultIsReturned (List<Patient> result) {

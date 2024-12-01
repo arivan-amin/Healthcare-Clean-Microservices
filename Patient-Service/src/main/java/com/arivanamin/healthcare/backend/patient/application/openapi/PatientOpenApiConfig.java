@@ -26,6 +26,7 @@ class PatientOpenApiConfig {
             .termsOfService(getOpenApiTermsOfService())
             .license(getOpenApiLicence());
         
-        return new OpenAPI().info(info).servers(List.of(server));
+        return new OpenAPI().info(info)
+            .servers(List.of(server));
     }
 }

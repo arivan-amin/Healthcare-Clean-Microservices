@@ -41,11 +41,19 @@ class JpaPatientPersistenceIntegrationTest implements BaseIntegrationTest {
         thenAssertThatAllEntitiesOfRepositoryAreReturned(expectedPatients);
     }
     
-    private void givenRepositoryWithSavedPatients () {
-        numberOfSavedEntities = FAKER.number().numberBetween(3, 10);
-        for (int i = 0; i < numberOfSavedEntities; i++) {
-            repository.save(RANDOM.nextObject(JpaPatient.class));
-        }
+    private void givenRepositoryWithSamplePatientsAndOnePatientExtracted () {
+        givenRepositoryWithSavedPatients();
+        expectedId = repository.findAll()
+            .get(FAKER.number()
+                .numberBetween(0, numberOfSavedEntities))
+            .getId();
+        expectedPatient = repository.findAll()
+            .stream()
+            .filter(patient -> patient.getId()
+                .equals(expectedId))
+            .findFirst()
+            .orElseThrow()
+            .toDomain();
     }
     
     private void whenFindAllIsCalled () {
@@ -63,18 +71,17 @@ class JpaPatientPersistenceIntegrationTest implements BaseIntegrationTest {
         thenAssertThatCorrectPatientIsReturned(expectedPatient);
     }
     
-    private void givenRepositoryWithSamplePatientsAndOnePatientExtracted () {
-        givenRepositoryWithSavedPatients();
-        expectedId = repository.findAll()
-            .get(FAKER.number().numberBetween(0, numberOfSavedEntities))
-            .getId();
-        expectedPatient = repository.findAll()
-            .stream().filter(patient -> patient.getId().equals(expectedId))
-            .findFirst().orElseThrow().toDomain();
+    private void givenRepositoryWithSavedPatients () {
+        numberOfSavedEntities = FAKER.number()
+            .numberBetween(3, 10);
+        for (int i = 0; i < numberOfSavedEntities; i++) {
+            repository.save(RANDOM.nextObject(JpaPatient.class));
+        }
     }
     
     private void whenFindByIdIsCalled (UUID sampleId) {
-        expectedPatient = persistence.findById(sampleId).orElseThrow();
+        expectedPatient = persistence.findById(sampleId)
+            .orElseThrow();
     }
     
     private void thenAssertThatCorrectPatientIsReturned (Patient resultPatient) {
@@ -93,7 +100,8 @@ class JpaPatientPersistenceIntegrationTest implements BaseIntegrationTest {
     }
     
     private void thenAssertThatEntityIsDeletedFromRepository () {
-        assertThat(persistence.findAll().size()).isEqualTo(numberOfSavedEntities - 1);
+        assertThat(persistence.findAll()
+            .size()).isEqualTo(numberOfSavedEntities - 1);
         assertThat(repository.findById(expectedId)).isEmpty();
     }
     
@@ -106,7 +114,8 @@ class JpaPatientPersistenceIntegrationTest implements BaseIntegrationTest {
     
     private void givenValidSamplePatient () {
         expectedPatient = RANDOM.nextObject(Patient.class);
-        expectedPatient.setEmail(FAKER.internet().emailAddress());
+        expectedPatient.setEmail(FAKER.internet()
+            .emailAddress());
     }
     
     private void whenCreateIsCalled () {
@@ -114,7 +123,8 @@ class JpaPatientPersistenceIntegrationTest implements BaseIntegrationTest {
     }
     
     private void thenAssertThatPatientIsCreatedInRepository () {
-        assertThat(repository.findAll().size()).isOne();
+        assertThat(repository.findAll()
+            .size()).isOne();
     }
     
     @Test
@@ -125,12 +135,14 @@ class JpaPatientPersistenceIntegrationTest implements BaseIntegrationTest {
     }
     
     private void whenUpdateIsCalledWithModifiedPatient () {
-        expectedPatient.setFirstName(FAKER.zelda().character());
+        expectedPatient.setFirstName(FAKER.zelda()
+            .character());
         persistence.update(expectedPatient);
     }
     
     private void thenAssertThatPatientIsUpdatedInRepository () {
-        JpaPatient result = repository.findById(expectedId).orElseThrow();
+        JpaPatient result = repository.findById(expectedId)
+            .orElseThrow();
         assertThat(result.getFirstName()).isEqualTo(expectedPatient.getFirstName());
     }
 }

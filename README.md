@@ -132,6 +132,7 @@ project to demonstrate the implementation of microservices using modern **Java**
     - Now you should have 2 dashboards to monitor Spring Boot, MySQL.
 
 ## Testing
+
 - Unit and integration tests are available for each microservice.
 - Run the tests using Maven:
 
@@ -140,6 +141,7 @@ project to demonstrate the implementation of microservices using modern **Java**
     ```
 
 ## Microservices
+
 The system is divided into several microservices, each responsible for a specific domain:
 
 - **API Gateway**: Serves as the single entry point for all client requests, routing them to the
@@ -171,15 +173,19 @@ The system is divided into several microservices, each responsible for a specifi
   protection of sensitive data.
 
 ## Contributing
+
 **Contributions are welcome!** Please fork the repository and submit a pull request for any
 improvements
 or bug fixes.
 
 ## License
+
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more
 details.
 
 ## Contact
+
 For any questions or inquiries, please contact:
+
 - **Name: Arivan Amin**
 - **Email: arivanamin@gmail.com**

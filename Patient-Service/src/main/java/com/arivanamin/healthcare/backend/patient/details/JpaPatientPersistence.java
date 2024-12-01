@@ -17,17 +17,22 @@ public class JpaPatientPersistence implements PatientPersistence {
     
     @Override
     public List<Patient> findAll () {
-        return repository.findAll().stream().map(JpaPatient::toDomain).toList();
+        return repository.findAll()
+            .stream()
+            .map(JpaPatient::toDomain)
+            .toList();
     }
     
     @Override
     public Optional<Patient> findById (UUID id) {
-        return repository.findById(id).map(JpaPatient::toDomain);
+        return repository.findById(id)
+            .map(JpaPatient::toDomain);
     }
     
     @Override
     public UUID create (Patient patient) {
-        return repository.save(JpaPatient.fromDomain(patient)).getId();
+        return repository.save(JpaPatient.fromDomain(patient))
+            .getId();
     }
     
     @Override

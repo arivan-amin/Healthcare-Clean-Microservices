@@ -20,7 +20,8 @@ class SpringSchedulerLoggingAspect {
     }
     
     private String initJobName (JoinPoint joinPoint) {
-        final String classPath = joinPoint.getSignature().getDeclaringTypeName();
+        final String classPath = joinPoint.getSignature()
+            .getDeclaringTypeName();
         return "The scheduled task: %s".formatted(classPath);
     }
 }

@@ -13,12 +13,17 @@ import static com.tngtech.archunit.library.GeneralCodingRules.*;
 public interface CommonBestPracticeRules extends BaseUnitTest {
     
     @ArchTest
-    ArchRule INTERFACES_SHOULD_NOT_HAVE_NAMES_ENDING_WITH_THE_WORD_INTERFACE =
-        noClasses().that().areInterfaces().should().haveNameMatching(".*Interface");
+    ArchRule INTERFACES_SHOULD_NOT_HAVE_NAMES_ENDING_WITH_THE_WORD_INTERFACE = noClasses().that()
+        .areInterfaces()
+        .should()
+        .haveNameMatching(".*Interface");
     
     @ArchTest
     ArchRule INTERFACES_SHOULD_NOT_HAVE_SIMPLE_CLASS_NAMES_CONTAINING_THE_WORD_INTERFACE =
-        noClasses().that().areInterfaces().should().haveSimpleNameContaining("Interface");
+        noClasses().that()
+            .areInterfaces()
+            .should()
+            .haveSimpleNameContaining("Interface");
     
     // @ArchTest
     ArchRule NO_ACCESS_TO_STANDARD_STREAMS = NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS;
@@ -36,7 +41,9 @@ public interface CommonBestPracticeRules extends BaseUnitTest {
         .bePrivate()
         .andShould()
         .beStatic()
-        .andShould().beFinal().allowEmptyShould(true)
+        .andShould()
+        .beFinal()
+        .allowEmptyShould(true)
         .because("we agreed on this convention");
     
     @ArchTest
