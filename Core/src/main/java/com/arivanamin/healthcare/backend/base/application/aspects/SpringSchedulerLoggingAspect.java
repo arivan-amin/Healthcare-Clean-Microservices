@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 @Slf4j
-public class SpringSchedulerLoggingAspect {
+class SpringSchedulerLoggingAspect {
     
     @Around ("@annotation(org.springframework.scheduling.annotation.Scheduled)")
     public Object logScheduler (ProceedingJoinPoint joinPoint) throws Throwable {

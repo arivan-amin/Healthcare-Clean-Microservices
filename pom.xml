@@ -21,25 +21,27 @@
 
     <properties>
         <java.version>21</java.version>
-        <spring-cloud.version>2023.0.3</spring-cloud.version>
+        <spring-cloud-bom-version>2023.0.4</spring-cloud-bom-version>
         <!-- Other dependency versions -->
-        <springdoc-starter-version>2.6.0</springdoc-starter-version>
+        <springdoc-starter-version>2.7.0</springdoc-starter-version>
+        <caffeine-cache-version>3.1.8</caffeine-cache-version>
         <java-faker-version>1.0.2</java-faker-version>
         <easy-random-version>5.0.0</easy-random-version>
-        <vavr-version>0.10.4</vavr-version>
+        <vavr-version>0.10.5</vavr-version>
         <commons-lang-version>3.17.0</commons-lang-version>
         <commons-text-version>1.12.0</commons-text-version>
         <commons-collections-version>4.4</commons-collections-version>
         <commons-validator-version>1.9.0</commons-validator-version>
-        <commons-io-version>2.17.0</commons-io-version>
+        <commons-io-version>2.18.0</commons-io-version>
+        <datasource-micrometer-version>1.0.6</datasource-micrometer-version>
         <model-mapper-version>3.2.1</model-mapper-version>
-        <caffeine-cache-version>3.1.8</caffeine-cache-version>
-        <testcontainers-bom-version>1.20.3</testcontainers-bom-version>
-        <datasource-micrometer-version>1.0.5</datasource-micrometer-version>
         <arch-unit-version>1.3.0</arch-unit-version>
+        <testcontainers-bom-version>1.20.4</testcontainers-bom-version>
+        <liquibase-version>4.30.0</liquibase-version>
         <!-- Plugin versions -->
-        <maven-resources-version>3.3.1</maven-resources-version>
         <jib-plugin-version>3.4.4</jib-plugin-version>
+        <jacoco-plugin-ver>0.8.12</jacoco-plugin-ver>
+        <maven-resources-version>3.3.1</maven-resources-version>
         <!-- Inherited dependency versions -->
         <core-module-version>1.0.0</core-module-version>
         <testing-module-version>1.0.0</testing-module-version>
@@ -209,7 +211,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
+                <version>${spring-cloud-bom-version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -255,6 +257,25 @@
                         <phase>package</phase>
                         <goals>
                             <goal>dockerBuild</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-plugin-ver}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report-aggregate</goal>
                         </goals>
                     </execution>
                 </executions>
