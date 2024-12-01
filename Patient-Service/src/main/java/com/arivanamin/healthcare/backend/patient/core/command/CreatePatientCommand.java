@@ -26,7 +26,7 @@ public class CreatePatientCommand {
     }
     
     private static boolean checkEmailDuplication (Patient patientToBeCreated,
-                                                  Patient existingPatient) {
+        Patient existingPatient) {
         return patientToBeCreated.getEmail()
             .equals(existingPatient.getEmail());
     }

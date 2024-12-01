@@ -41,19 +41,12 @@ class JpaPatientPersistenceIntegrationTest implements BaseIntegrationTest {
         thenAssertThatAllEntitiesOfRepositoryAreReturned(expectedPatients);
     }
     
-    private void givenRepositoryWithSamplePatientsAndOnePatientExtracted () {
-        givenRepositoryWithSavedPatients();
-        expectedId = repository.findAll()
-            .get(FAKER.number()
-                .numberBetween(0, numberOfSavedEntities))
-            .getId();
-        expectedPatient = repository.findAll()
-            .stream()
-            .filter(patient -> patient.getId()
-                .equals(expectedId))
-            .findFirst()
-            .orElseThrow()
-            .toDomain();
+    private void givenRepositoryWithSavedPatients () {
+        numberOfSavedEntities = FAKER.number()
+            .numberBetween(3, 10);
+        for (int i = 0; i < numberOfSavedEntities; i++) {
+            repository.save(RANDOM.nextObject(JpaPatient.class));
+        }
     }
     
     private void whenFindAllIsCalled () {
@@ -71,12 +64,19 @@ class JpaPatientPersistenceIntegrationTest implements BaseIntegrationTest {
         thenAssertThatCorrectPatientIsReturned(expectedPatient);
     }
     
-    private void givenRepositoryWithSavedPatients () {
-        numberOfSavedEntities = FAKER.number()
-            .numberBetween(3, 10);
-        for (int i = 0; i < numberOfSavedEntities; i++) {
-            repository.save(RANDOM.nextObject(JpaPatient.class));
-        }
+    private void givenRepositoryWithSamplePatientsAndOnePatientExtracted () {
+        givenRepositoryWithSavedPatients();
+        expectedId = repository.findAll()
+            .get(FAKER.number()
+                .numberBetween(0, numberOfSavedEntities))
+            .getId();
+        expectedPatient = repository.findAll()
+            .stream()
+            .filter(patient -> patient.getId()
+                .equals(expectedId))
+            .findFirst()
+            .orElseThrow()
+            .toDomain();
     }
     
     private void whenFindByIdIsCalled (UUID sampleId) {

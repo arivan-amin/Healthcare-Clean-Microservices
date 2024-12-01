@@ -402,7 +402,7 @@ public interface CleanArchitectureRules {
         }
         
         private void validateVersioning (JavaAnnotation<JavaMethod> annotation, JavaMethod method,
-                                         ConditionEvents events) {
+            ConditionEvents events) {
             final String[] urlPatterns = (String[]) annotation.get("value")
                 .orElse(new String[0]);
             final boolean isNotVersioned = Arrays.stream(urlPatterns)
@@ -457,7 +457,7 @@ public interface CleanArchitectureRules {
         }
         
         private void validateMappingAnnotation (JavaAnnotation<JavaMethod> annotation,
-                                                JavaMethod method, ConditionEvents events) {
+            JavaMethod method, ConditionEvents events) {
             String[] mappings = (String[]) annotation.get("value")
                 .orElse(null);
             if (mappings == null || mappings.length == 0)
