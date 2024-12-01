@@ -255,7 +255,9 @@ public interface CleanArchitectureRules {
         .and()
         .areDeclaredInClassesThat()
         .areAnnotatedWith(RestController.class)
-        .or().areMetaAnnotatedWith(RestController.class).should(new ControllerUrlPrefixCheck())
+        .or()
+        .areMetaAnnotatedWith(RestController.class)
+        .should(new ControllerUrlPrefixCheck())
         .because(
             "URLs must be recognized based on their path, whether they are public or require " +
                 "authentication");
@@ -273,7 +275,7 @@ public interface CleanArchitectureRules {
         .resideOutsideOfPackages(APPLICATION_PACKAGE)
         .should()
         .notBeAnnotatedWith(Component.class)
-        .andShould()
+        .andShould().notBeAnnotatedWith(Configuration.class).andShould()
         .notBeAnnotatedWith(Service.class);
     
     @ArchTest
