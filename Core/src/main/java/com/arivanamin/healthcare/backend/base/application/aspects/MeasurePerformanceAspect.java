@@ -14,7 +14,7 @@ import static com.arivanamin.healthcare.backend.base.domain.config.CoreApplicati
 @Aspect
 @Component
 @Slf4j
-public class MeasurePerformanceAspect {
+class MeasurePerformanceAspect {
     
     @Around ("@annotation(" + BASE_PACKAGE + ".base.domain.aspects.LogExecutionTime)")
     public Object logExecutionTimeOfMethod (ProceedingJoinPoint joinPoint) throws Throwable {

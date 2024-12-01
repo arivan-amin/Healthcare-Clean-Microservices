@@ -82,8 +82,8 @@ public interface CleanArchitectureRules {
         .resideInAnyPackage(DETAILS_PACKAGE, APPLICATION_PACKAGE);
     
     @ArchTest
-    ArchRule CORE_SHOULD_NOT_ACCESS_APPLICATION_LAYER =
-        noClasses().that().resideInAPackage(CORE_PACKAGE)
+    ArchRule CORE_SHOULD_NOT_ACCESS_APPLICATION_LAYER = noClasses().that()
+        .resideInAPackage(CORE_PACKAGE)
         .should()
         .accessClassesThat()
         .resideInAPackage(APPLICATION_PACKAGE);
@@ -110,8 +110,8 @@ public interface CleanArchitectureRules {
         .resideInAPackage(APPLICATION_PACKAGE);
     
     @ArchTest
-    ArchRule DETAILS_SHOULD_NOT_DEPEND_ON_APPLICATION =
-        noClasses().that().resideInAPackage(DETAILS_PACKAGE)
+    ArchRule DETAILS_SHOULD_NOT_DEPEND_ON_APPLICATION = noClasses().that()
+        .resideInAPackage(DETAILS_PACKAGE)
         .should()
         .dependOnClassesThat()
         .resideInAPackage(APPLICATION_PACKAGE);
@@ -124,8 +124,10 @@ public interface CleanArchitectureRules {
         .byAnyPackage(APPLICATION_PACKAGE, DETAILS_PACKAGE);
     
     @ArchTest
-    ArchRule INTERFACES_MUST_NOT_BE_PLACED_IN_IMPLEMENTATION_PACKAGES =
-        noClasses().that().resideInAPackage(APPLICATION_PACKAGE).should().beInterfaces();
+    ArchRule INTERFACES_MUST_NOT_BE_PLACED_IN_IMPLEMENTATION_PACKAGES = noClasses().that()
+        .resideInAPackage(APPLICATION_PACKAGE)
+        .should()
+        .beInterfaces();
     
     @ArchTest
     ArchRule PERSISTENCE_CLASSES_SHOULD_BE_IN_DETAILS_PACKAGE = classes().that()
@@ -233,7 +235,8 @@ public interface CleanArchitectureRules {
         .should(new ArchCondition<>("") {
             @Override
             public void check (JavaMethod method, ConditionEvents events) {
-                var requestBodyParameter = Arrays.stream(method.reflect().getParameters())
+                var requestBodyParameter = Arrays.stream(method.reflect()
+                        .getParameters())
                     .filter(parameter -> parameter.isAnnotationPresent(RequestBody.class))
                     .findFirst()
                     .orElse(null);
@@ -263,24 +266,40 @@ public interface CleanArchitectureRules {
                 "authentication");
     
     @ArchTest
-    ArchRule AVOID_BEAN_ANNOTATION_WITH_QUALIFIER =
-        methods().that().areAnnotatedWith(Bean.class).should().notBeAnnotatedWith(Qualifier.class);
+    ArchRule AVOID_BEAN_ANNOTATION_WITH_QUALIFIER = methods().that()
+        .areAnnotatedWith(Bean.class)
+        .should()
+        .notBeAnnotatedWith(Qualifier.class);
     
     @ArchTest
-    ArchRule CONFIGURATIONS_SHOULD_NOT_BE_PUBLIC =
-        classes().that().areAnnotatedWith(Configuration.class).should().notBePublic();
+    ArchRule BEAN_ANNOTATION_SHOULD_BE_ON_PUBLIC_METHODS = methods().that()
+        .areAnnotatedWith(Bean.class)
+        .should()
+        .bePublic();
     
     @ArchTest
-    ArchRule ONLY_DECLARE_BEANS_IN_CONFIGURATION_CLASSES = classes().that()
+    ArchRule CONFIGURATION_AND_COMPONENT_CLASSES_SHOULD_NOT_BE_PUBLIC = classes().that()
+        .areAnnotatedWith(Configuration.class)
+        .or()
+        .areAnnotatedWith(Component.class)
+        .should()
+        .notBePublic();
+    
+    @ArchTest
+    ArchRule ONLY_DECLARE_BEANS_IN_APPLICATION_CLASSES = classes().that()
         .resideOutsideOfPackages(APPLICATION_PACKAGE)
         .should()
         .notBeAnnotatedWith(Component.class)
-        .andShould().notBeAnnotatedWith(Configuration.class).andShould()
+        .andShould()
+        .notBeAnnotatedWith(Configuration.class)
+        .andShould()
         .notBeAnnotatedWith(Service.class);
     
     @ArchTest
-    ArchRule REST_CONTROLLERS_SHOULD_NOT_BE_PUBLIC =
-        classes().that().areAnnotatedWith(RestController.class).should().notBePublic();
+    ArchRule REST_CONTROLLERS_SHOULD_NOT_BE_PUBLIC = classes().that()
+        .areAnnotatedWith(RestController.class)
+        .should()
+        .notBePublic();
     
     @ArchTest
     ArchRule REST_CONTROLLERS_METHODS_SHOULD_BE_PUBLIC = methods().that()
@@ -294,8 +313,10 @@ public interface CleanArchitectureRules {
         .bePublic();
     
     @ArchTest
-    ArchRule DOCUMENTED_REST_CONTROLLERS =
-        classes().that().areAnnotatedWith(RestController.class).should().beAnnotatedWith(Tag.class);
+    ArchRule DOCUMENTED_REST_CONTROLLERS = classes().that()
+        .areAnnotatedWith(RestController.class)
+        .should()
+        .beAnnotatedWith(Tag.class);
     
     @ArchTest
     ArchRule DOCUMENT_REST_CONTROLLER_METHODS_WITH_OPERATION = methods().that()
@@ -347,12 +368,14 @@ public interface CleanArchitectureRules {
             
             @Override
             public void check (JavaMethod method, ConditionEvents events) {
-                String returnType = method.getRawReturnType().getName();
+                String returnType = method.getRawReturnType()
+                    .getName();
                 boolean matches =
                     "void".equals(returnType) || returnType.endsWith(API_RESPONSE_SUFFIX);
                 events.add(new SimpleConditionEvent(method, matches,
                     "Method %s in %s does not return a type ending with '%s'".formatted(
-                        method.getName(), method.getOwner().getName(), API_RESPONSE_SUFFIX)));
+                        method.getName(), method.getOwner()
+                            .getName(), API_RESPONSE_SUFFIX)));
             }
         };
     }
@@ -372,15 +395,19 @@ public interface CleanArchitectureRules {
         public void check (JavaMethod method, ConditionEvents events) {
             method.getAnnotations()
                 .stream()
-                .filter(annotation -> annotation.getRawType().getName().endsWith("Mapping"))
+                .filter(annotation -> annotation.getRawType()
+                    .getName()
+                    .endsWith("Mapping"))
                 .forEach(annotation -> validateVersioning(annotation, method, events));
         }
         
         private void validateVersioning (JavaAnnotation<JavaMethod> annotation, JavaMethod method,
                                          ConditionEvents events) {
-            final String[] urlPatterns = (String[]) annotation.get("value").orElse(new String[0]);
+            final String[] urlPatterns = (String[]) annotation.get("value")
+                .orElse(new String[0]);
             final boolean isNotVersioned = Arrays.stream(urlPatterns)
-                .noneMatch(url -> API_VERSIONING_PATTERNS.stream().anyMatch(url::matches));
+                .noneMatch(url -> API_VERSIONING_PATTERNS.stream()
+                    .anyMatch(url::matches));
             if (isNotVersioned) {
                 final String message =
                     "Method %s should be versioned".formatted(method.getFullName());
@@ -408,8 +435,8 @@ public interface CleanArchitectureRules {
         }
         
         private boolean isProhibitedMethodImplemented (JavaClass javaClass, JavaMethod method) {
-            return PROHIBITED_JPA_METHODS.contains(method.getName()) &&
-                method.getOwner().equals(javaClass);
+            return PROHIBITED_JPA_METHODS.contains(method.getName()) && method.getOwner()
+                .equals(javaClass);
         }
     }
     
@@ -423,18 +450,22 @@ public interface CleanArchitectureRules {
         public void check (JavaMethod method, ConditionEvents events) {
             method.getAnnotations()
                 .stream()
-                .filter(annotation -> annotation.getRawType().getName().endsWith("Mapping"))
+                .filter(annotation -> annotation.getRawType()
+                    .getName()
+                    .endsWith("Mapping"))
                 .forEach(annotation -> validateMappingAnnotation(annotation, method, events));
         }
         
         private void validateMappingAnnotation (JavaAnnotation<JavaMethod> annotation,
                                                 JavaMethod method, ConditionEvents events) {
-            String[] mappings = (String[]) annotation.get("value").orElse(null);
+            String[] mappings = (String[]) annotation.get("value")
+                .orElse(null);
             if (mappings == null || mappings.length == 0)
                 return;
             
             long validMappingsCount = Arrays.stream(mappings)
-                .filter(mapping -> REQUIRED_API_PREFIXES.stream().anyMatch(mapping::contains))
+                .filter(mapping -> REQUIRED_API_PREFIXES.stream()
+                    .anyMatch(mapping::contains))
                 .count();
             
             if (validMappingsCount == 0) {
