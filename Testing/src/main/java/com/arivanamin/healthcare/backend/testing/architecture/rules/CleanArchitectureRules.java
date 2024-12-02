@@ -47,6 +47,8 @@ public interface CleanArchitectureRules {
     
     String CONTROLLER_PACKAGE = "..endpoints..";
     
+    String COMMANDS_AND_QUERIES_METHOD_NAME = "execute";
+    
     String CONTROLLER_SUFFIX = "Controller";
     
     String PERSISTENCE_SUFFIX = "Persistence";
@@ -180,16 +182,74 @@ public interface CleanArchitectureRules {
                 "core module");
     
     @ArchTest
-    ArchRule COMMAND_SHOULD_BE_PREFIXED = classes().that()
+    ArchRule COMMAND_SHOULD_BE_SUFFIXED = classes().that()
         .resideInAPackage(COMMAND_PACKAGE)
         .should()
         .haveSimpleNameEndingWith(COMMAND_SUFFIX);
     
     @ArchTest
-    ArchRule QUERY_SHOULD_BE_PREFIXED = classes().that()
+    ArchRule QUERY_SHOULD_BE_SUFFIXED = classes().that()
         .resideInAPackage(QUERY_PACKAGE)
         .should()
         .haveSimpleNameEndingWith(QUERY_SUFFIX);
+    
+    @ArchTest
+    ArchRule COMMANDS_AND_QUERIES_SHOULD_BE_IN_CORE_PACKAGE = classes().that()
+        .haveSimpleNameEndingWith(COMMAND_SUFFIX)
+        .or()
+        .haveSimpleNameEndingWith(QUERY_SUFFIX)
+        .should()
+        .resideInAPackage(CORE_PACKAGE)
+        .because("Commands and queries contain business rules and should be in core.");
+    
+    @ArchTest
+    ArchRule COMMANDS_AND_QUERIES_SHOULD_BE_PUBLIC = classes().that()
+        .resideInAPackage(CORE_PACKAGE)
+        .and()
+        .haveSimpleNameEndingWith(COMMAND_SUFFIX)
+        .or()
+        .haveSimpleNameEndingWith(QUERY_SUFFIX)
+        .and()
+        .areNotNestedClasses()
+        .should()
+        .bePublic()
+        .because("Commands and queries must be public to be used by other layers.");
+    
+    @ArchTest
+    ArchRule COMMANDS_AND_QUERIES_SHOULD_HAVE_EXACTLY_ONE_PUBLIC_METHOD_NAMED_EXECUTE =
+        classes().that()
+            .resideInAPackage(CORE_PACKAGE)
+            .and()
+            .haveSimpleNameEndingWith(COMMAND_SUFFIX)
+            .or()
+            .haveSimpleNameEndingWith(QUERY_SUFFIX)
+            .and()
+            .doNotHaveModifier(JavaModifier.ABSTRACT)
+            .should(new ArchCondition<>("have exactly one public method named 'execute'") {
+                @Override
+                public void check (JavaClass javaClass, ConditionEvents events) {
+                    final List<JavaMethod> publicMethods = javaClass.getAllMethods()
+                        .stream()
+                        .filter(method -> !method.getOwner()
+                            .isEquivalentTo(Object.class))
+                        .filter(method -> method.getModifiers()
+                            .contains(JavaModifier.PUBLIC))
+                        .toList();
+                    
+                    long executeMethodCount = publicMethods.stream()
+                        .filter(method -> COMMANDS_AND_QUERIES_METHOD_NAME.equals(method.getName()))
+                        .count();
+                    
+                    if (publicMethods.size() != 1 || executeMethodCount != 1) {
+                        events.add(new SimpleConditionEvent(javaClass, false, javaClass +
+                            " should have exactly one public method, and it must be named " +
+                            "'execute'."));
+                    }
+                }
+            })
+            .because(
+                "Commands and queries should adhere to the single responsibility principle and " +
+                    "expose only the 'execute' method.");
     
     @ArchTest
     ArchRule CONTROLLERS_SHOULD_BE_SUFFIXED = classes().that()
@@ -402,7 +462,7 @@ public interface CleanArchitectureRules {
         }
         
         private void validateVersioning (JavaAnnotation<JavaMethod> annotation, JavaMethod method,
-            ConditionEvents events) {
+                                         ConditionEvents events) {
             final String[] urlPatterns = (String[]) annotation.get("value")
                 .orElse(new String[0]);
             final boolean isNotVersioned = Arrays.stream(urlPatterns)
@@ -457,7 +517,7 @@ public interface CleanArchitectureRules {
         }
         
         private void validateMappingAnnotation (JavaAnnotation<JavaMethod> annotation,
-            JavaMethod method, ConditionEvents events) {
+                                                JavaMethod method, ConditionEvents events) {
             String[] mappings = (String[]) annotation.get("value")
                 .orElse(null);
             if (mappings == null || mappings.length == 0)

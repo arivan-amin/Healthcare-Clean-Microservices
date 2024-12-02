@@ -59,7 +59,7 @@ class PatientController {
     @Operation (summary = "Updates a patient")
     @ResponseStatus (HttpStatus.OK)
     public void updatePatient (@PathVariable UUID id,
-        @RequestBody @Valid UpdatePatientRequest request) {
+                               @RequestBody @Valid UpdatePatientRequest request) {
         updateCommand.execute(request.toEntity(id));
     }
     
