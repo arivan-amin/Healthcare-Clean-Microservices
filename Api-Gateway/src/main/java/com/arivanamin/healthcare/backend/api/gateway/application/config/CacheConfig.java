@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.api.gateway.infrastructure.config;
+package com.arivanamin.healthcare.backend.api.gateway.application.config;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.cache.CacheManager;
