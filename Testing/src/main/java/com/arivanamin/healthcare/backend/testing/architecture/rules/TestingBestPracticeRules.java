@@ -7,6 +7,7 @@ import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
 import org.junit.jupiter.api.Test;
 
+import static com.arivanamin.healthcare.backend.testing.architecture.rules.CleanArchitectureRules.*;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
 import static com.tngtech.archunit.library.GeneralCodingRules.testClassesShouldResideInTheSamePackageAsImplementation;
@@ -53,4 +54,15 @@ public interface TestingBestPracticeRules extends BaseUnitTest {
         .areAnnotatedWith(Test.class)
         .should()
         .bePackagePrivate();
+    
+    @ArchTest
+    ArchRule INTEGRATION_TESTS_SHOULD_BE_IN_APPLICATION_PACKAGE_AND_AWAY_FROM_CORE =
+        classes().that()
+            .areAssignableTo(BaseIntegrationTest.class)
+            .should()
+            .resideOutsideOfPackage(CORE_PACKAGE)
+            .andShould()
+            .resideInAPackage(APPLICATION_PACKAGE)
+            .orShould()
+            .resideInAPackage(DETAILS_PACKAGE);
 }

@@ -1,5 +1,6 @@
 package com.arivanamin.healthcare.backend.testing.architecture.rules;
 
+import com.tngtech.archunit.base.DescribedPredicate;
 import com.tngtech.archunit.core.domain.*;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.*;
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.repository.Repository;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,11 +53,15 @@ public interface CleanArchitectureRules {
     
     String CONTROLLER_SUFFIX = "Controller";
     
+    String SCHEDULER_SUFFIX = "Scheduler";
+    
     String PERSISTENCE_SUFFIX = "Persistence";
     
     String REPOSITORY_SUFFIX = "Repository";
     
     String API_RESPONSE_SUFFIX = "Response";
+    
+    String API_RESPONSE_METHOD_NAME = "of";
     
     String SPRING_FRAMEWORK_PACKAGES = "org.springframework..";
     
@@ -326,6 +332,27 @@ public interface CleanArchitectureRules {
                 "authentication");
     
     @ArchTest
+    ArchRule SCHEDULER_CLASSES_SHOULD_BE_SUFFIXED_WITH_CORRECT_NAME = classes().that()
+        .containAnyMethodsThat(new DescribedPredicate<>("are annotated with @Scheduled ") {
+            @Override
+            public boolean test (JavaMethod method) {
+                return method.isAnnotatedWith(Scheduled.class);
+            }
+        })
+        .should()
+        .resideInAPackage(APPLICATION_PACKAGE)
+        .andShould()
+        .haveSimpleNameEndingWith(SCHEDULER_SUFFIX)
+        .allowEmptyShould(true);
+    
+    @ArchTest
+    ArchRule STATIC_METHOD_NAMED_OF_IN_RESPONSE_CLASSES = classes().that()
+        .haveSimpleNameEndingWith(API_RESPONSE_SUFFIX)
+        .and()
+        .resideInAPackage(APPLICATION_PACKAGE)
+        .should(haveStaticMethodNamedOf());
+    
+    @ArchTest
     ArchRule AVOID_BEAN_ANNOTATION_WITH_QUALIFIER = methods().that()
         .areAnnotatedWith(Bean.class)
         .should()
@@ -421,6 +448,27 @@ public interface CleanArchitectureRules {
         .areMetaAnnotatedWith(RestController.class)
         .should(new ApiVersioningCheck())
         .because("All endpoints should be versioned");
+    
+    private static ArchCondition<JavaClass> haveStaticMethodNamedOf () {
+        
+        return new ArchCondition<>("have a static method named 'of'") {
+            
+            @Override
+            public void check (JavaClass javaClass, ConditionEvents events) {
+                boolean hasStaticMethodNamedOf = javaClass.getMethods()
+                    .stream()
+                    .anyMatch(method -> method.getName()
+                        .equals(API_RESPONSE_METHOD_NAME) && method.getModifiers()
+                        .contains(JavaModifier.STATIC));
+                
+                String message =
+                    "Class %s %s a static method named 'of'".formatted(javaClass.getName(),
+                        hasStaticMethodNamedOf ? "contains" : "does not contain");
+                
+                events.add(new SimpleConditionEvent(javaClass, hasStaticMethodNamedOf, message));
+            }
+        };
+    }
     
     private static ArchCondition<JavaMethod> haveReturnTypeWithResponseSuffix () {
         
