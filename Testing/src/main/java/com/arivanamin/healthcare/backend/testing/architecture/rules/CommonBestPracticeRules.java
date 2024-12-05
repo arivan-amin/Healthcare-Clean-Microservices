@@ -25,7 +25,7 @@ public interface CommonBestPracticeRules extends BaseUnitTest {
             .should()
             .haveSimpleNameContaining("Interface");
     
-    // @ArchTest
+    @ArchTest
     ArchRule NO_ACCESS_TO_STANDARD_STREAMS = NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS;
     
     @ArchTest
