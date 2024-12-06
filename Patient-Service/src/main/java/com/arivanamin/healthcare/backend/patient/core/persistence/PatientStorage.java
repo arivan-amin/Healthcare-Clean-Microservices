@@ -4,7 +4,7 @@ import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 
 import java.util.*;
 
-public interface PatientPersistence {
+public interface PatientStorage {
     
     List<Patient> findAll ();
     

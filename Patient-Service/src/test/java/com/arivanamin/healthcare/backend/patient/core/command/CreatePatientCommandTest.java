@@ -2,7 +2,7 @@ package com.arivanamin.healthcare.backend.patient.core.command;
 
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.core.exception.PatientAlreadyExistsException;
-import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
+import com.arivanamin.healthcare.backend.patient.core.persistence.PatientStorage;
 import com.arivanamin.healthcare.backend.testing.architecture.bases.BaseUnitTest;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ class CreatePatientCommandTest implements BaseUnitTest {
     private final String emailAddress = "echo@mail.com";
     private final UUID createdPatientId = UUID.randomUUID();
     
-    private PatientPersistence persistence;
+    private PatientStorage persistence;
     private CreatePatientCommand command;
     
     private Patient patient;
@@ -31,7 +31,7 @@ class CreatePatientCommandTest implements BaseUnitTest {
     }
     
     private void givenCommandWithMockFindAll () {
-        persistence = mock(PatientPersistence.class);
+        persistence = mock(PatientStorage.class);
         command = new CreatePatientCommand(persistence);
         Patient patient = RANDOM.nextObject(Patient.class);
         patient.setEmail(emailAddress);
@@ -56,7 +56,7 @@ class CreatePatientCommandTest implements BaseUnitTest {
     }
     
     private void givenCommandWithMockPersistence () {
-        persistence = mock(PatientPersistence.class);
+        persistence = mock(PatientStorage.class);
         command = new CreatePatientCommand(persistence);
         when(persistence.create(any())).thenReturn(createdPatientId);
         patient = RANDOM.nextObject(Patient.class);

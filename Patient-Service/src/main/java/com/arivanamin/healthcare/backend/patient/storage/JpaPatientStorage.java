@@ -1,7 +1,7 @@
-package com.arivanamin.healthcare.backend.patient.details;
+package com.arivanamin.healthcare.backend.patient.storage;
 
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
-import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
+import com.arivanamin.healthcare.backend.patient.core.persistence.PatientStorage;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +11,7 @@ import java.util.*;
 @RequiredArgsConstructor
 @Slf4j
 @Transactional
-public class JpaPatientPersistence implements PatientPersistence {
+public class JpaPatientStorage implements PatientStorage {
     
     private final PatientRepository repository;
     

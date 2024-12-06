@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.patient.details;
+package com.arivanamin.healthcare.backend.patient.storage;
 
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import com.arivanamin.healthcare.backend.testing.architecture.bases.BaseIntegrationTest;
@@ -12,12 +12,12 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest (showSql = false)
-class JpaPatientPersistenceIntegrationTest implements BaseIntegrationTest {
+class JpaPatientStorageIntegrationTest implements BaseIntegrationTest {
     
     @Autowired
     private PatientRepository repository;
     
-    private JpaPatientPersistence persistence;
+    private JpaPatientStorage persistence;
     private int numberOfSavedEntities;
     
     private UUID expectedId;
@@ -26,7 +26,7 @@ class JpaPatientPersistenceIntegrationTest implements BaseIntegrationTest {
     
     @BeforeEach
     void setUp () {
-        persistence = new JpaPatientPersistence(repository);
+        persistence = new JpaPatientStorage(repository);
     }
     
     @AfterEach

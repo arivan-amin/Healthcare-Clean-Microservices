@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.patient.details;
+package com.arivanamin.healthcare.backend.patient.storage;
 
 import com.arivanamin.healthcare.backend.base.domain.gender.Gender;
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;

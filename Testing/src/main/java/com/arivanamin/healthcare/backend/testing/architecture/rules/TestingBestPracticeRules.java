@@ -64,5 +64,5 @@ public interface TestingBestPracticeRules extends BaseUnitTest {
             .andShould()
             .resideInAPackage(APPLICATION_PACKAGE)
             .orShould()
-            .resideInAPackage(DETAILS_PACKAGE);
+            .resideInAPackage(STORAGE_PACKAGE);
 }

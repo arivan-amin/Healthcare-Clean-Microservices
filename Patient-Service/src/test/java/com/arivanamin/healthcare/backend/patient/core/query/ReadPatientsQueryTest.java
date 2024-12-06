@@ -1,7 +1,7 @@
 package com.arivanamin.healthcare.backend.patient.core.query;
 
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
-import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
+import com.arivanamin.healthcare.backend.patient.core.persistence.PatientStorage;
 import com.arivanamin.healthcare.backend.testing.architecture.bases.BaseUnitTest;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ import static org.mockito.Mockito.*;
 class ReadPatientsQueryTest implements BaseUnitTest {
     
     private final List<Patient> patients = List.of();
-    private PatientPersistence persistence;
+    private PatientStorage persistence;
     private ReadPatientsQuery query;
     
     @Test
@@ -24,7 +24,7 @@ class ReadPatientsQueryTest implements BaseUnitTest {
     }
     
     private void givenQueryWithMockPersistence () {
-        persistence = mock(PatientPersistence.class);
+        persistence = mock(PatientStorage.class);
         when(persistence.findAll()).thenReturn(patients);
         query = new ReadPatientsQuery(persistence);
     }

@@ -2,7 +2,7 @@ package com.arivanamin.healthcare.backend.patient.core.query;
 
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import com.arivanamin.healthcare.backend.patient.core.exception.PatientNotFoundException;
-import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
+import com.arivanamin.healthcare.backend.patient.core.persistence.PatientStorage;
 import com.arivanamin.healthcare.backend.testing.architecture.bases.BaseUnitTest;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ class ReadPatientByIdQueryTest implements BaseUnitTest {
     private final Patient patient = RANDOM.nextObject(Patient.class);
     private final UUID id = UUID.randomUUID();
     
-    private PatientPersistence persistence;
+    private PatientStorage persistence;
     private ReadPatientByIdQuery query;
     
     @Test
@@ -29,7 +29,7 @@ class ReadPatientByIdQueryTest implements BaseUnitTest {
     }
     
     private void givenQueryWithMockPersistence () {
-        persistence = mock(PatientPersistence.class);
+        persistence = mock(PatientStorage.class);
         when(persistence.findById(id)).thenReturn(Optional.of(patient));
         query = new ReadPatientByIdQuery(persistence);
     }
@@ -60,7 +60,7 @@ class ReadPatientByIdQueryTest implements BaseUnitTest {
     }
     
     private void givenQueryWithMockThatThrowsException () {
-        persistence = mock(PatientPersistence.class);
+        persistence = mock(PatientStorage.class);
         when(persistence.findById(id)).thenThrow(PatientNotFoundException.class);
         query = new ReadPatientByIdQuery(persistence);
     }

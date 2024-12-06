@@ -1,4 +1,4 @@
-package com.arivanamin.healthcare.backend.patient.details;
+package com.arivanamin.healthcare.backend.patient.storage;
 
 import com.arivanamin.healthcare.backend.testing.architecture.bases.BaseUnitTest;
 import org.junit.jupiter.api.Tag;
@@ -10,13 +10,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @Tag ("current")
 @ExtendWith (MockitoExtension.class)
-class JpaPatientPersistenceTest implements BaseUnitTest {
+class JpaPatientStorageTest implements BaseUnitTest {
     
     @Mock
     PatientRepository repository;
     
     @InjectMocks
-    JpaPatientPersistence persistence;
+    JpaPatientStorage persistence;
     
     @Test
     void shouldReturnAllPatientsFromRepository () {

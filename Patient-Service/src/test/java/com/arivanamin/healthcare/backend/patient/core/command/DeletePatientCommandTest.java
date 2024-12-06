@@ -1,6 +1,6 @@
 package com.arivanamin.healthcare.backend.patient.core.command;
 
-import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
+import com.arivanamin.healthcare.backend.patient.core.persistence.PatientStorage;
 import com.arivanamin.healthcare.backend.testing.architecture.bases.BaseUnitTest;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -14,7 +14,7 @@ class DeletePatientCommandTest implements BaseUnitTest {
     
     private final UUID id = UUID.randomUUID();
     
-    private PatientPersistence persistence;
+    private PatientStorage persistence;
     private DeletePatientCommand command;
     
     @Test
@@ -25,7 +25,7 @@ class DeletePatientCommandTest implements BaseUnitTest {
     }
     
     private void givenCommandWithMockPersistence () {
-        persistence = mock(PatientPersistence.class);
+        persistence = mock(PatientStorage.class);
         command = new DeletePatientCommand(persistence);
     }
     

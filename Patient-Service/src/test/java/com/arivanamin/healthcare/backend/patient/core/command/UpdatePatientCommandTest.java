@@ -1,7 +1,7 @@
 package com.arivanamin.healthcare.backend.patient.core.command;
 
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
-import com.arivanamin.healthcare.backend.patient.core.persistence.PatientPersistence;
+import com.arivanamin.healthcare.backend.patient.core.persistence.PatientStorage;
 import com.arivanamin.healthcare.backend.testing.architecture.bases.BaseUnitTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ class UpdatePatientCommandTest implements BaseUnitTest {
     
     private final Patient patient = RANDOM.nextObject(Patient.class);
     
-    private PatientPersistence persistence;
+    private PatientStorage persistence;
     private UpdatePatientCommand command;
     
     @Test
@@ -27,7 +27,7 @@ class UpdatePatientCommandTest implements BaseUnitTest {
     }
     
     private void givenCommandWithMockPersistence () {
-        persistence = Mockito.mock(PatientPersistence.class);
+        persistence = Mockito.mock(PatientStorage.class);
         command = new UpdatePatientCommand(persistence);
     }
     
