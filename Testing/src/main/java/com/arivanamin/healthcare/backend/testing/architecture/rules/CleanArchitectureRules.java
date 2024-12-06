@@ -388,7 +388,7 @@ public interface CleanArchitectureRules {
             Async.class);
     
     @ArchTest
-    ArchRule ENTITY_CLASSES_SHOULD_NOT_IMPLEMENT_EQUALS_HASHCODE_AND_TO_STRING = classes().that()
+    ArchRule ENTITY_CLASSES_SHOULD_NOT_IMPLEMENT_EQUALS_HASHCODE = classes().that()
         .areAnnotatedWith(Entity.class)
         .or()
         .areMetaAnnotatedWith(Entity.class)
