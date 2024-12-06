@@ -23,7 +23,6 @@ public class JpaPatient {
     private static ModelMapper mapper = new ModelMapper();
     
     @Id
-    @GeneratedValue
     UUID id;
     
     @NotBlank
