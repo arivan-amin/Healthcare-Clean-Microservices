@@ -23,7 +23,8 @@
         <java.version>21</java.version>
         <spring-cloud-bom-version>2024.0.0</spring-cloud-bom-version>
         <!-- Other dependency versions -->
-        <springdoc-starter-version>2.7.0</springdoc-starter-version>
+        <springdoc-web-mvc-version>2.7.0</springdoc-web-mvc-version>
+        <springdoc-web-flux-version>2.7.0</springdoc-web-flux-version>
         <caffeine-cache-version>3.1.8</caffeine-cache-version>
         <java-faker-version>1.0.2</java-faker-version>
         <easy-random-version>5.0.0</easy-random-version>
@@ -79,9 +80,10 @@
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>${springdoc-starter-version}</version>
+            <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+            <version>${springdoc-web-mvc-version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>

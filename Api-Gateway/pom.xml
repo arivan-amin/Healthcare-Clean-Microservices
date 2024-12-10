@@ -27,7 +27,7 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
-            <version>2.5.0</version>
+            <version>${springdoc-web-flux-version}</version>
         </dependency>
     </dependencies>
 
