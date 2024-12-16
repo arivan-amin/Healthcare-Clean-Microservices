@@ -43,7 +43,7 @@ public class PatientControllerAdvice {
     }
     
     @ExceptionHandler (MissingPathVariableException.class)
-    ProblemDetail handleMissingPathVariable (HttpMessageNotReadableException exception) {
+    ProblemDetail handleMissingPathVariable (MissingPathVariableException exception) {
         ProblemDetail detail = forStatusAndDetail(BAD_REQUEST, exception.getMessage());
         detail.setTitle("Bad request, Missing required path variables");
         detail.setType(URI.create(
