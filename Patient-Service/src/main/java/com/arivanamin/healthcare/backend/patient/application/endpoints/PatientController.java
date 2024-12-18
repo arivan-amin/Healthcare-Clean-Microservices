@@ -1,5 +1,6 @@
 package com.arivanamin.healthcare.backend.patient.application.endpoints;
 
+import com.arivanamin.healthcare.backend.patient.application.audit.AuditHelper;
 import com.arivanamin.healthcare.backend.patient.application.request.CreatePatientRequest;
 import com.arivanamin.healthcare.backend.patient.application.request.UpdatePatientRequest;
 import com.arivanamin.healthcare.backend.patient.application.response.*;
@@ -31,6 +32,8 @@ class PatientController {
     private final UpdatePatientCommand updateCommand;
     private final DeletePatientCommand deleteCommand;
     
+    private final AuditHelper auditHelper;
+    
     @GetMapping (PROTECTED_API_BASE_PATH + "/v1/accounts")
     @Cacheable (cacheNames = "patientsCache")
     @Operation (summary = "Get a list of patients")
@@ -44,6 +47,8 @@ class PatientController {
     @Operation (summary = "Get a single patient by id")
     @ResponseStatus (HttpStatus.OK)
     public PatientResponse getPatientById (@PathVariable UUID id) {
+        auditHelper.sendAuditLog(PROTECTED_API_BASE_PATH + "/v1/accounts/{id}", String.valueOf(id),
+            "transaction-service", "get by id");
         return PatientResponse.of(readByIdQuery.execute(id));
     }
     
