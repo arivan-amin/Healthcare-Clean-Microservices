@@ -1,12 +1,13 @@
 package com.arivanamin.healthcare.backend.base.domain.audit;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AuditEvent {
     
     private String serviceName;
