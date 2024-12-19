@@ -1,9 +1,11 @@
 package com.arivanamin.healthcare.backend.patient.application.endpoints;
 
-import com.arivanamin.healthcare.backend.patient.application.audit.AuditHelper;
+import com.arivanamin.healthcare.backend.base.domain.audit.AuditEvent;
+import com.arivanamin.healthcare.backend.base.domain.audit.AuditTopics;
 import com.arivanamin.healthcare.backend.patient.application.request.CreatePatientRequest;
 import com.arivanamin.healthcare.backend.patient.application.request.UpdatePatientRequest;
 import com.arivanamin.healthcare.backend.patient.application.response.*;
+import com.arivanamin.healthcare.backend.patient.core.audit.AuditEventPublisher;
 import com.arivanamin.healthcare.backend.patient.core.command.*;
 import com.arivanamin.healthcare.backend.patient.core.query.ReadPatientByIdQuery;
 import com.arivanamin.healthcare.backend.patient.core.query.ReadPatientsQuery;
@@ -16,6 +18,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static com.arivanamin.healthcare.backend.patient.application.config.PatientApiConfig.PROTECTED_API_BASE_PATH;
@@ -32,7 +35,7 @@ class PatientController {
     private final UpdatePatientCommand updateCommand;
     private final DeletePatientCommand deleteCommand;
     
-    private final AuditHelper auditHelper;
+    private final AuditEventPublisher auditPublisher;
     
     @GetMapping (PROTECTED_API_BASE_PATH + "/v1/accounts")
     @Cacheable (cacheNames = "patientsCache")
@@ -47,8 +50,14 @@ class PatientController {
     @Operation (summary = "Get a single patient by id")
     @ResponseStatus (HttpStatus.OK)
     public PatientResponse getPatientById (@PathVariable UUID id) {
-        auditHelper.sendAuditLog(PROTECTED_API_BASE_PATH + "/v1/accounts/{id}", String.valueOf(id),
-            "transaction-service", "get by id");
+        AuditEvent event = AuditEvent.builder()
+            .location(PROTECTED_API_BASE_PATH + "/v1/accounts/{id})")
+            .data(String.valueOf(id))
+            .serviceName("transaction-service")
+            .timestamp(LocalDateTime.now())
+            .action("get patient by id")
+            .build();
+        auditPublisher.sendAuditLog(AuditTopics.API_AUDIT_TOPIC, event);
         return PatientResponse.of(readByIdQuery.execute(id));
     }
     
