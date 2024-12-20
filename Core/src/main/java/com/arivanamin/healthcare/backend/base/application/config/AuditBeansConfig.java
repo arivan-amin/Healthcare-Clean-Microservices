@@ -1,8 +1,9 @@
-package com.arivanamin.healthcare.backend.patient.application.config;
+package com.arivanamin.healthcare.backend.base.application.config;
 
+import com.arivanamin.healthcare.backend.base.application.audit.KafkaAuditEventPublisher;
 import com.arivanamin.healthcare.backend.base.domain.audit.AuditEvent;
-import com.arivanamin.healthcare.backend.patient.application.audit.KafkaAuditEventPublisher;
-import com.arivanamin.healthcare.backend.patient.core.audit.AuditEventPublisher;
+import com.arivanamin.healthcare.backend.base.domain.audit.AuditEventPublisher;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
@@ -12,10 +13,13 @@ import java.time.LocalDateTime;
 @Component
 class AuditBeansConfig {
     
+    @Value ("${spring.application.name}")
+    String applicationName;
+    
     @Bean
-    public AuditEvent persistence () {
+    public AuditEvent auditEvent () {
         return AuditEvent.builder()
-            .serviceName("transaction-service")
+            .serviceName(applicationName)
             .timestamp(LocalDateTime.now())
             .build();
     }

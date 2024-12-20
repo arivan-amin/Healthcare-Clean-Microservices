@@ -1,13 +1,11 @@
-package com.arivanamin.healthcare.backend.patient.application.audit;
+package com.arivanamin.healthcare.backend.base.application.audit;
 
 import com.arivanamin.healthcare.backend.base.domain.audit.AuditEvent;
-import com.arivanamin.healthcare.backend.patient.core.audit.AuditEventPublisher;
+import com.arivanamin.healthcare.backend.base.domain.audit.AuditEventPublisher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
-@Service
 public class KafkaAuditEventPublisher implements AuditEventPublisher {
     
     private final KafkaTemplate<String, AuditEvent> kafkaTemplate;
