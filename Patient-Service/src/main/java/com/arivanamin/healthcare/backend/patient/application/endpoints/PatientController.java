@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-import static com.arivanamin.healthcare.backend.patient.application.config.PatientApiConfig.PROTECTED_API_BASE_PATH;
+import static com.arivanamin.healthcare.backend.patient.application.config.PatientApiURLs.*;
 
 @Tag (name = "Patient Controller")
 @RestController
@@ -35,7 +35,7 @@ class PatientController {
     private final AuditEventPublisher auditPublisher;
     private final AuditEvent event;
     
-    @GetMapping (PROTECTED_API_BASE_PATH + "/v1/accounts")
+    @GetMapping (GET_PATIENTS_URL)
     @Cacheable (cacheNames = "patientsCache")
     @Operation (summary = "Get a list of patients")
     @ResponseStatus (HttpStatus.OK)
@@ -43,13 +43,14 @@ class PatientController {
         return ReadPatientsResponse.of(readQuery.execute());
     }
     
-    @GetMapping (PROTECTED_API_BASE_PATH + "/v1/accounts/{id}")
+    @GetMapping (GET_PATIENT_BY_ID_URL)
     @Cacheable (cacheNames = "patientByIdCache")
     @Operation (summary = "Get a single patient by id")
     @ResponseStatus (HttpStatus.OK)
     public PatientResponse getPatientById (@PathVariable UUID id) {
         
-        event.setLocation(PROTECTED_API_BASE_PATH + "/v1/accounts/{id})");
+        // todo 12/21/24 - shouldn't be done here, aspect is a better place
+        event.setLocation(PROTECTED_API + "/v1/accounts/{id})");
         event.setData(String.valueOf(id));
         event.setAction("get patient by id");
         
@@ -57,7 +58,7 @@ class PatientController {
         return PatientResponse.of(readByIdQuery.execute(id));
     }
     
-    @PostMapping (PROTECTED_API_BASE_PATH + "/v1/accounts")
+    @PostMapping (CREATE_PATIENT_URL)
     @Operation (summary = "Creates a patient")
     @ResponseStatus (HttpStatus.CREATED)
     public CreatePatientResponse createPatient (@RequestBody @Valid CreatePatientRequest request) {
@@ -65,7 +66,7 @@ class PatientController {
         return CreatePatientResponse.of(createdPatientId);
     }
     
-    @PutMapping (PROTECTED_API_BASE_PATH + "/v1/accounts/{id}")
+    @PutMapping (UPDATE_PATIENT_URL)
     @Operation (summary = "Updates a patient")
     @ResponseStatus (HttpStatus.OK)
     public void updatePatient (@PathVariable UUID id,
@@ -73,7 +74,7 @@ class PatientController {
         updateCommand.execute(request.toEntity(id));
     }
     
-    @DeleteMapping (PROTECTED_API_BASE_PATH + "/v1/accounts/{id}")
+    @DeleteMapping (DELETE_PATIENT_URL)
     @Operation (summary = "Deletes a patient")
     @ResponseStatus (HttpStatus.NO_CONTENT)
     public void deletePatient (@PathVariable UUID id) {
