@@ -2,28 +2,41 @@ package com.arivanamin.healthcare.backend.base.application.audit;
 
 import com.arivanamin.healthcare.backend.base.domain.audit.AuditEvent;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
-import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+import static com.arivanamin.healthcare.backend.base.domain.dates.TimestampHelper.toTimestamp;
+import static java.time.LocalDateTime.now;
 
 @RequiredArgsConstructor
+@Slf4j
 public class AuditDataExtractor {
     
-    private final AuditEvent event;
+    private final String serviceName;
     
     public AuditEvent extractAuditData (ProceedingJoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         String requestURL = extractRequestUrl(method);
         String requestAnnotation = extractRequestAnnotation(method);
+        AuditEvent event = new AuditEvent();
+        event.setServiceName(serviceName);
+        event.setTimestamp(toTimestamp(now()));
         event.setLocation(requestURL);
         event.setAction(requestAnnotation);
-        event.setData(List.of(joinPoint.getArgs())
-            .toString());
+        String data = Arrays.stream(joinPoint.getArgs())
+            .map(String::valueOf)
+            .collect(Collectors.joining(","));
+        event.setData(data);
+        
+        log.info("Create AuditEvent to be published = {}", event);
         return event;
     }
     

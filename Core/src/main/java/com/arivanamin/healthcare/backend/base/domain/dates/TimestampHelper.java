@@ -14,10 +14,16 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor (access = PRIVATE)
 public final class TimestampHelper {
     
-    public static LocalDateTime convertEpochToLocalDateTime (long timestamp) {
-        log.info("received timestamp to convert = {}", timestamp);
+    public static LocalDateTime toLocalDateTime (long timestamp) {
         LocalDateTime result = ofInstant(ofEpochMilli(timestamp), ZONE_ID);
-        log.info("timestamp resulted in LocalDateTime = {}", result);
+        log.info("timestamp {} converted to LocalDateTime = {}", timestamp, result);
+        return result;
+    }
+    
+    public static Long toTimestamp (LocalDateTime dateTime) {
+        Long result = dateTime.atZone(ZONE_ID)
+            .toEpochSecond();
+        log.info("LocalDateTime {} converted to timestamp = {}", dateTime, result);
         return result;
     }
 }

@@ -2,8 +2,6 @@ package com.arivanamin.healthcare.backend.base.domain.audit;
 
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -14,6 +12,6 @@ public class AuditEvent {
     private String location;
     private String action;
     private String data;
-    private LocalDateTime timestamp;
+    private long timestamp;
 }
 
