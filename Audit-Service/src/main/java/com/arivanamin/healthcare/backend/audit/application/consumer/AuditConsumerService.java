@@ -13,7 +13,7 @@ public class AuditConsumerService {
     @KafkaListener (topics = AuditTopics.API_AUDIT_TOPIC, groupId = "audit-service-group")
     public void consumeAuditEvent (AuditEvent auditEvent) {
         log.info("Received audit event: {}", auditEvent);
-        saveToDatabase(auditEvent);
+        // saveToDatabase(auditEvent);
     }
     
     private void saveToDatabase (AuditEvent auditEvent) {
