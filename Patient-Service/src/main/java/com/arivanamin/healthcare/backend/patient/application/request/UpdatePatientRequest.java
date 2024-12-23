@@ -20,10 +20,8 @@ public class UpdatePatientRequest {
     Gender gender;
     String address;
     
-    ModelMapper mapper = new ModelMapper();
-    
     public Patient toEntity (UUID id) {
-        Patient patient = mapper.map(this, Patient.class);
+        Patient patient = new ModelMapper().map(this, Patient.class);
         patient.setId(id);
         return patient;
     }

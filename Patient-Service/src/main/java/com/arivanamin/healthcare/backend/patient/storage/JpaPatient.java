@@ -20,8 +20,6 @@ import java.util.UUID;
 @ToString
 public class JpaPatient {
     
-    private static ModelMapper mapper = new ModelMapper();
-    
     @Id
     UUID id;
     
@@ -44,10 +42,10 @@ public class JpaPatient {
     String address;
     
     public static JpaPatient fromDomain (Patient patient) {
-        return mapper.map(patient, JpaPatient.class);
+        return new ModelMapper().map(patient, JpaPatient.class);
     }
     
     public Patient toDomain () {
-        return mapper.map(this, Patient.class);
+        return new ModelMapper().map(this, Patient.class);
     }
 }

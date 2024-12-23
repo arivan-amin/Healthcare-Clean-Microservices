@@ -1,7 +1,5 @@
 package com.arivanamin.healthcare.backend.patient.application.endpoints;
 
-import com.arivanamin.healthcare.backend.base.domain.audit.AuditEvent;
-import com.arivanamin.healthcare.backend.base.domain.audit.AuditEventPublisher;
 import com.arivanamin.healthcare.backend.patient.application.request.CreatePatientRequest;
 import com.arivanamin.healthcare.backend.patient.application.request.UpdatePatientRequest;
 import com.arivanamin.healthcare.backend.patient.application.response.*;
@@ -33,9 +31,6 @@ class PatientController {
     private final UpdatePatientCommand updateCommand;
     private final DeletePatientCommand deleteCommand;
     
-    private final AuditEventPublisher auditPublisher;
-    private AuditEvent event;
-    
     @GetMapping (GET_PATIENTS_URL)
     @Cacheable (cacheNames = "patientsCache")
     @Operation (summary = "Get a list of patients")
@@ -49,13 +44,6 @@ class PatientController {
     @Operation (summary = "Get a single patient by id")
     @ResponseStatus (HttpStatus.OK)
     public PatientResponse getPatientById (@PathVariable UUID id) {
-        
-        // todo 12/21/24 - shouldn't be done here, aspect is a better place
-        // event.setLocation(PROTECTED_API + "/v1/accounts/{id})");
-        // event.setData(String.valueOf(id));
-        // event.setAction("get patient by id");
-        
-        // auditPublisher.sendAuditLog(AuditTopics.API_AUDIT_TOPIC, event);
         return PatientResponse.of(readByIdQuery.execute(id));
     }
     
