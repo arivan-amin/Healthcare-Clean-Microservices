@@ -1,9 +1,9 @@
-package com.arivanamin.healthcare.backend.audit;
+package com.arivanamin.healthcare.backend.audit.storage;
 
 import com.arivanamin.healthcare.backend.testing.architecture.bases.BaseUnitTest;
 import org.junit.jupiter.api.Test;
 
-class AuditApplicationTest implements BaseUnitTest {
+class JpaAuditEventStorageTest implements BaseUnitTest {
     
     @Test
     void should () {
