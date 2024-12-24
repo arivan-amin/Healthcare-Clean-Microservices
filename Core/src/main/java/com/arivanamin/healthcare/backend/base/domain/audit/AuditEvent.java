@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 public class AuditEvent {
     
+    private String id;
     private String serviceName;
     private String location;
     private String action;
