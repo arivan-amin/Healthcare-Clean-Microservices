@@ -5,6 +5,7 @@ import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.hibernate.annotations.UuidGenerator;
 import org.modelmapper.ModelMapper;
 
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ import java.util.UUID;
 public class JpaPatient {
     
     @Id
+    @UuidGenerator
     UUID id;
     
     @NotBlank

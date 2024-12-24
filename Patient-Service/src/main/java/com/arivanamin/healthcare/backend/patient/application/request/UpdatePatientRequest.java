@@ -5,8 +5,9 @@ import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import lombok.*;
 import org.modelmapper.ModelMapper;
 
-import java.time.LocalDate;
 import java.util.UUID;
+
+import static com.arivanamin.healthcare.backend.base.domain.dates.TimestampHelper.toLocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -16,13 +17,14 @@ public class UpdatePatientRequest {
     String firstName;
     String lastName;
     String email;
-    LocalDate dateOfBirth;
+    long dateOfBirth;
     Gender gender;
     String address;
     
     public Patient toEntity (UUID id) {
         Patient patient = new ModelMapper().map(this, Patient.class);
         patient.setId(id);
+        patient.setDateOfBirth(toLocalDateTime(dateOfBirth).toLocalDate());
         return patient;
     }
 }
