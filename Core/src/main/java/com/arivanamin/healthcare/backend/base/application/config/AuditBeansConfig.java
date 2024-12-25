@@ -12,21 +12,10 @@ import org.springframework.stereotype.Component;
 @Component
 class AuditBeansConfig {
     
-    @Value ("${spring.application.name}")
-    String applicationName;
-    
-    /*@Bean
-    @Scope (value = SCOPE_REQUEST, proxyMode = TARGET_CLASS)
-    public AuditEvent auditEvent () {
-        return AuditEvent.builder()
-            .serviceName(applicationName)
-            .timestamp(TimestampHelper.toTimestamp(LocalDateTime.now()))
-            .build();
-    }*/
-    
     @Bean
-    public AuditDataExtractor auditDataExtractor () {
-        return new AuditDataExtractor(applicationName);
+    public AuditDataExtractor auditDataExtractor (
+        @Value ("${spring.application.name}") String appName) {
+        return new AuditDataExtractor(appName);
     }
     
     @Bean
