@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import static com.arivanamin.healthcare.backend.base.domain.dates.TimestampHelper.toTimestamp;
-import static java.time.LocalDateTime.now;
+import static com.arivanamin.healthcare.backend.base.domain.dates.TimestampHelper.toTimestampInMilliseconds;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -28,7 +28,7 @@ public class AuditDataExtractor {
         String requestAnnotation = extractRequestAnnotation(method);
         AuditEvent event = new AuditEvent();
         event.setServiceName(serviceName);
-        event.setTimestamp(toTimestamp(now()));
+        event.setTimestamp(toTimestampInMilliseconds(LocalDateTime.now()));
         event.setLocation(requestURL);
         event.setAction(requestAnnotation);
         String data = Arrays.stream(joinPoint.getArgs())
