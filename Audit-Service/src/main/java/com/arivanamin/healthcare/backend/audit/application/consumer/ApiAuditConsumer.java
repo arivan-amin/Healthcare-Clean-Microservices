@@ -24,6 +24,7 @@ public class ApiAuditConsumer {
     }
     
     private void saveToStorage (AuditEvent event) {
-        storage.create(event);
+        String savedEventId = storage.create(event);
+        log.info("savedEventId = {}", savedEventId);
     }
 }

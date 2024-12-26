@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 
 import static com.arivanamin.healthcare.backend.base.domain.dates.TimestampHelper.toLocalDateTime;
-import static com.arivanamin.healthcare.backend.base.domain.dates.TimestampHelper.toTimestamp;
+import static com.arivanamin.healthcare.backend.base.domain.dates.TimestampHelper.toTimestampInMilliseconds;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
@@ -18,7 +18,7 @@ class CreatePatientRequestTest implements BaseUnitTest {
     void shouldMapRequestToEntityCorrectly () {
         // given
         CreatePatientRequest request = RANDOM.nextObject(CreatePatientRequest.class);
-        request.setDateOfBirth(toTimestamp(LocalDateTime.now()));
+        request.setDateOfBirth(toTimestampInMilliseconds(LocalDateTime.now()));
         
         // when
         Patient entity = request.toEntity();

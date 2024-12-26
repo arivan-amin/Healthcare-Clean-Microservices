@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface AuditEventRepository extends MongoRepository<JpaAuditEvent, String> {
     
-    List<JpaAuditEvent> findAllByTimestampBetween (LocalDateTime start, LocalDateTime end);
+    List<JpaAuditEvent> findAllByRecordedAtBetween (LocalDateTime start, LocalDateTime end);
 }

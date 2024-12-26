@@ -8,6 +8,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
+import static com.arivanamin.healthcare.backend.base.domain.dates.TimestampHelper.toLocalDateTime;
+import static com.arivanamin.healthcare.backend.base.domain.dates.TimestampHelper.toTimestampInMilliseconds;
+
 @Document
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,18 +20,21 @@ public class JpaAuditEvent {
     
     @Id
     String id;
-    
     private String serviceName;
     private String location;
     private String action;
     private String data;
-    private LocalDateTime timestamp;
+    private LocalDateTime recordedAt;
     
     public static JpaAuditEvent fromDomain (AuditEvent event) {
-        return new ModelMapper().map(event, JpaAuditEvent.class);
+        JpaAuditEvent jpaEvent = new ModelMapper().map(event, JpaAuditEvent.class);
+        jpaEvent.setRecordedAt(toLocalDateTime(event.getTimestamp()));
+        return jpaEvent;
     }
     
     public AuditEvent toDomain () {
-        return new ModelMapper().map(this, AuditEvent.class);
+        AuditEvent event = new ModelMapper().map(this, AuditEvent.class);
+        event.setTimestamp(toTimestampInMilliseconds(recordedAt));
+        return event;
     }
 }
