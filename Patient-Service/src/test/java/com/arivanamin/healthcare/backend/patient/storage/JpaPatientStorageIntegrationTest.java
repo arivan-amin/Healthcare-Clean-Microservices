@@ -2,16 +2,22 @@ package com.arivanamin.healthcare.backend.patient.storage;
 
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import com.arivanamin.healthcare.backend.testing.architecture.bases.BaseIntegrationTest;
+import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DataJpaTest (showSql = false)
+@SpringBootTest
+@AutoConfigureTestDatabase
+@Slf4j
 class JpaPatientStorageIntegrationTest implements BaseIntegrationTest {
     
     @Autowired
@@ -45,7 +51,9 @@ class JpaPatientStorageIntegrationTest implements BaseIntegrationTest {
         numberOfSavedEntities = FAKER.number()
             .numberBetween(3, 10);
         for (int i = 0; i < numberOfSavedEntities; i++) {
-            repository.save(RANDOM.nextObject(JpaPatient.class));
+            log.info("inside the loop {}", i);
+            JpaPatient entity = createSamplePatient();
+            repository.save(entity);
         }
     }
     
@@ -55,6 +63,16 @@ class JpaPatientStorageIntegrationTest implements BaseIntegrationTest {
     
     private void thenAssertThatAllEntitiesOfRepositoryAreReturned (List<Patient> result) {
         assertThat(result.size()).isEqualTo(numberOfSavedEntities);
+    }
+    
+    private static @NotNull JpaPatient createSamplePatient () {
+        JpaPatient entity = RANDOM.nextObject(JpaPatient.class);
+        entity.setId(null);
+        entity.setEmail(FAKER.internet()
+            .emailAddress());
+        entity.setDateOfBirth(LocalDate.now()
+            .minusYears(25));
+        return entity;
     }
     
     @Test
@@ -113,7 +131,7 @@ class JpaPatientStorageIntegrationTest implements BaseIntegrationTest {
     }
     
     private void givenValidSamplePatient () {
-        expectedPatient = RANDOM.nextObject(Patient.class);
+        expectedPatient = createSamplePatient().toDomain();
         expectedPatient.setEmail(FAKER.internet()
             .emailAddress());
     }

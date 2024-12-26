@@ -2,6 +2,7 @@ package com.arivanamin.healthcare.backend.patient.application.advice;
 
 import com.arivanamin.healthcare.backend.patient.core.exception.PatientAlreadyExistsException;
 import com.arivanamin.healthcare.backend.patient.core.exception.PatientNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.*;
@@ -15,6 +16,7 @@ import java.time.Instant;
 import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.ProblemDetail.forStatusAndDetail;
 
+@Slf4j
 @RestControllerAdvice
 public class PatientControllerAdvice {
     
@@ -27,6 +29,7 @@ public class PatientControllerAdvice {
         detail.setProperty("errorCategory", "Resource not found");
         detail.setProperty("timestamp", Instant.now());
         detail.setDetail(exception.getMessage());
+        log.error("PatientNotFoundException advice", exception);
         return detail;
     }
     
@@ -39,6 +42,7 @@ public class PatientControllerAdvice {
         detail.setProperty("errorCategory", "Patient already exists");
         detail.setProperty("timestamp", Instant.now());
         detail.setDetail(exception.getMessage());
+        log.error("PatientAlreadyExistsException advice", exception);
         return detail;
     }
     
@@ -52,6 +56,7 @@ public class PatientControllerAdvice {
         detail.setProperty("errorCategory", "Missing Parameter");
         detail.setProperty("timestamp", Instant.now());
         detail.setDetail(exception.getMessage());
+        log.error("MissingPathVariableException advice", exception);
         return detail;
     }
     
@@ -65,6 +70,7 @@ public class PatientControllerAdvice {
         detail.setProperty("errorCategory", "Missing Parameter");
         detail.setProperty("timestamp", Instant.now());
         detail.setDetail(exception.getMessage());
+        log.error("HttpMessageNotReadableException advice", exception);
         return detail;
     }
     
@@ -78,6 +84,7 @@ public class PatientControllerAdvice {
         detail.setProperty("errorCategory", "Missing Parameter");
         detail.setProperty("timestamp", Instant.now());
         detail.setDetail(exception.getMessage());
+        log.error("MethodArgumentNotValidException advice", exception);
         return detail;
     }
     
@@ -92,6 +99,7 @@ public class PatientControllerAdvice {
         detail.setProperty("errorCategory", "Missing Parameter");
         detail.setProperty("timestamp", Instant.now());
         detail.setDetail(exception.getMessage());
+        log.error("MissingServletRequestParameterException advice", exception);
         return detail;
     }
     
@@ -106,6 +114,7 @@ public class PatientControllerAdvice {
         detail.setProperty("errorCategory", "Resource not found");
         detail.setProperty("timestamp", Instant.now());
         detail.setDetail(exception.getMessage());
+        log.error("NoResourceFoundException advice", exception);
         return detail;
     }
     
@@ -119,6 +128,7 @@ public class PatientControllerAdvice {
         detail.setProperty("errorCategory", "Internal Error");
         detail.setProperty("timestamp", Instant.now());
         detail.setDetail(exception.getMessage());
+        log.error("Exception advice", exception);
         return detail;
     }
 }

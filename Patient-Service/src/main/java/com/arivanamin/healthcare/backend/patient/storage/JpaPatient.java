@@ -5,6 +5,7 @@ import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.hibernate.annotations.UuidGenerator;
 import org.modelmapper.ModelMapper;
 
 import java.time.LocalDate;
@@ -20,9 +21,8 @@ import java.util.UUID;
 @ToString
 public class JpaPatient {
     
-    private static ModelMapper mapper = new ModelMapper();
-    
     @Id
+    @UuidGenerator
     UUID id;
     
     @NotBlank
@@ -44,10 +44,10 @@ public class JpaPatient {
     String address;
     
     public static JpaPatient fromDomain (Patient patient) {
-        return mapper.map(patient, JpaPatient.class);
+        return new ModelMapper().map(patient, JpaPatient.class);
     }
     
     public Patient toDomain () {
-        return mapper.map(this, Patient.class);
+        return new ModelMapper().map(this, Patient.class);
     }
 }

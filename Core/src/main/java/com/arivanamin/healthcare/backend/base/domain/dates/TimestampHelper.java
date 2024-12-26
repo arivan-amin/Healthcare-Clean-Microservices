@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 
-import static com.arivanamin.healthcare.backend.base.domain.config.CoreApplicationConfig.ZONE_ID;
+import static com.arivanamin.healthcare.backend.base.domain.config.CoreApplicationConfig.DEFAULT_ZONE_ID;
 import static java.time.Instant.ofEpochMilli;
 import static java.time.LocalDateTime.ofInstant;
 import static lombok.AccessLevel.PRIVATE;
@@ -14,10 +14,13 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor (access = PRIVATE)
 public final class TimestampHelper {
     
-    public static LocalDateTime convertEpochToLocalDateTime (long timestamp) {
-        log.info("received timestamp to convert = {}", timestamp);
-        LocalDateTime result = ofInstant(ofEpochMilli(timestamp), ZONE_ID);
-        log.info("timestamp resulted in LocalDateTime = {}", result);
-        return result;
+    public static LocalDateTime toLocalDateTime (long timestamp) {
+        return ofInstant(ofEpochMilli(timestamp), DEFAULT_ZONE_ID);
+    }
+    
+    public static Long toTimestampInMilliseconds (LocalDateTime dateTime) {
+        return dateTime.atZone(DEFAULT_ZONE_ID)
+            .toInstant()
+            .toEpochMilli();
     }
 }

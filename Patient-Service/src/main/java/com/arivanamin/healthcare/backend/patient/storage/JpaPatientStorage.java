@@ -10,7 +10,6 @@ import java.util.*;
 
 @RequiredArgsConstructor
 @Slf4j
-@Transactional
 public class JpaPatientStorage implements PatientStorage {
     
     private final PatientRepository repository;
@@ -29,17 +28,20 @@ public class JpaPatientStorage implements PatientStorage {
             .map(JpaPatient::toDomain);
     }
     
+    @Transactional
     @Override
     public UUID create (Patient patient) {
         return repository.save(JpaPatient.fromDomain(patient))
             .getId();
     }
     
+    @Transactional
     @Override
     public void update (Patient patient) {
         repository.save(JpaPatient.fromDomain(patient));
     }
     
+    @Transactional
     @Override
     public void delete (UUID id) {
         repository.deleteById(id);

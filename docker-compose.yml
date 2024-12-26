@@ -94,82 +94,86 @@ services:
       - mysql-data:/var/lib/mysql
       - ./Docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
   
-  #  mongo:
-  #    container_name: healthcare-mongo
-  #    restart: unless-stopped
-  #    image: mongo:8.0.0
-  #    ports:
-  #      - "27017:27017"
-  #    volumes:
-  #      - mongo-data:/data/db
-  #    environment:
-  #      MONGO_INITDB_ROOT_USERNAME: root
-  #      MONGO_INITDB_ROOT_PASSWORD: mongo
-  #
-  #  mongo-express:
-  #    container_name: mongo-express
-  #    restart: unless-stopped
-  #    image: mongo-express:latest
-  #    ports:
-  #      - "8081:8081"
-  #    environment:
-  #      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-  #      ME_CONFIG_MONGODB_ADMINPASSWORD: mongo
-  #      ME_CONFIG_MONGODB_SERVER: healthcare-mongo
-  #    depends_on:
-  #      - mongo
+  mongo:
+    container_name: healthcare-mongo
+    restart: unless-stopped
+    image: mongo:8.0.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+  
+  mongo-express:
+    container_name: healthcare-mongo-express
+    restart: unless-stopped
+    image: mongo-express:latest
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mongo
+      ME_CONFIG_MONGODB_SERVER: healthcare-mongo
+      ME_CONFIG_MONGODB_PORT: 27017
+      # Mongo Express UI Credentials
+      ME_CONFIG_BASICAUTH_USERNAME: express
+      ME_CONFIG_BASICAUTH_PASSWORD: healthcare
+    depends_on:
+      - mongo
 
   # Kafka
-#  zookeeper:
-#    container_name: healthcare-zookeeper
-#    restart: unless-stopped
-#    image: confluentinc/cp-zookeeper:7.5.0
-#    hostname: zookeeper
-#    ports:
-#      - "2181:2181"
-#    environment:
-#      ZOOKEEPER_CLIENT_PORT: 2181
-#      ZOOKEEPER_TICK_TIME: 2000
-#
-#  broker:
-#    container_name: healthcare-broker
-#    restart: unless-stopped
-#    image: confluentinc/cp-kafka:7.5.0
-#    ports:
-#      - "9092:9092"
-#      - "29092:29092"
-#    depends_on:
-#      - zookeeper
-#    environment:
-#      KAFKA_BROKER_ID: 1
-#      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092
-#      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-#
-#  schema-registry:
-#    container_name: healthcare-schema-registry
-#    restart: unless-stopped
-#    image: confluentinc/cp-schema-registry:7.5.0
-#    hostname: schema-registry
-#    depends_on:
-#      - broker
-#    ports:
-#      - "8085:8081"
-#    environment:
-#      SCHEMA_REGISTRY_HOST_NAME: schema-registry
-#      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker:29092'
-#      SCHEMA_REGISTRY_LISTENERS: http://schema-registry:8081
-#
-#  kafka-ui:
-#    container_name: healthcare-kafka-ui
-#    restart: unless-stopped
-#    image: provectuslabs/kafka-ui:latest
-#    ports:
-#      - "8086:8080"
-#    depends_on:
-#      - broker
-#    environment:
-#      KAFKA_CLUSTERS_NAME: local
-#      KAFKA_CLUSTERS_BOOTSTRAPSERVERS: broker:29092
-#      DYNAMIC_CONFIG_ENABLED: 'true'
+  zookeeper:
+    container_name: healthcare-zookeeper
+    restart: unless-stopped
+    image: confluentinc/cp-zookeeper:7.5.0
+    hostname: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  broker:
+    container_name: healthcare-broker
+    restart: unless-stopped
+    image: confluentinc/cp-kafka:7.5.0
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  schema-registry:
+    container_name: healthcare-schema-registry
+    restart: unless-stopped
+    image: confluentinc/cp-schema-registry:7.5.0
+    hostname: schema-registry
+    depends_on:
+      - broker
+    ports:
+      - "8085:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker:29092'
+      SCHEMA_REGISTRY_LISTENERS: http://schema-registry:8081
+
+  kafka-ui:
+    container_name: healthcare-kafka-ui
+    restart: unless-stopped
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - "8086:8080"
+    depends_on:
+      - broker
+    environment:
+      KAFKA_CLUSTERS_NAME: local
+      KAFKA_CLUSTERS_BOOTSTRAPSERVERS: broker:29092
+      DYNAMIC_CONFIG_ENABLED: 'true'

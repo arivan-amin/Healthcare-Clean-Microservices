@@ -1,4 +1,5 @@
 docker/tempo/tempo-data/
+*.sh
 
 target/
 !.mvn/wrapper/maven-wrapper.jar
