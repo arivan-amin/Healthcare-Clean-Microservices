@@ -107,7 +107,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: mongo
   
   mongo-express:
-    container_name: mongo-express
+    container_name: healthcare-mongo-express
     restart: unless-stopped
     image: mongo-express:latest
     ports:
@@ -116,6 +116,10 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: mongo
       ME_CONFIG_MONGODB_SERVER: healthcare-mongo
+      ME_CONFIG_MONGODB_PORT: 27017
+      # Mongo Express UI Credentials
+      ME_CONFIG_BASICAUTH_USERNAME: express
+      ME_CONFIG_BASICAUTH_PASSWORD: healthcare
     depends_on:
       - mongo
 
