@@ -1,6 +1,6 @@
 package com.arivanamin.healthcare.backend.audit.application.consumer;
 
-import com.arivanamin.healthcare.backend.audit.core.persistence.AuditEventStorage;
+import com.arivanamin.healthcare.backend.audit.core.command.CreateAuditEventCommand;
 import com.arivanamin.healthcare.backend.base.domain.aspects.LogExecutionTime;
 import com.arivanamin.healthcare.backend.base.domain.audit.AuditEvent;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import static com.arivanamin.healthcare.backend.base.domain.audit.AuditTopics.AP
 @Slf4j
 public class ApiAuditConsumer {
     
-    private final AuditEventStorage storage;
+    private final CreateAuditEventCommand command;
     
     @KafkaListener (topics = API_AUDIT_TOPIC, groupId = "api-audit-group")
     @LogExecutionTime
@@ -24,7 +24,7 @@ public class ApiAuditConsumer {
     }
     
     private void saveToStorage (AuditEvent event) {
-        String savedEventId = storage.create(event);
+        String savedEventId = command.execute(event);
         log.info("savedEventId = {}", savedEventId);
     }
 }
