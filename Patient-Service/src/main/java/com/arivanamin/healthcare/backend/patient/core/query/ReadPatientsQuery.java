@@ -9,9 +9,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReadPatientsQuery {
     
-    private final PatientStorage persistence;
+    private final PatientStorage storage;
     
     public List<Patient> execute () {
-        return persistence.findAll();
+        return storage.findAll();
     }
 }

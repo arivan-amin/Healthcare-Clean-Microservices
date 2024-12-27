@@ -10,17 +10,17 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CreatePatientCommand {
     
-    private final PatientStorage persistence;
+    private final PatientStorage storage;
     
     public UUID execute (Patient patient) {
         if (doesPatientExist(patient)) {
             throw new PatientAlreadyExistsException();
         }
-        return persistence.create(patient);
+        return storage.create(patient);
     }
     
     private boolean doesPatientExist (Patient patient) {
-        return persistence.findAll()
+        return storage.findAll()
             .stream()
             .anyMatch(p -> checkEmailDuplication(patient, p));
     }
