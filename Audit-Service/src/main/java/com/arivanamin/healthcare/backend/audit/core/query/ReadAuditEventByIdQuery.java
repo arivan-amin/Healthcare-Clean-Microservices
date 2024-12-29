@@ -6,7 +6,7 @@ import com.arivanamin.healthcare.backend.base.domain.audit.AuditEvent;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class ReadAuditEventsByIdQuery {
+public class ReadAuditEventByIdQuery {
     
     private final AuditEventStorage storage;
     
