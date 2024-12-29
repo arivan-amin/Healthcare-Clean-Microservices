@@ -2,16 +2,14 @@ package com.arivanamin.healthcare.backend.patient.application.request;
 
 import com.arivanamin.healthcare.backend.base.domain.gender.Gender;
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
-import lombok.*;
+import lombok.Value;
 import org.modelmapper.ModelMapper;
 
 import java.util.UUID;
 
 import static com.arivanamin.healthcare.backend.base.domain.dates.TimestampHelper.toLocalDateTime;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Value
 public class UpdatePatientRequest {
     
     String firstName;
