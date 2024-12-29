@@ -25,6 +25,9 @@ public class ApiGatewayRouting {
             .route(getPatientServiceRoute())
             .route(getPatientServiceApiDocRoute())
             .route(getPatientServiceActuatorRoute())
+            .route(getAuditServiceRoute())
+            .route(getAuditServiceApiDocRoute())
+            .route(getAuditServiceActuatorRoute())
             .build();
     }
     
@@ -55,5 +58,22 @@ public class ApiGatewayRouting {
             .filters(
                 f -> f.rewritePath("/actuator/patients/(?<segment>.*)", "/actuator/${segment}"))
             .uri("lb://patient-service");
+    }
+    
+    private Function<PredicateSpec, Buildable<Route>> getAuditServiceRoute () {
+        return r -> r.path("/audits/**")
+            .uri("lb://audit-service");
+    }
+    
+    private Function<PredicateSpec, Buildable<Route>> getAuditServiceApiDocRoute () {
+        return r -> r.path("/audit-service/api-docs")
+            .filters(f -> f.setPath("/v3/api-docs"))
+            .uri("lb://audit-service");
+    }
+    
+    private Function<PredicateSpec, Buildable<Route>> getAuditServiceActuatorRoute () {
+        return r -> r.path("/actuator/audits/**")
+            .filters(f -> f.rewritePath("/actuator/audits/(?<segment>.*)", "/actuator/${segment}"))
+            .uri("lb://audit-service");
     }
 }
