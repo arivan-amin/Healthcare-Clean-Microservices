@@ -33,4 +33,14 @@ class TimestampHelperTest {
         // then
         assertThat(dateTime).isEqualTo(LocalDateTime.parse("2019-11-15T21:15:30"));
     }
+    
+    @Test
+    void shouldGenerateSampleTimestampForTesting () {
+        Long start =
+            TimestampHelper.toTimestampInMilliseconds(LocalDateTime.of(2024, 12, 25, 0, 0, 0));
+        Long end =
+            TimestampHelper.toTimestampInMilliseconds(LocalDateTime.of(2024, 12, 30, 0, 0, 0));
+        log.info("start = {}", start);
+        log.info("end = {}", end);
+    }
 }

@@ -7,9 +7,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UpdatePatientCommand {
     
-    private final PatientStorage persistence;
+    private final PatientStorage storage;
     
     public void execute (Patient patient) {
-        persistence.update(patient);
+        storage.update(patient);
     }
 }

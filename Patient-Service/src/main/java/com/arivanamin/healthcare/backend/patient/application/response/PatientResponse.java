@@ -2,15 +2,13 @@ package com.arivanamin.healthcare.backend.patient.application.response;
 
 import com.arivanamin.healthcare.backend.base.domain.gender.Gender;
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
-import lombok.*;
+import lombok.Value;
 import org.modelmapper.ModelMapper;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Value
 public class PatientResponse {
     
     UUID id;
@@ -22,7 +20,6 @@ public class PatientResponse {
     String address;
     
     public static PatientResponse of (Patient patient) {
-        ModelMapper mapper = new ModelMapper();
-        return mapper.map(patient, PatientResponse.class);
+        return new ModelMapper().map(patient, PatientResponse.class);
     }
 }

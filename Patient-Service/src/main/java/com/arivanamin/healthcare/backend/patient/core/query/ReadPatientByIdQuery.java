@@ -10,10 +10,10 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ReadPatientByIdQuery {
     
-    private final PatientStorage persistence;
+    private final PatientStorage storage;
     
     public Patient execute (UUID id) {
-        return persistence.findById(id)
+        return storage.findById(id)
             .orElseThrow(PatientNotFoundException::new);
     }
 }

@@ -8,9 +8,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class DeletePatientCommand {
     
-    private final PatientStorage persistence;
+    private final PatientStorage storage;
     
     public void execute (UUID id) {
-        persistence.delete(id);
+        storage.delete(id);
     }
 }
