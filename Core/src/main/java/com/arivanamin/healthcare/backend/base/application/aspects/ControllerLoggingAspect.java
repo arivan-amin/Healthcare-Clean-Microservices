@@ -25,6 +25,7 @@ class ControllerLoggingAspect {
     
     private final AuditDataExtractor dataExtractor;
     
+    // todo 1/1/25 - maybe duration of method call should be also recorded in audit event ?
     @Around ("""
             @annotation(org.springframework.web.bind.annotation.GetMapping)
             or @annotation(org.springframework.web.bind.annotation.PostMapping)
