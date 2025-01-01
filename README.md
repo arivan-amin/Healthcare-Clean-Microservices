@@ -8,22 +8,27 @@ The system is designed to manage various healthcare-related operations such as p
 appointment scheduling, medical records management, billing, and more. It serves as a practice
 project to demonstrate the implementation of microservices using modern **Java** technologies.
 
+### Currently, the following services are implemented, other coming soon:
+
+- Discovery Server
+- API Gateway
+- Patient Service
+- Audit Service
+
 ## Technologies Used
 
 - **Java 21**: Core programming language.
 - **Spring Boot**: Framework for building microservices.
 - **Spring Cloud**: For managing microservices, service discovery, and load balancing.
 - **Eureka**: Service registry for microservices.
-- **Feign Client**: For inter-service communication.
 - **MySQL**: Relational database for persistent storage.
-- **MongoDB**: NoSQL database for storing data.
+- **MongoDB**: NoSQL database for storing Audit logs data.
 - **Docker**: Containerization of microservices.
 - **Kafka**: Message broker for event-driven communication between services.
 - **Swagger/OpenAPI**: API documentation and testing.
 - **JUnit & Mockito**: Testing frameworks for unit and integration testing.
-- **Flyway**: Database migration tools.
+- **Liquibase**: Database migration tool.
 - **Lombok**: Reducing boilerplate code.
-- **Keycloak**: For authentication and authorization management.
 - **Grafana**: For observability and monitoring services through dashboards.
 - **loki**: For centralized logging.
 - **tempo**: For distributed tracing.
@@ -127,9 +132,9 @@ project to demonstrate the implementation of microservices using modern **Java**
     - Open your browser and navigate to **Grafana** at: http://localhost:3000/dashboards
     - In the **Grafana** dashboards page, click on the **New** icon on the top right side and select
       **Import**.
-    - Choose both json file located at: **project-root/docker/grafana/**
-    - Complete the import process for both files.
-    - Now you should have 2 dashboards to monitor Spring Boot, MySQL.
+   - Choose the json file located at: **project-root/docker/grafana/**
+   - Complete the import process.
+   - Now you should have a dashboard to monitor Spring Boot.
 
 ## Testing
 
@@ -144,33 +149,20 @@ project to demonstrate the implementation of microservices using modern **Java**
 
 The system is divided into several microservices, each responsible for a specific domain:
 
+- **Discovery Server**: Implements service discovery mechanisms, allowing microservices to find and
+  communicate with each other dynamically. It maintains a registry of available services and their
+  locations.
 - **API Gateway**: Serves as the single entry point for all client requests, routing them to the
   appropriate microservices. It handles request aggregation, load balancing, and provides a
   centralized point for managing cross-cutting concerns such as authentication and logging.
-- **Appointment Service**: Manages scheduling and rescheduling of patient appointments. It interacts
-  with the Doctor and Patient services to ensure availability and updates the system with the latest
-  appointment data.
+- **Core Module**: Provides foundational services and shared functionality used across other
+  microservices. This could include utility functions, common data access layers, or basic service
+  management features.
+- **Patient Service**: Manages patient information, It supports patient registration, updates, and
+  interactions with other services.
 - **Audit Service**: Provides centralized logging and auditing for all actions within the system. It
   records critical events, such as user activities and service interactions, to ensure transparency
   and compliance.
-- **Core Service**: Provides foundational services and shared functionality used across other
-  microservices. This could include utility functions, common data access layers, or basic service
-  management features.
-- **Discovery Service**: Implements service discovery mechanisms, allowing microservices to find and
-  communicate with each other dynamically. It maintains a registry of available services and their
-  locations.
-- **Doctor Service**: Manages information related to doctors, including their profiles, specialties,
-  schedules, and availability. It supports operations related to doctor management and integrates
-  with other services for scheduling and patient care.
-- **Notification Service**: Sends notifications and alerts to users, such as appointment reminders,
-  billing notifications, or system updates. It handles different communication channels like email,
-  SMS, or in-app notifications.
-- **Patient Service**: Manages patient information, including personal details, medical history, and
-  contact information. It supports patient registration, updates, and interactions with other
-  services such as appointments and billing.
-- **Security Service**: Ensures the security of the system by managing authentication,
-  authorization, and encryption. It handles user access controls, secure communication, and
-  protection of sensitive data.
 
 ## Contributing
 
