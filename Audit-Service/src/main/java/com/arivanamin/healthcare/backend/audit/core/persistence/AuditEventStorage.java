@@ -10,7 +10,7 @@ public interface AuditEventStorage {
     
     List<AuditEvent> findAll (LocalDateTime start, LocalDateTime end);
     
-    List<AuditEvent> findAllByCriteria (LocalDateTime start, LocalDateTime end, AuditEvent event);
+    List<AuditEvent> findAllByCriteria (AuditEvent criteria);
     
     Optional<AuditEvent> findById (String id);
     

@@ -30,23 +30,24 @@ public class JpaAuditEventStorage implements AuditEventStorage {
             .toList();
     }
     
-    @Override
-    public List<AuditEvent> findAllByCriteria (LocalDateTime start, LocalDateTime end,
-                                               AuditEvent event) {
-        return repository.findAllByRecordedAtBetween(start, end, createExampleFromEvent(event))
-            .stream()
-            .map(JpaAuditEvent::toDomain)
-            .toList();
+    private static ExampleMatcher getExampleMatcher () {
+        return ExampleMatcher.matching()
+            .withIgnorePaths("id", "recordedAt")
+            .withIgnoreNullValues()
+            .withIgnoreCase()
+            .withStringMatcher(CONTAINING);
     }
     
     private static Example<JpaAuditEvent> createExampleFromEvent (AuditEvent event) {
         return Example.of(fromDomain(event), getExampleMatcher());
     }
     
-    private static ExampleMatcher getExampleMatcher () {
-        return ExampleMatcher.matching()
-            .withIgnoreCase()
-            .withStringMatcher(CONTAINING);
+    @Override
+    public List<AuditEvent> findAllByCriteria (AuditEvent criteria) {
+        return repository.findAll(createExampleFromEvent(criteria))
+            .stream()
+            .map(JpaAuditEvent::toDomain)
+            .toList();
     }
     
     @Override
