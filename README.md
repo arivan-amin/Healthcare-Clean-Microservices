@@ -2,78 +2,86 @@
 
 ## Overview
 
-This project is a **Healthcare Management System** developed as a **Microservices Architecture**
+This project is a **Sample Healthcare System** developed as a **Microservices Architecture**
 using **Java**.
-The system is designed to manage various healthcare-related operations such as patient registration,
-appointment scheduling, medical records management, billing, and more. It serves as a practice
-project to demonstrate the implementation of microservices using modern **Java** technologies.
 
-### Currently, the following services are implemented, other coming soon:
+It serves as a practice project to demonstrate the implementation of microservices using
+modern **Java** and **Spring Boot** and follow some of the best practices in development.
+
+## Notable Features
+
+- **Automatic Audit Logs Recording**: Uses Spring AOP to create Audit Events automatically whenever
+  any API in any of the services are called and uses Kafka to send them to the Audit Service to be
+  recorded, allowing the controllers to be clutter-free and simple.
+- **Clean and concise Restful API in all services**: the API follows the modern best practices in
+  Restful services recommendations like using ResponseEntity and returning ProblemDetails.
+- **CQRS**:
+- **ArchUnit**: to validate architectural boundaries and verify adherence to best coding standards
+
+## Quick Info
+
+![Java](https://img.shields.io/badge/java-21-brightgreen)
+![SpringBoot](https://img.shields.io/badge/spring--boot-3.4.1-brightgreen)
+![Maven](https://img.shields.io/badge/Maven-3.9.9-blue)
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-brightgreen)
+
+![Last Commit](https://img.shields.io/github/last-commit/arivan-amin/Healthcare-Clean-Microservices)
+![Repo Size](https://img.shields.io/github/repo-size/arivan-amin/Healthcare-Clean-Microservices)
+![Contributors](https://img.shields.io/github/contributors/arivan-amin/Healthcare-Clean-Microservices)
+![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20MacOS-informational)
+
+## 🛠️ Architecture concepts demonstrated and implemented
+
+- **Microservices**
+- **Clean Architecture**
+- **Clean Code**
+- **Command-Query Responsibility Separation**
+- **Solid Principles**
+- **Loose Coupling of Components**
+- **Spring Dependency Injection**
+- **Aspect-Oriented Programming (AOP)**
+
+---
+
+## 🛠️ Technical Features Implemented
+
+- **Microservices Architecture**.
+- **Automatic Audit Logs recording**: Uses Spring AOP to automatically store audit logs.
+- **Robust Monitoring**: Real-time monitoring with Grafana, Loki, and Tempo.
+- **Event-Driven Communication**: Using Kafka.
+- **Centralized Logging & Tracing**: Using Logback and Tempo.
+- **Database Migrations**: Using Liquibase.
+- **Dockerized Deployment**: Using Docker and Docker Compose.
+
+---
+
+### Currently, the following services are implemented, other services will be added:
 
 - Discovery Server
 - API Gateway
 - Patient Service
 - Audit Service
 
-## Technologies Used
+## Technologies used and their responsibility
 
-- **Java 21**: Core programming language.
-- **Spring Boot**: Framework for building microservices.
-- **Spring Cloud**: For managing microservices, service discovery, and load balancing.
-- **Eureka**: Service registry for microservices.
-- **MySQL**: Relational database for persistent storage.
-- **MongoDB**: NoSQL database for storing Audit logs data.
-- **Docker**: Containerization of microservices.
-- **Kafka**: Message broker for event-driven communication between services.
-- **Swagger/OpenAPI**: API documentation and testing.
-- **JUnit & Mockito**: Testing frameworks for unit and integration testing.
-- **Liquibase**: Database migration tool.
-- **Lombok**: Reducing boilerplate code.
-- **Grafana**: For observability and monitoring services through dashboards.
-- **loki**: For centralized logging.
-- **tempo**: For distributed tracing.
+- **Java 21**
+- **Spring Boot**
+- **Spring Cloud**
+- **Eureka**: Dynamic service registry.
+- **MySQL**: Services data storage.
+- **MongoDB**: Storage for Audit logs.
+- **Kafka**: Event streaming for microservices.
+- **Docker**
+- **Grafana, Loki, Tempo**: Observability stack for metrics, logging, and tracing.
+- **JUnit & Mockito**: Unit testing and Mocking.
+- **Swagger/OpenAPI**: API documentation.
+- **Liquibase**: Database Migrations.
+- **Lombok**: Cleaner code with reduced boilerplate.
 
-## Grafana Monitoring Screenshots
-
-### Services monitoring dashboard main section
+## Grafana Monitoring Sample
 
 ![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-1.png)
-
-### Graphs for total requests response time and response time per endpoint
-
-![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-2.png)
-
-### Graphs for total calls made to Jpa repository
-
-![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-4.png)
-
-### Graphs for percentage of HTTP request status codes, 2xx, 3xx, 4xx, and 5xx
-
-![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-6.png)
-
-### Graphs for graph on .95 and .99 percentile histogram to identify bottlenecks
-
-![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-7.png)
-
-### Graphs for JVM performance, threads, GC, logs and IO
-
-![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-8.png)
-
-### Graphs for JVM memory usage, heap, non heap, and more
-
-![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-9.png)
-
-### Graphs for Hikari connection pool performance
-
-![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-10.png)
-
-### Graphs for Tomcat sessions, send and receive and threads
-
-![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-11.png)
-
-### Graphs for log events and their volume per minute
-
-![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-12.png)
 
 ## Installation
 
@@ -84,100 +92,95 @@ project to demonstrate the implementation of microservices using modern **Java**
 - **Docker**
 - **Docker Compose**
 
-### Steps to Run the Project
+## 🚀 Installation Guide
 
-1. ### Clone the repository:
+### Prerequisites
 
-    ```bash
-    git clone https://github.com/arivan-amin/Healthcare-Management-Microservices.git
-    cd Healthcare-Management-Microservices
-    ```
+- **Java 21**
+- **Maven**
+- **Docker** & **Docker Compose**
 
-2. ### Build and install the Core Module because all modules depend on it:
+### Steps to Get Started
 
-    ```bash
-    cd Core
-    mvn clean install
-    cd ..
-    ```
-3. ### Build the project, and it will load the images to your local docker repository using JIB:
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/arivan-amin/Healthcare-Clean-Microservices.git
+   cd Healthcare-Clean-Microservices
+   ```
 
-    ```bash
-    mvn clean package
-    ```
+2. **Build Core Module:**
+   ```bash
+   cd Core
+   mvn clean install
+   cd ..
+   ```
 
-4. ### Set Eureka username and password environment variables and docker host ip:
-    - on **Linux**: add the below variables to your **.bashrc** file and reload or reboot
-    ```bash
-    export EUREKA_USER=admin
-    export EUREKA_PASSWORD=admin
-    ```
-    - on **Windows**: run the below commands
-    ```bash
-    set EUREKA_USER=admin
-    set EUREKA_PASSWORD=admin
-    ```
-5. ### Run the services using Docker Compose:
-    ```bash
-    docker compose up -d
-    ```
+3. **Build and Package the Project:**
+   ```bash
+   mvn clean package
+   ```
 
-6. ### Access the services:
-    - **API Gateway:** `http://localhost:8080`
-    - **Eureka Dashboard:** `http://localhost:8080/eureka/web`
-    - **Swagger UI:** `http://localhost:8080/swagger-ui.html`
-    - **Grafana:** `http://localhost:3000/dashboards`
+4. **Set Environment Variables (Linux/MacOS):**
+   ```bash
+   export EUREKA_USER=admin
+   export EUREKA_PASSWORD=admin
+   ```
+   ```
+   *(For Windows, use `set` command)*
+   ```
 
-7. ### Accessing the Grafana Dashboards for monitoring Spring Boot and MySQL
-    - Open your browser and navigate to **Grafana** at: http://localhost:3000/dashboards
-    - In the **Grafana** dashboards page, click on the **New** icon on the top right side and select
-      **Import**.
-   - Choose the json file located at: **project-root/docker/grafana/**
-   - Complete the import process.
-   - Now you should have a dashboard to monitor Spring Boot.
+5. **Run Services with Docker Compose:**
+   ```bash
+   docker compose up -d
+   ```
 
-## Testing
+6. **Access the Services:**
+    - **API Gateway:** [http://localhost:8080](http://localhost:8080)
+    - **Eureka Dashboard:** [http://localhost:8080/eureka/web](http://localhost:8080/eureka/web)
+    - **Swagger UI:** [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+    - **Grafana Dashboard:** [http://localhost:3000/dashboards](http://localhost:3000/dashboards)
 
-- Unit and integration tests are available for each microservice.
-- Run the tests using Maven:
+7. **Grafana Dashboard Setup:**
+    - Import pre-built dashboard JSON configuration from `docker/grafana/` folder.
 
-    ```bash
-    mvn test
-    ```
+---
 
-## Microservices
+## 🧪 Testing
 
-The system is divided into several microservices, each responsible for a specific domain:
+- **Run Unit and Integration Tests:**
+   ```bash
+   mvn test
+   ```
 
-- **Discovery Server**: Implements service discovery mechanisms, allowing microservices to find and
-  communicate with each other dynamically. It maintains a registry of available services and their
-  locations.
-- **API Gateway**: Serves as the single entry point for all client requests, routing them to the
-  appropriate microservices. It handles request aggregation, load balancing, and provides a
-  centralized point for managing cross-cutting concerns such as authentication and logging.
-- **Core Module**: Provides foundational services and shared functionality used across other
-  microservices. This could include utility functions, common data access layers, or basic service
-  management features.
-- **Patient Service**: Manages patient information, It supports patient registration, updates, and
-  interactions with other services.
-- **Audit Service**: Provides centralized logging and auditing for all actions within the system. It
-  records critical events, such as user activities and service interactions, to ensure transparency
-  and compliance.
+---
 
-## Contributing
+## ⚙️ Microservices Overview
 
-**Contributions are welcome!** Please fork the repository and submit a pull request for any
-improvements
-or bug fixes.
+- **Discovery Server**: Dynamic service discovery and registry.
+- **API Gateway**: Centralized entry point for routing and security.
+- **Core Module**: Shared utilities and functionality.
+- **Patient Service**: Manages patient data.
+- **Audit Service**: Logs events and ensures compliance.
 
-## License
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Fork the repository, create a new branch, and submit a pull request.
+
+---
+
+## 📜 License
 
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more
 details.
 
-## Contact
+---
 
-For any questions or inquiries, please contact:
+## 📧 Contact
 
-- **Name: Arivan Amin**
-- **Email: arivanamin@gmail.com**
+For questions or inquiries:
+
+- **Name:** Arivan Amin
+- **Email:** [arivanamin@gmail.com](mailto:arivanamin@gmail.com)
+
