@@ -8,15 +8,24 @@ using **Java**.
 It serves as a practice project to demonstrate the implementation of microservices using
 modern **Java** and **Spring Boot** and follow some of the best practices in development.
 
+---
+
 ## Notable Features
 
-- **Automatic Audit Logs Recording**: Uses Spring AOP to create Audit Events automatically whenever
-  any API in any of the services are called and uses Kafka to send them to the Audit Service to be
-  recorded, allowing the controllers to be clutter-free and simple.
+- **Automatic Audit Logs Recording**: Uses Spring **AOP** to create Audit Events automatically
+  whenever any API in any of the services are called and uses **Kafka** to send them to the Audit
+  Service to be recorded, allowing the controllers to be clutter-free and simple.
 - **Clean and concise Restful API in all services**: the API follows the modern best practices in
-  Restful services recommendations like using ResponseEntity and returning ProblemDetails.
-- **CQRS**:
+  Restful services recommendations like using **ResponseEntity** and returning **ProblemDetails**.
+- **CQRS**: Command and Query Separation Principle to implement Business logic.
 - **ArchUnit**: to validate architectural boundaries and verify adherence to best coding standards
+- **@RestControllerAdvice**: to handle specific exceptions and return a unified and standard error
+  response instead of an exception stack trace using Spring **ProblemDetail**.
+- **OpenAPI and Swagger Docs**: to provide detailed documentation for all endpoints.
+- **Entity and DTO separation**: decouples core business logic from presentation using request and
+  response pojo.
+- **Core Entity and Jpa separation**: core entities have no association with JPA and are never
+  annotated with @Entity.
 
 ## Quick Info
 
@@ -63,6 +72,8 @@ modern **Java** and **Spring Boot** and follow some of the best practices in dev
 - Patient Service
 - Audit Service
 
+---
+
 ## Technologies used and their responsibility
 
 - **Java 21**
@@ -79,18 +90,11 @@ modern **Java** and **Spring Boot** and follow some of the best practices in dev
 - **Liquibase**: Database Migrations.
 - **Lombok**: Cleaner code with reduced boilerplate.
 
+---
+
 ## Grafana Monitoring Sample
 
 ![image](https://raw.githubusercontent.com/arivan-amin/Healthcare-Management-Microservices/master/Docs/Grafana/Grafana-Dashboard-1.png)
-
-## Installation
-
-### Prerequisites
-
-- **Java 21**
-- **Maven**
-- **Docker**
-- **Docker Compose**
 
 ## 🚀 Installation Guide
 
@@ -99,6 +103,8 @@ modern **Java** and **Spring Boot** and follow some of the best practices in dev
 - **Java 21**
 - **Maven**
 - **Docker** & **Docker Compose**
+
+---
 
 ### Steps to Get Started
 
