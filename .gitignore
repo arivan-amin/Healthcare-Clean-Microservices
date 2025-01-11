@@ -13,6 +13,7 @@ target/
 .run
 *.ipr
 *.tmdl
+changes.txt
 
 # Other files and folders
 .settings/

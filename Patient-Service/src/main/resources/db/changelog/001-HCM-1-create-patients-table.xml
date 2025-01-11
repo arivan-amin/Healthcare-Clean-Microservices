@@ -23,7 +23,7 @@
             <column name="date_of_birth" type="DATE">
                 <constraints nullable="false" />
             </column>
-            <column name="gender" type="VARCHAR(255)">
+            <column name="gender" type="TINYINT">
                 <constraints nullable="false" />
             </column>
             <column name="address" type="VARCHAR(255)">
