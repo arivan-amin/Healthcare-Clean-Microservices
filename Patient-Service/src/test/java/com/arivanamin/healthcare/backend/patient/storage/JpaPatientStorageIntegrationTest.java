@@ -1,13 +1,12 @@
 package com.arivanamin.healthcare.backend.patient.storage;
 
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
-import com.arivanamin.healthcare.backend.testing.architecture.bases.BaseIntegrationTest;
+import com.arivanamin.healthcare.backend.testing.architecture.bases.BaseDatabaseTest;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,17 +15,18 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@AutoConfigureTestDatabase
+@Testcontainers
 @Slf4j
-class JpaPatientStorageIntegrationTest implements BaseIntegrationTest {
+class JpaPatientStorageIntegrationTest implements BaseDatabaseTest {
     
     @Autowired
     private PatientRepository repository;
     
     private JpaPatientStorage persistence;
-    private int numberOfSavedEntities;
     
+    private int numberOfSavedEntities;
     private UUID expectedId;
+    
     private List<Patient> expectedPatients;
     private Patient expectedPatient;
     
@@ -51,7 +51,6 @@ class JpaPatientStorageIntegrationTest implements BaseIntegrationTest {
         numberOfSavedEntities = FAKER.number()
             .numberBetween(3, 10);
         for (int i = 0; i < numberOfSavedEntities; i++) {
-            log.info("inside the loop {}", i);
             JpaPatient entity = createSamplePatient();
             repository.save(entity);
         }
@@ -65,7 +64,7 @@ class JpaPatientStorageIntegrationTest implements BaseIntegrationTest {
         assertThat(result.size()).isEqualTo(numberOfSavedEntities);
     }
     
-    private static @NotNull JpaPatient createSamplePatient () {
+    private static JpaPatient createSamplePatient () {
         JpaPatient entity = RANDOM.nextObject(JpaPatient.class);
         entity.setId(null);
         entity.setEmail(FAKER.internet()
