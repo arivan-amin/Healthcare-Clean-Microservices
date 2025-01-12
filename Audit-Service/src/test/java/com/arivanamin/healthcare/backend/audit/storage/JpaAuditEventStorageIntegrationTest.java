@@ -2,11 +2,8 @@ package com.arivanamin.healthcare.backend.audit.storage;
 
 import com.arivanamin.healthcare.backend.base.domain.audit.AuditEvent;
 import com.arivanamin.healthcare.backend.testing.architecture.bases.BaseMongoDatabaseTest;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,9 +12,6 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
-@Testcontainers
-@Slf4j
 class JpaAuditEventStorageIntegrationTest implements BaseMongoDatabaseTest {
     
     @Autowired

@@ -1,10 +1,14 @@
 package com.arivanamin.healthcare.backend.testing.architecture.bases;
 
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
+@SpringBootTest
+@Testcontainers
 public interface BaseDatabaseTest extends BaseIntegrationTest {
     
     @Container

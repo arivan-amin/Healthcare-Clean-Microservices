@@ -2,11 +2,8 @@ package com.arivanamin.healthcare.backend.patient.storage;
 
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import com.arivanamin.healthcare.backend.testing.architecture.bases.BaseDatabaseTest;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,9 +11,6 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
-@Testcontainers
-@Slf4j
 class JpaPatientStorageIntegrationTest implements BaseDatabaseTest {
     
     @Autowired
