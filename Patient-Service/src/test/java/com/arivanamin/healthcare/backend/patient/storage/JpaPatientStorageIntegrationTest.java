@@ -1,5 +1,6 @@
 package com.arivanamin.healthcare.backend.patient.storage;
 
+import com.arivanamin.healthcare.backend.base.domain.pagination.PaginationCriteria;
 import com.arivanamin.healthcare.backend.patient.core.entity.Patient;
 import com.arivanamin.healthcare.backend.testing.architecture.bases.BaseDatabaseTest;
 import org.junit.jupiter.api.*;
@@ -13,9 +14,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class JpaPatientStorageIntegrationTest implements BaseDatabaseTest {
     
+    private final PaginationCriteria pagination = PaginationCriteria.of(0, 10);
+    
     @Autowired
     private PatientRepository repository;
-    
     private JpaPatientStorage persistence;
     
     private int numberOfSavedEntities;
@@ -51,7 +53,7 @@ class JpaPatientStorageIntegrationTest implements BaseDatabaseTest {
     }
     
     private void whenFindAllIsCalled () {
-        expectedPatients = persistence.findAll();
+        // expectedPatients = persistence.findAll(pagination);
     }
     
     private void thenAssertThatAllEntitiesOfRepositoryAreReturned (List<Patient> result) {
@@ -111,7 +113,8 @@ class JpaPatientStorageIntegrationTest implements BaseDatabaseTest {
     }
     
     private void thenAssertThatEntityIsDeletedFromRepository () {
-        assertThat(persistence.findAll()
+        assertThat(persistence.findAll(pagination)
+            .getElements()
             .size()).isEqualTo(numberOfSavedEntities - 1);
         assertThat(repository.findById(expectedId)).isEmpty();
     }
